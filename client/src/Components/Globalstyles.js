@@ -3,6 +3,12 @@ import { reset } from "styled-reset";
 
 const globalStyles = createGlobalStyle`
 ${reset};
+@font-face {
+    font-family: notopen_numbers;
+    src:url(${require("../assets/fonts/notopen_numbers.ttf")}) format('opentype');
+    text-rendering: optimizeLegibility;
+}
+
 *{
     box-sizing : border-box;
 }
@@ -15,11 +21,9 @@ body {
     font-weight: 400;
     line-height: 1.5;
     background-color: #000;
+    font-family : 'notopen_numbers', sans-serif;
 }
-    @font-face {
-         font-family: "notopen_numbers";
-         src: url(${require("../assets/fonts/notopen_numbers.ttf")});
-     }
+
 p {
     line-height: 1.75;
 }

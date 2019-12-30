@@ -4,9 +4,11 @@ import styled from "styled-components";
 const Section = styled.section`
   padding-bottom: 120px;
   background: #1c1c1c;
+  margin: auto;
 `;
 const Container = styled.div`
   max-width: 1260px;
+  width: 1162px;
   margin: auto;
 `;
 const HBox = styled.div`
