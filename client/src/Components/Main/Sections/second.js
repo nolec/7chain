@@ -13,7 +13,6 @@ const Container = styled.div`
 `;
 const HBox = styled.div`
   position: relative;
-  width: 1162px;
   margin: 0 auto;
   padding-top: 45px;
   transition: all 0.1s, color 0.1s 0.1s;
