@@ -9,7 +9,7 @@ ${reset};
     text-rendering: optimizeLegibility;
 }
 
-*{
+*,::before,::after{
     box-sizing : border-box;
 }
 body {

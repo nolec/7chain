@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
@@ -34,9 +34,25 @@ const Item = styled.div`
 `;
 
 export default () => {
+  const slide = useRef(null);
+  const [height, setHeight] = useState();
+  function reSizeIntro() {
+    let win_height = window.innerHeight;
+    let top_margin = 90;
+    let min_height = 0;
+
+    if (win_height > min_height) setHeight(win_height - top_margin);
+    else setHeight(min_height - top_margin);
+  }
+  useEffect(() => {
+    window.addEventListener("load", reSizeIntro);
+    window.addEventListener("resize", reSizeIntro);
+
+    return () => window.removeEventListener("resize", reSizeIntro);
+  }, []);
   return (
     <Section>
-      <Slider>
+      <Slider ref={slide} style={{ height: height }}>
         <Item>
           <video autoPlay="autoplay" preload="auto" muted="muted" playsInline>
             <source
