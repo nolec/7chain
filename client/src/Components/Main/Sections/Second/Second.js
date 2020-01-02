@@ -62,7 +62,7 @@ export default () => {
           <h2>탈중앙화된 확률의 중요성</h2>
         </HBox>
         <ContentBox>
-          <ImgBox back={require("../../../assets/images/man_2.png")}>
+          <ImgBox back={require("../../../../assets/images/man_2.png")}>
             <p>
               로제 카이와 - 사회학자, 문학평론가
               <br />

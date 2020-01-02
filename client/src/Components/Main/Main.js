@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import SectionOne from "./Sections/first";
-import SectionTwo from "./Sections/second";
-import SectionThree from "./Sections/third";
+import SectionOne from "./Sections/First";
+import SectionTwo from "./Sections/Second";
+import SectionThree from "./Sections/Third";
+import SectionFour from "./Sections/Fourth";
+import SectionFifth from "./Sections/Fifth";
+import SectionSixth from "./Sections/Sixth";
+import SectionSeventh from "./Sections/Seventh";
+import SectionEighth from "./Sections/Eighth";
+import SectionNinth from "./Sections/Ninth";
+import SectionTenth from "./Sections/Tenth";
 
 const Main = styled.main`
   h1,
@@ -11,7 +18,6 @@ const Main = styled.main`
   h4,
   h5,
   h6 {
-    margin-bottom: 0.5rem;
     font-family: inherit;
     line-height: 1.2;
   }
@@ -23,6 +29,13 @@ export default () => {
       <SectionOne />
       <SectionTwo />
       <SectionThree />
+      <SectionFour />
+      <SectionFifth />
+      <SectionSixth />
+      <SectionSeventh />
+      <SectionEighth />
+      <SectionNinth />
+      <SectionTenth />
     </Main>
   );
 };

@@ -56,7 +56,7 @@ export default () => {
         <Item>
           <video autoPlay="autoplay" preload="auto" muted="muted" playsInline>
             <source
-              src={require("../../../assets/videos/7ChainIntroMovie_Korean.mp4")}
+              src={require("../../../../assets/videos/7ChainIntroMovie_Korean.mp4")}
               type="video/mp4"
             />
           </video>

@@ -20,9 +20,15 @@ const Blink = styled(Link)`
 `;
 
 export default () => {
+  const handleClick = () => {
+    const { top } = document.querySelector("body").getBoundingClientRect();
+
+    window.scrollTo({ top, behavior: "smooth" });
+  };
   return (
     <Btn>
       <Blink
+        onClick={handleClick}
         to="/"
         back={require("../assets/images/bullet-arrow-top.png")}
       ></Blink>
