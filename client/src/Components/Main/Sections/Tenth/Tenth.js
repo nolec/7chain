@@ -25,36 +25,39 @@ const HBox = styled.div`
     color: #fff;
   }
 `;
+
 const TimeList = styled.div`
   margin-bottom: -1.5em;
-  .timeline {
+`;
+const Timeline = styled.ul`
+  position: relative;
+  padding: 0;
+  list-style: none;
+  height: 100%;
+  ::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 26px;
+    width: 2px;
+    margin-left: -1.5px;
+    content: "";
+    background-color: #a9dede;
+    left: 50%;
+  }
+  ::after {
+    clear: both;
+  }
+  li {
     position: relative;
-    padding: 0;
-    list-style: none;
-    height: 100%;
+    margin-bottom: 40px;
     ::before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 26px;
-      width: 2px;
-      margin-left: -1.5px;
+      display: table;
       content: "";
-      background-color: #a9dede;
-      left: 50%;
-    }
-    ::after {
-      clear: both;
-    }
-    li {
-      position: relative;
-      margin-bottom: 40px;
-      ::before {
-        display: table;
-        content: "";
-      }
     }
     h3 {
+      position: relative;
+      margin-right: 60px;
       font-size: 80px;
       color: #fff;
       margin-bottom: 0.5rem;
@@ -69,6 +72,21 @@ const TimeList = styled.div`
         background: #777;
       }
     }
+  }
+  .timeline-panel {
+    position: relative;
+    float: left;
+    width: 50%;
+    text-align: left;
+    padding-left: 0;
+    &.left {
+      text-align: right;
+      padding-right: 90px;
+    }
+    &.right {
+      text-align: left;
+      padding-left: 85px;
+    }
     h4 {
       font-size: 23px;
       margin-bottom: 0;
@@ -80,46 +98,27 @@ const TimeList = styled.div`
       color: #fff;
       padding-top: 15px;
     }
-    .timeline-panel {
-      float: left;
-      width: 50%;
-      padding-left: 0;
+  }
+  .timeline-image {
+    position: absolute;
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;
+    border-radius: 100%;
+    z-index: 100;
+    background-color: #a9dede;
+    ::after {
       display: block;
-    }
-    .timeline-panel.left {
-      text-align: right;
-      padding-right: 90px;
-    }
-    .timeline-panel.right {
-      text-align: left;
-      padding-left: 85px;
-    }
-    .year h3 {
-      position: relative;
-      margin-right: 60px;
-    }
-    .timeline-image {
+      content: "";
       position: absolute;
-      left: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 100%;
-      z-index: 100;
-      background-color: #a9dede;
+      top: 50%;
       left: 50%;
-      margin-left: -16px;
-      ::after {
-        display: block;
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 12px;
-        height: 12px;
-        margin: -6px 0 0 -6px;
-        background: #1c1c1c;
-        border-radius: 50%;
-      }
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      background: #1c1c1c;
+      border-radius: 50%;
     }
   }
 `;
@@ -131,7 +130,7 @@ export default () => {
           <h2>Roadmap</h2>
         </HBox>
         <TimeList>
-          <ul class="timeline">
+          <Timeline>
             <li class="year-p">
               <div class="timeline-panel left year">
                 <h3>17</h3>
@@ -143,7 +142,7 @@ export default () => {
                 <p>블록체인기술 R&amp;D</p>
               </div>
             </li>
-          </ul>
+          </Timeline>
         </TimeList>
         <TimeList>
           <ul class="timeline">
