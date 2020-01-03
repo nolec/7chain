@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SectionOne from "./Sections/First";
 import SectionTwo from "./Sections/Second";
@@ -10,6 +10,11 @@ import SectionSeventh from "./Sections/Seventh";
 import SectionEighth from "./Sections/Eighth";
 import SectionNinth from "./Sections/Ninth";
 import SectionTenth from "./Sections/Tenth";
+import SectionEleventh from "./Sections/Eleventh";
+import SectionTwelfth from "./Sections/Twelfth";
+import Join from "./Sections/Join";
+import Partner from "./Sections/Partner";
+import { withRouter } from "react-router-dom";
 
 const Main = styled.main`
   h1,
@@ -21,9 +26,16 @@ const Main = styled.main`
     font-family: inherit;
     line-height: 1.2;
   }
+  button,
+  input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
 `;
 
-export default () => {
+export default withRouter(({ location: { pathname } }) => {
   return (
     <Main>
       <SectionOne />
@@ -36,6 +48,10 @@ export default () => {
       <SectionEighth />
       <SectionNinth />
       <SectionTenth />
+      <SectionEleventh />
+      <SectionTwelfth />
+      <Join />
+      <Partner />
     </Main>
   );
-};
+});

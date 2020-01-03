@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TopBox from "./TopBox";
 import BottomBox from "./BottomBox";
+import { withRouter } from "react-router-dom";
 const Header = styled.div`
   position: fixed;
   top: 0;
@@ -18,15 +19,20 @@ const BottomContainer = styled.div`
   display: flex;
 `;
 
-export default () => {
+export default withRouter(({ history, location }) => {
   return (
     <Header>
       <TopContainer>
-        <TopBox />
+        <TopBox history={history} location={location} />
       </TopContainer>
-      <BottomContainer>
-        <BottomBox />
-      </BottomContainer>
+      {(location && location.pathname === "/admin/press") ||
+      location.pathname === "/admin/media" ? (
+        "null"
+      ) : (
+        <BottomContainer>
+          <BottomBox />
+        </BottomContainer>
+      )}
     </Header>
   );
-};
+});

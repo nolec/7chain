@@ -60,57 +60,74 @@ const UtilBox = styled(Link)`
     margin-right: 5px;
   }
 `;
-export default () => {
+export default ({ history, location }) => {
+  console.log(history);
   return (
     <TopBox>
       <div>
-        <LogoBox to="#">
+        <LogoBox to="#" onClick={() => history.push("/")}>
           <img
             src={require("../../assets/images/logo/7chain-logo-white.svg")}
             alt="logo"
           />
         </LogoBox>
-        <NavBar>
-          <Ul>
-            <Li>
-              <Alink to="#">
-                <span>Overview</span>
-              </Alink>
-            </Li>
-            <Li>
-              <Alink to="#">
-                <span>Roadmap</span>
-              </Alink>
-            </Li>
-            <Li>
-              <Alink to="#">
-                <span>Token Distribution</span>
-              </Alink>
-            </Li>
-            <Li>
-              <Alink to="#">
-                <span>Press</span>
-              </Alink>
-            </Li>
-            <Li>
-              <Alink to="#">
-                <span>Media</span>
-              </Alink>
-            </Li>
-            <Li>
-              <Alink to="#">
-                <span>Contact</span>
-              </Alink>
-            </Li>
-          </Ul>
-        </NavBar>
-        <Util>
-          <UtilBox to="/">
-            <i className="flag-icon flag-icon-kr"></i>
-            <span>Korean</span>
-            <FontAwesomeIcon icon={faAngleDown} />
-          </UtilBox>
-        </Util>
+        {(location && location.pathname === "/admin/press") ||
+        location.pathname === "/admin/media" ? (
+          <NavBar>
+            <Ul>
+              <Li>
+                <Alink to="/admin/press">Press</Alink>
+              </Li>
+              <Li>
+                <Alink to="/admin/media">Media</Alink>
+              </Li>
+            </Ul>
+          </NavBar>
+        ) : (
+          <>
+            <NavBar>
+              <Ul>
+                <Li>
+                  <Alink to="#">
+                    <span>Overview</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink to="#">
+                    <span>Roadmap</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink to="#">
+                    <span>Token Distribution</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink to="#">
+                    <span>Press</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink to="#">
+                    <span>Media</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink to="#">
+                    <span>Contact</span>
+                  </Alink>
+                </Li>
+              </Ul>
+            </NavBar>
+            <Util>
+              <UtilBox to="/">
+                <i className="flag-icon flag-icon-kr"></i>
+                <span>Korean</span>
+                <FontAwesomeIcon icon={faAngleDown} />
+              </UtilBox>
+            </Util>
+          </>
+        )}
       </div>
     </TopBox>
   );

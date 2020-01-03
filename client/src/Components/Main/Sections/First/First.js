@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Section = styled.section`
   position: relative;
@@ -44,11 +45,16 @@ export default () => {
     if (win_height > min_height) setHeight(win_height - top_margin);
     else setHeight(min_height - top_margin);
   }
+  const press = useSelector(state => state.press);
   useEffect(() => {
+    reSizeIntro();
     window.addEventListener("load", reSizeIntro);
     window.addEventListener("resize", reSizeIntro);
-
-    return () => window.removeEventListener("resize", reSizeIntro);
+    console.log("작동");
+    return () => {
+      window.removeEventListener("resize", reSizeIntro);
+      window.removeEventListener("load", reSizeIntro);
+    };
   }, []);
   return (
     <Section>

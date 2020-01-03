@@ -113,7 +113,7 @@ export default () => {
             </thead>
             <tbody>
               <tr>
-                <td class="column1">
+                <td className="column1">
                   <span id="lblComparison007">암호화폐 형태</span>
                 </td>
                 <td>
@@ -133,10 +133,10 @@ export default () => {
                 </td>
               </tr>
               <tr>
-                <td class="column1">
+                <td className="column1">
                   <span id="lblComparison013">게이밍 플랫폼</span>
                 </td>
-                <td class="brg">
+                <td className="brg">
                   <img src={check} alt="Support" />
                 </td>
                 <td>
@@ -145,19 +145,19 @@ export default () => {
                 <td>
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="m-text">
+                <td className="m-text">
                   <img src={triangle} alt="Unclear" />
                   <br />
-                  <span id="lblComparison014" class="f12">
+                  <span id="lblComparison014" className="f12">
                     Unclear
                   </span>
                 </td>
-                <td class="brg">
+                <td className="brg">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1">
+                <td className="column1">
                   <span id="lblComparison015">모든 기기 OS 지원</span>
                 </td>
                 <td>
@@ -172,44 +172,44 @@ export default () => {
                 <td>
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="brg">
+                <td className="brg">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1">
+                <td className="column1">
                   <span id="lblComparison016">탈중앙화 RNG 구현</span>
                 </td>
-                <td class="m-text">
+                <td className="m-text">
                   <img src={triangle} alt="Not proven" />
                   <br />
-                  <span id="lblComparison017" class="f12">
+                  <span id="lblComparison017" className="f12">
                     Unproven
                   </span>
                 </td>
-                <td class="m-text">
+                <td className="m-text">
                   <img src={triangle} alt="Not Transparent" />
                   <br />
-                  <span id="lblComparison018" class="f12">
+                  <span id="lblComparison018" className="f12">
                     Untransparent
                   </span>
                 </td>
                 <td>
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="m-text">
+                <td className="m-text">
                   <img src={triangle} alt="Not Implement" />
                   <br />
-                  <span id="lblComparison019" class="f12">
+                  <span id="lblComparison019" className="f12">
                     Not Implemented
                   </span>
                 </td>
-                <td class="brg">
+                <td className="brg">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1">
+                <td className="column1">
                   <span id="lblComparison020">게이머의 RNG 참여</span>
                 </td>
                 <td>
@@ -224,123 +224,123 @@ export default () => {
                 <td>
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="brg">
+                <td className="brg">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1 animated fadeIn">
+                <td className="column1 animated fadeIn">
                   <span id="lblComparison021">RNG 실시간 게임 적용</span>
                 </td>
-                <td class="m-text animated fadeIn">
+                <td className="m-text animated fadeIn">
                   <img src={triangle} alt="Not proven" />
                   <br />
-                  <span id="lblComparison022" class="f12">
+                  <span id="lblComparison022" className="f12">
                     Unproven
                   </span>
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="m-text animated fadeIn">
+                <td className="m-text animated fadeIn">
                   <img src={triangle} alt="Not Implement" />
                   <br />
-                  <span id="lblComparison023" class="f12">
+                  <span id="lblComparison023" className="f12">
                     Not Implemented
                   </span>
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1 animated fadeIn">
+                <td className="column1 animated fadeIn">
                   <span id="lblComparison030">암호화폐 없이 적용</span>
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1 animated fadeIn">
+                <td className="column1 animated fadeIn">
                   <span id="lblComparison024">멘탈 포커 알고리즘</span>
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1 animated fadeIn">
+                <td className="column1 animated fadeIn">
                   <span id="lblComparison025">거래 수수료 해결</span>
                 </td>
-                <td class="m-text animated fadeIn">
+                <td className="m-text animated fadeIn">
                   <img src={triangle} alt="Not proven" />
                   <br />
-                  <span id="lblComparison026" class="f12">
+                  <span id="lblComparison026" className="f12">
                     Unproven
                   </span>
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="m-text animated fadeIn">
+                <td className="m-text animated fadeIn">
                   <img src={triangle} alt="Not Implement" />
                   <br />
-                  <span id="lblComparison027" class="f12">
+                  <span id="lblComparison027" className="f12">
                     Not Implemented
                   </span>
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
               <tr>
-                <td class="column1 animated fadeIn">
+                <td className="column1 animated fadeIn">
                   <span id="lblComparison028">상용제품 보유</span>
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
-                <td class="brg animated fadeIn">
+                <td className="brg animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
-                <td class="animated fadeIn">
+                <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
                 </td>
-                <td class="brg last animated fadeIn">
+                <td className="brg last animated fadeIn">
                   <img src={check} alt="Support" />
                 </td>
               </tr>
