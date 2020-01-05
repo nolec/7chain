@@ -5,7 +5,8 @@ const mediaRoute = express.Router();
 mediaRoute.get("/", async (req, res) => {
   try {
     db.query(
-      "select * from media group by media_link order by reg_date DESC limit 4",
+      // "select * from media group by media_link order by reg_date DESC limit 4",
+      `SELECT * from press ORDER BY reg_date DESC limit ${limit}`,
       (err, rows, fields) => {
         if (err) throw err;
         return res.send(rows);
@@ -18,7 +19,8 @@ mediaRoute.get("/", async (req, res) => {
 mediaRoute.get("/all", async (req, res) => {
   try {
     db.query(
-      "select * from media group by media_link order by reg_date DESC",
+      // "select * from media group by media_link order by reg_date DESC",
+      "SELECT * from press ORDER BY reg_date DESC",
       (err, rows, fields) => {
         if (err) throw err;
         return res.send(rows);

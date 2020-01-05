@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PressUpload from "./PressUpload";
 
 const Section = styled.section`
   padding: 0 0 60px;
@@ -32,6 +33,7 @@ export default () => {
         <HBox>
           <h2>Press</h2>
         </HBox>
+        <PressUpload />
       </Container>
     </Section>
   );

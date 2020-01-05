@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { TweenMax } from "gsap";
+import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
 const TopBox = styled.div`
   max-width: 1162px;
@@ -38,7 +40,7 @@ const Ul = styled.ul`
   display: flex;
 `;
 const Li = styled.li``;
-const Alink = styled(Link)`
+const Alink = styled.a`
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -61,7 +63,12 @@ const UtilBox = styled(Link)`
   }
 `;
 export default ({ history, location }) => {
-  console.log(history);
+  const ul = useRef(null);
+  const handleGo = e => {
+    const id = e.currentTarget.hash;
+    e.preventDefault();
+    TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+  };
   return (
     <TopBox>
       <div>
@@ -86,10 +93,10 @@ export default ({ history, location }) => {
         ) : (
           <>
             <NavBar>
-              <Ul>
+              <Ul ref={ul}>
                 <Li>
-                  <Alink to="#">
-                    <span>Overview</span>
+                  <Alink onClick={handleGo} href="#overview">
+                    <span>overview</span>
                   </Alink>
                 </Li>
                 <Li>

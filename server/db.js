@@ -17,12 +17,19 @@
 // db.on("error", handleError);
 import mysql from "mysql";
 
+// const db = mysql.createConnection({
+//   host: "211.251.239.224",
+//   user: "num_local",
+//   password: "num_local",
+//   post: 3306,
+//   database: "7chain_official"
+// });
 const db = mysql.createConnection({
-  host: "211.251.239.224",
-  user: "num_local",
-  password: "num_local",
+  host: "127.0.0.1",
+  user: "root",
+  password: "15324613",
   post: 3306,
-  database: "7chain_official"
+  database: "nolec"
 });
 db.connect(function(err) {
   if (err) throw err;

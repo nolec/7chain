@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { TweenMax } from "gsap";
+import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
 const Btn = styled.div`
   position: fixed;
@@ -8,7 +10,7 @@ const Btn = styled.div`
   right: 30px;
   bottom: 30px;
 `;
-const Blink = styled(Link)`
+const Blink = styled.a`
   display: block;
   border-radius: 100%;
   width: 50px;
@@ -20,15 +22,16 @@ const Blink = styled(Link)`
 `;
 
 export default () => {
-  const handleClick = () => {
-    const { top } = document.querySelector("html").getBoundingClientRect();
-    window.scrollTo({ top, behavior: "smooth" });
+  const handleClick = e => {
+    console.log(e.target);
+    const body = document.querySelector("body");
+    TweenMax.to(window, 1, { scrollTo: body.offsetTop });
   };
   return (
     <Btn>
       <Blink
         onClick={handleClick}
-        to="#"
+        href="#window"
         back={require("../assets/images/bullet-arrow-top.png")}
       ></Blink>
     </Btn>

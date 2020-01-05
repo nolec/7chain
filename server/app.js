@@ -17,7 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/press", pressRoute);
 app.use("/api/media", mediaRoute);
-
+//------------------------------------
+app.use("/server", express.static("uploads"));
+//------------------------------------
 const port = process.env.PORT || 5000;
 const handleListen = () => {
   console.log(`Listened on Server - PORT : ${port} `);
