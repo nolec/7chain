@@ -11,7 +11,8 @@ export const getPress = () => async dispatch => {
 };
 export const getPressAll = page => async dispatch => {
   try {
-    const res = await axios.get(`/api/press/${page}`);
+    const res = await axios.get(`/api/press/all/${page}`);
+    console.log(res.data);
     dispatch({ type: LOAD_PRESS, payload: res.data });
   } catch (error) {
     dispatch({ type: FAIL_LOAD, payload: error });
