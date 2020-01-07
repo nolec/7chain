@@ -25,6 +25,7 @@ mediaRoute.get("/", async (req, res) => {
 });
 mediaRoute.get("/all/:page", async (req, res) => {
   try {
+    const page = parseInt(req.params.page) * 8;
     db.getConnection((err, con) => {
       if (err) {
         con.release();
@@ -32,9 +33,12 @@ mediaRoute.get("/all/:page", async (req, res) => {
       }
       con.query(
         `CALL spt_GetMedias(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
-        [1, 2],
+        [1, page],
         (err, rows, fields) => {
-          if (err) throw err;
+          if (err) {
+            con.release();
+            throw err;
+          }
 
           // for (let index = rows.length - 1; index >= 0; index--) {
           //   const element = rows[index];
@@ -42,11 +46,12 @@ mediaRoute.get("/all/:page", async (req, res) => {
           //     rows.splice(index, 1);
           //   }
           // }
-          const result = rows.filter((row, i) => Array.isArray(row));
-          console.log(rows.length);
-          rows = result;
+          const result = rows.filter(
+            (row, i) => row.constructor.name !== "OkPacket"
+          );
+          console.log(result);
           con.release();
-          return res.send(rows);
+          return res.send(result);
         }
       );
     });

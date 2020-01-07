@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { getPressAll } from "../../../actions/press";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Section = styled.section`
   margin-top: 80px;
@@ -117,13 +117,15 @@ const SLink = styled(Link)`
 `;
 export default () => {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const press = useSelector(state => state.press);
+  const { press, cnt } = useSelector(state => ({
+    press: state.press.adminPress,
+    cnt: state.press.cnt
+  }));
   const dispatch = useDispatch();
-
   const handleClick = () => {
     setCurrentPage(currentPage + 1);
   };
+  console.log(press, cnt, useLocation());
   useEffect(() => {
     dispatch(getPressAll(currentPage));
   }, [currentPage]);
@@ -134,13 +136,8 @@ export default () => {
           <h2>Press</h2>
         </HBox>
         <Articles>
-          {press.press[1] &&
-            console.log(
-              press.press[1][0].total_row_count,
-              press.press[0].length
-            )}
-          {press.press[0] &&
-            press.press[0].map(pr => (
+          {press &&
+            press.map(pr => (
               <Item key={pr.no}>
                 <a href={pr.media_link} target="_blank">
                   <figure src="#" alt="poster">
@@ -158,9 +155,7 @@ export default () => {
             ))}
         </Articles>
         <SeeMore>
-          {press.press[0] &&
-          press.press[0].length ===
-            press.press[1][0].total_row_count - 1 ? null : (
+          {cnt && press.length === cnt - 1 ? null : (
             <SLink to="#" onClick={handleClick}>
               더보기
             </SLink>

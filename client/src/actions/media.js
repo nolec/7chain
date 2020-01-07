@@ -1,4 +1,4 @@
-import { LOAD_MEDIA, FAIL_LOAD } from "./types";
+import { LOAD_MEDIA, FAIL_LOAD, LOAD_ADMINMEDIA } from "./types";
 import axios from "axios";
 
 export const getMedia = () => async dispatch => {
@@ -9,10 +9,11 @@ export const getMedia = () => async dispatch => {
     dispatch({ type: FAIL_LOAD, payload: error });
   }
 };
-export const getMediaAll = () => async dispatch => {
+export const getMediaAll = page => async dispatch => {
   try {
-    const res = await axios.get("/api/media/all");
-    dispatch({ type: LOAD_MEDIA, payload: res.data });
+    const res = await axios.get(`/api/media/all/${page}`);
+    console.log(res.data);
+    dispatch({ type: LOAD_ADMINMEDIA, payload: res.data });
   } catch (error) {
     dispatch({ type: FAIL_LOAD, payload: error });
   }

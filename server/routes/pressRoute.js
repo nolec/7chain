@@ -36,7 +36,10 @@ pressRoute.get("/all/:page", async (req, res) => {
         `CALL spt_GetArticlesAdmin(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
         [1, page],
         (err, rows, fields) => {
-          if (err) throw err;
+          if (err) {
+            con.release();
+            throw err;
+          }
 
           // for (let index = rows.length - 1; index >= 0; index--) {
           //   const element = rows[index];
@@ -44,11 +47,12 @@ pressRoute.get("/all/:page", async (req, res) => {
           //     rows.splice(index, 1);
           //   }
           // }
-          const result = rows.filter((row, i) => Array.isArray(row));
-          console.log(rows.length);
-          rows = result;
+          const result = rows.filter(
+            (row, i) => row.constructor.name !== "OkPacket"
+          );
+          console.log(result);
           con.release();
-          return res.send(rows);
+          return res.send(result);
         }
       );
     });
@@ -56,13 +60,17 @@ pressRoute.get("/all/:page", async (req, res) => {
     return res.status(400).json({ error: error });
   }
 });
-pressRoute.post("/upload", upload, async (req, res) => {
+pressRoute.post("/upload", async (req, res) => {
   try {
     console.log(req.body);
-    await db.query(`CALL filterTodo()`, (err, rows, fields) => {
-      if (err) throw err;
-      return res.send(rows);
-    });
+    await db.query(
+      `CALL spt_RegistPress(?,?,?,?,?,?,?,?,?,?)`,
+      [],
+      (err, rows, fields) => {
+        if (err) throw err;
+        return res.send(rows);
+      }
+    );
   } catch (error) {
     return res.status(400).json({ error: error });
   }

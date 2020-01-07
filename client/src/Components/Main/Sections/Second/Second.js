@@ -69,6 +69,7 @@ const TextBox = styled.div`
 export default () => {
   const controller = new ScrollMagic.Controller();
   const gsap = useRef(null);
+  console.log("second 실행");
   useEffect(() => {
     const Scene = () => {
       for (let i = 0; i < gsap.current.children.length; i++) {

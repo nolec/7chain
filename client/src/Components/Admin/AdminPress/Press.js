@@ -40,7 +40,7 @@ export default () => {
           <PressUpload />
         </Container>
       </Section>
-      <Content></Content>
+      <Content />
     </>
   );
 };

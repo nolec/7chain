@@ -40,7 +40,7 @@ const Ul = styled.ul`
   display: flex;
 `;
 const Li = styled.li``;
-const Alink = styled.a`
+const Alink = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -72,7 +72,7 @@ export default ({ history, location }) => {
   return (
     <TopBox>
       <div>
-        <LogoBox to="#" onClick={() => history.push("/")}>
+        <LogoBox to="/">
           <img
             src={require("../../assets/images/logo/7chain-logo-white.svg")}
             alt="logo"
@@ -95,7 +95,7 @@ export default ({ history, location }) => {
             <NavBar>
               <Ul ref={ul}>
                 <Li>
-                  <Alink onClick={handleGo} href="#overview">
+                  <Alink onClick={handleGo} to="#overview">
                     <span>overview</span>
                   </Alink>
                 </Li>

@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import MediaUpload from "./MediaUpload";
+import Content from "./Content";
 
 const Section = styled.section`
+  margin-top: 80px;
   padding: 0 0 60px;
   overflow: hidden;
 `;
@@ -20,6 +23,7 @@ const HBox = styled.div`
   padding-bottom: 15px;
   margin-bottom: 55px;
   h2 {
+    font-weight: 700;
     font-size: 40px;
     color: #fff;
   }
@@ -27,12 +31,16 @@ const HBox = styled.div`
 
 export default () => {
   return (
-    <Section>
-      <Container>
-        <HBox>
-          <h2>Media</h2>
-        </HBox>
-      </Container>
-    </Section>
+    <>
+      <Section>
+        <Container>
+          <HBox>
+            <h2>Media Upload</h2>
+          </HBox>
+          <MediaUpload />
+        </Container>
+      </Section>
+      <Content />
+    </>
   );
 };

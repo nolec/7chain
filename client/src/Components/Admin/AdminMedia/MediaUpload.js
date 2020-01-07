@@ -7,8 +7,8 @@ import {
   ThemeProvider,
   Button,
   Checkbox,
-  FormControlLabel,
-  withStyles
+  withStyles,
+  FormControlLabel
 } from "@material-ui/core";
 import { green, blue } from "@material-ui/core/colors";
 
@@ -33,7 +33,6 @@ const BlueCheckbox = withStyles({
   },
   checked: {}
 })(props => <Checkbox color="default" {...props} />);
-
 const UploadBox = styled.div`
   margin-top: 60px;
   padding: 0 20px;
@@ -86,13 +85,6 @@ const Group = styled(TextField)`
   }
   label {
     color: #707070;
-  }
-  &:nth-child(2) {
-    width: calc(50% - 5px);
-    margin-right: 10px;
-  }
-  &:nth-child(3) {
-    width: calc(50% - 5px);
   }
 `;
 const SubBox = styled.div`

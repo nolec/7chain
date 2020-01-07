@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getPress } from "../../../../actions/press";
-import { Link } from "react-router-dom";
-import { getMedia } from "../../../../actions/media";
+import { getMediaAll } from "../../../actions/media";
+import { Link, useLocation } from "react-router-dom";
 
 const Section = styled.section`
-  padding: 0 0 60px;
+  margin-top: 80px;
+  padding: 0 0 120px;
   overflow: hidden;
-  background: #1c1c1c;
 `;
 const Container = styled.div`
   max-width: 1162px;
@@ -25,6 +24,7 @@ const HBox = styled.div`
   padding-bottom: 15px;
   margin-bottom: 55px;
   h2 {
+    font-weight: 700;
     font-size: 40px;
     color: #fff;
   }
@@ -116,58 +116,28 @@ const SLink = styled(Link)`
   font-size: 22px;
 `;
 export default () => {
-  const { press, media } = useSelector(
-    state => ({ press: state.press, media: state.media }),
-    []
-  );
-  // const tags = useMemo(() => {
-  //   return [dispatch(getPress()), dispatch(getMedia())];
-  // }, [press.loading]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { media, cnt } = useSelector(state => ({
+    media: state.media.adminMedia,
+    cnt: state.media.cnt
+  }));
   const dispatch = useDispatch();
+  const handleClick = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  console.log(media, cnt, useLocation());
   useEffect(() => {
-    dispatch(getPress());
-  }, []);
-  useEffect(() => {
-    dispatch(getMedia());
-  }, []);
+    dispatch(getMediaAll(currentPage));
+  }, [currentPage]);
   return (
-    <>
-      <Section>
-        <Container>
-          <HBox>
-            <h2>Press</h2>
-          </HBox>
-          <Articles>
-            {console.log(press)}
-            {press.press.map((pr, i) => (
-              <Item key={i}>
-                <a href={pr.media_link} target="_blank">
-                  <figure src="#" alt="poster">
-                    <Logo>
-                      <img src="#" alt="logo" />
-                    </Logo>
-                  </figure>
-                  <Sub>
-                    <span>{pr.media_name}</span>
-                    <span>{pr.reg_date}</span>
-                  </Sub>
-                  <p>{pr.title}</p>
-                </a>
-              </Item>
-            ))}
-          </Articles>
-          <SeeMore>
-            <SLink to="/press">더보기</SLink>
-          </SeeMore>
-        </Container>
-      </Section>
-      <Section>
-        <Container>
-          <HBox>
-            <h2>Media</h2>
-          </HBox>
-          <Articles>
-            {media.media.map(me => (
+    <Section>
+      <Container>
+        <HBox>
+          <h2>Media</h2>
+        </HBox>
+        <Articles>
+          {media &&
+            media.map(me => (
               <Item key={me.no}>
                 <a href={me.media_link} target="_blank">
                   <figure src="#" alt="poster">
@@ -183,12 +153,15 @@ export default () => {
                 </a>
               </Item>
             ))}
-          </Articles>
-          <SeeMore>
-            <SLink to="/media">더보기</SLink>
-          </SeeMore>
-        </Container>
-      </Section>
-    </>
+        </Articles>
+        <SeeMore>
+          {cnt && media.length === cnt - 1 ? null : (
+            <SLink to="#" onClick={handleClick}>
+              더보기
+            </SLink>
+          )}
+        </SeeMore>
+      </Container>
+    </Section>
   );
 };

@@ -118,7 +118,7 @@ export default () => {
   const press = useSelector(state => state.press);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPressAll());
+    // dispatch(getPressAll());
   }, []);
   return (
     <Section>
