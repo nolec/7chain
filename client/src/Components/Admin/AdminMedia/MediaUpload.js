@@ -89,6 +89,7 @@ const Group = styled(TextField)`
 `;
 const SubBox = styled.div`
   display: flex;
+  align-items: center;
 `;
 const CheckCard = styled.div`
   display: flex;

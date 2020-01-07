@@ -17,25 +17,20 @@
 // db.on("error", handleError);
 import mysql from "mysql";
 
-const db = mysql.createPool({
-  host: "211.251.239.224",
-  user: "num_local",
-  password: "num_local",
-  post: 3306,
-  database: "7chain_official",
-  multipleStatements: true
-
-  // ,  debug: ["RowDataPacket"]
-});
-// const db = mysql.createConnection({
-//   host: "127.0.0.1",
-//   user: "root",
-//   password: "15324613",
+// const db = mysql.createPool({
+//   host: "211.251.239.224",
+//   user: "num_local",
+//   password: "num_local",
 //   post: 3306,
-//   database: "nolec"
+//   database: "7chain_official",
+//   multipleStatements: true
 // });
-// db.connect(function(err) {
-//   if (err) throw err;
-//   return console.log("연결 성공");
-// });
+const db = mysql.createPool({
+  host: "127.0.0.1",
+  user: "root",
+  password: "15324613",
+  post: 3306,
+  database: "nolec",
+  multipleStatements: true
+});
 export default db;

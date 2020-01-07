@@ -64,7 +64,7 @@ const PostImg = styled.div`
 `;
 const Form = styled.form`
   padding-left: 40px;
-  padding-top: 10px;
+  padding-top: 28px;
   width: 500px;
   position: relative;
   display: flex;
@@ -82,7 +82,7 @@ const Group = styled(TextField)`
   }
   p {
     color: #fff;
-    visibility: hidden;
+    visibility: ${props => (props.error ? "visibility" : "hidden")};
   }
   label {
     color: #707070;
@@ -97,6 +97,7 @@ const Group = styled(TextField)`
 `;
 const SubBox = styled.div`
   display: flex;
+  align-items: center;
 `;
 const CheckCard = styled.div`
   display: flex;
@@ -115,9 +116,25 @@ export default () => {
     checkedB: false
   });
 
+  const [formData, setFormData] = useState({
+    mediaLink: "",
+    mediaName: "",
+    regDate: "",
+    title: "",
+    description: ""
+  });
+  const { mediaLink, mediaName, regDate, title, description } = formData;
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(mediaLink, mediaName, regDate, title, description);
+  };
+  const hadnleForm = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
+
   const classes = useStyles();
   return (
     <UploadBox>
@@ -132,39 +149,54 @@ export default () => {
       <Form className={classes.root}>
         <ThemeProvider theme={theme}>
           <Group
-            error={false}
-            id="outlined-basic"
+            error={formData.mediaLink === "" ? true : false}
+            id="outlined-error-helper-text"
             helperText="hello"
             label="Link 주소"
             variant="outlined"
+            name="mediaLink"
+            value={formData.mediaLink}
+            onChange={hadnleForm}
           />
           <Group
-            error={false}
-            id="outlined-basic"
+            error={formData.mediaName === "" ? true : false}
+            id="outlined-error-helper-text"
             helperText="hello"
             label="미디어 명"
             variant="outlined"
+            name="mediaName"
+            value={formData.mediaName}
+            onChange={hadnleForm}
           />
           <Group
-            error={false}
-            id="outlined-basic"
+            error={formData.regDate === "" ? true : false}
+            id="outlined-error-helper-text"
             helperText="hello"
             label="등록일(yyyy.mm.dd)"
             variant="outlined"
+            name="regDate"
+            value={formData.regDate}
+            onChange={hadnleForm}
           />
           <Group
-            error={false}
-            id="outlined-basic"
+            error={formData.title === "" ? true : false}
+            id="outlined-error-helper-text"
             helperText="hello"
             label="제목"
             variant="outlined"
+            name="title"
+            value={formData.title}
+            onChange={hadnleForm}
           />
           <Group
-            error={false}
-            id="outlined-basic"
+            error={formData.description === "" ? true : false}
+            id="outlined-error-helper-text"
             helperText="hello"
             label="내용"
             variant="outlined"
+            name="description"
+            value={formData.description}
+            onChange={hadnleForm}
           />
           <SubBox>
             <CheckCard>
@@ -192,6 +224,7 @@ export default () => {
               />
             </CheckCard>
             <Button
+              onClick={handleSubmit}
               color="primary"
               variant="contained"
               style={{ alignSelf: "center" }}
