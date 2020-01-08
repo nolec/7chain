@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   makeStyles,
@@ -10,8 +10,13 @@ import {
   FormControlLabel,
   withStyles
 } from "@material-ui/core";
-import { green, blue } from "@material-ui/core/colors";
-
+import { blue } from "@material-ui/core/colors";
+import { uploadPress, uploadImage } from "../../../actions/press";
+import { useDispatch } from "react-redux";
+import Poster from "../Dropzone/Poster";
+import Logo from "../Dropzone/Logo";
+import DropzoneContext from "../context";
+import Drop from "../Dropzone/DropZone";
 const useStyles = makeStyles(theme => ({
   root: {
     "& .MuiOutlinedInput-root": {
@@ -42,20 +47,20 @@ const UploadBox = styled.div`
 `;
 const PostBox = styled.div`
   padding: 0 20px;
-  display: flex;
   color: #fff;
 `;
 const PostImg = styled.div`
+  display: flex;
   p {
     margin: 0;
   }
-  img:nth-of-type(1) {
+  :nth-of-type(1) img {
     width: 600px;
     height: 370px;
     cursor: pointer;
     border: 1px solid #fff;
   }
-  img:nth-of-type(2) {
+  :nth-of-type(2) img {
     width: 120px;
     height: 52px;
     cursor: pointer;
@@ -110,46 +115,76 @@ const theme = createMuiTheme({
   }
 });
 
-export default () => {
+export default props => {
+  const dispatch = useDispatch();
+  //Check Box ------------------------------
   const [state, setState] = useState({
     checkedA: false,
     checkedB: false
   });
-
+  //TextField Box ------------------------------
+  // const [error, setError] = useState(false);
+  //FormData ------------------------------
   const [formData, setFormData] = useState({
     mediaLink: "",
     mediaName: "",
     regDate: "",
     title: "",
-    description: ""
+    description: "",
+    checkedA: false,
+    checkedB: false,
+    logo: null,
+    poster: null,
+    files: []
   });
-  const { mediaLink, mediaName, regDate, title, description } = formData;
+  // const { mediaLink, mediaName, regDate, title, description } = formData;
+  //handleSubmit ------------------------------
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(mediaLink, mediaName, regDate, title, description);
+    console.log(formData);
+    // dispatch(uploadPress(formData));
+    dispatch(uploadImage(formData.logo, formData.poster));
   };
+
   const hadnleForm = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+    setFormData({
+      ...formData,
+      [name]: event.target.checked
+    });
   };
-
+  const updateLogo = file => {
+    setFormData({ ...formData, logo: file.logo, files: [file.file] });
+  };
+  const updatePoster = file => {
+    setFormData({ ...formData, poster: file.poster, files: [file.file] });
+  };
   const classes = useStyles();
+  const contextValue = {
+    formData,
+    updateLogo,
+    updatePoster
+  };
+  console.log(formData, "여기는 PressUpload");
   return (
     <UploadBox>
-      <PostBox>
-        <PostImg>
-          <p>Poster 이미지</p>
-          <img src={require("../../../assets/images/blank.png")} alt="poster" />
-          <p>Logo 이미지</p>
-          <img src={require("../../../assets/images/blank.png")} alt="logo" />
-        </PostImg>
-      </PostBox>
+      <DropzoneContext.Provider value={contextValue}>
+        <PostBox>
+          <PostImg>
+            <Poster />
+          </PostImg>
+          <PostImg>
+            <Logo />
+          </PostImg>
+        </PostBox>
+      </DropzoneContext.Provider>
       <Form className={classes.root}>
         <ThemeProvider theme={theme}>
           <Group
-            error={formData.mediaLink === "" ? true : false}
+            error={false}
             id="outlined-error-helper-text"
             helperText="hello"
             label="Link 주소"
@@ -159,7 +194,7 @@ export default () => {
             onChange={hadnleForm}
           />
           <Group
-            error={formData.mediaName === "" ? true : false}
+            error={false}
             id="outlined-error-helper-text"
             helperText="hello"
             label="미디어 명"
@@ -169,7 +204,7 @@ export default () => {
             onChange={hadnleForm}
           />
           <Group
-            error={formData.regDate === "" ? true : false}
+            error={false}
             id="outlined-error-helper-text"
             helperText="hello"
             label="등록일(yyyy.mm.dd)"
@@ -179,7 +214,7 @@ export default () => {
             onChange={hadnleForm}
           />
           <Group
-            error={formData.title === "" ? true : false}
+            error={false}
             id="outlined-error-helper-text"
             helperText="hello"
             label="제목"
@@ -189,7 +224,7 @@ export default () => {
             onChange={hadnleForm}
           />
           <Group
-            error={formData.description === "" ? true : false}
+            error={false}
             id="outlined-error-helper-text"
             helperText="hello"
             label="내용"

@@ -18,9 +18,23 @@ export const getPressAll = page => async dispatch => {
     dispatch({ type: FAIL_LOAD, payload: error });
   }
 };
-export const uploadPress = () => async dispatch => {
+export const uploadPress = formData => async dispatch => {
   try {
-    const res = await axios.post(`/api/press/upload`);
+    const res = await axios.post(`/api/press/upload`, formData);
+    console.log(res.data);
+  } catch (error) {
+    dispatch({ type: FAIL_LOAD, payload: error });
+  }
+};
+export const uploadImage = files => async dispatch => {
+  try {
+    const uploadData = new FormData();
+    const config = {
+      header: { "content-type": "multipart/form-data" }
+    };
+
+    console.log(uploadData);
+    const res = await axios.post(`/api/press/image`, uploadData, config);
     console.log(res.data);
   } catch (error) {
     dispatch({ type: FAIL_LOAD, payload: error });

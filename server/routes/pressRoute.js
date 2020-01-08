@@ -61,18 +61,61 @@ pressRoute.get("/all/:page", async (req, res) => {
   }
 });
 pressRoute.post("/upload", async (req, res) => {
+  let {
+    mediaLink: _media_link,
+    mediaName: _media_name,
+    title: _title,
+    description: _content,
+    checkedA: _is_7chain,
+    checkedB: _is_numbers,
+    regDate: _reg_date,
+    poster: _poster_img_filename,
+    logo: _logo_img_filename
+  } = req.body;
+  _is_7chain ? 1 : 0;
+  _is_7chain ? 1 : 0;
+
   try {
-    console.log(req.body);
-    await db.query(
-      `CALL spt_RegistPress(?,?,?,?,?,?,?,?,?,?)`,
-      [],
-      (err, rows, fields) => {
-        if (err) throw err;
-        return res.send(rows);
+    await db.getConnection((err, con) => {
+      if (err) {
+        con.release();
+        throw err;
       }
-    );
+      con.query(
+        `CALL spt_RegistPress(?,?,?,?,?,?,?,?,?,@_return); select @_return`,
+        [
+          _media_link,
+          _media_name,
+          _title,
+          _content,
+          _is_7chain,
+          _is_numbers,
+          _reg_date,
+          _poster_img_filename,
+          _logo_img_filename
+        ],
+        (err, rows, fields) => {
+          console.log(rows);
+          if (err) {
+            con.release();
+            throw err;
+          }
+          con.release();
+          return res.send(rows);
+        }
+      );
+    });
   } catch (error) {
     return res.status(400).json({ error: error });
   }
+});
+pressRoute.post("/image", (req, res) => {
+  upload(req, res, error => {
+    console.log(res.file);
+    if (error) {
+      return res.status(400).json({ success: false, error: error.message });
+    }
+    return res.json({ success: true, file: res.req.file });
+  });
 });
 export default pressRoute;
