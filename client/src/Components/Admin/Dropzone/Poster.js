@@ -6,8 +6,7 @@ export default () => {
   // useEffect(() => {
   //   URL.revokeObjectURL(file.poster);
   // }, [file]);
-  const [poster, setPoster] = useState({ poster: null, file: null });
-  console.log(poster);
+  const [poster, setPoster] = useState(null);
   const { getInputProps, getRootProps } = Drop(poster, setPoster);
   return (
     <DropzoneContext.Consumer>
@@ -15,18 +14,16 @@ export default () => {
         return (
           <div {...getRootProps()}>
             <p>Poster 이미지</p>
-            {poster.poster === null ? (
+            {poster === null ? (
               <img
                 src={require("../../../assets/images/blank.png")}
                 alt="poster"
               />
             ) : (
               <img
-                src={poster.poster}
+                src={poster}
                 alt="poster"
-                onLoad={() =>
-                  updatePoster({ poster: poster.poster, file: poster.file })
-                }
+                onLoad={() => updatePoster(poster)}
               />
             )}
             <input className="poster" {...getInputProps()} />

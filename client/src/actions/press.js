@@ -28,13 +28,12 @@ export const uploadPress = formData => async dispatch => {
 };
 export const uploadImage = files => async dispatch => {
   try {
-    const uploadData = new FormData();
     const config = {
       header: { "content-type": "multipart/form-data" }
     };
 
-    console.log(uploadData);
-    const res = await axios.post(`/api/press/image`, uploadData, config);
+    console.log(files);
+    const res = await axios.post(`/api/press/image`, files, config);
     console.log(res.data);
   } catch (error) {
     dispatch({ type: FAIL_LOAD, payload: error });

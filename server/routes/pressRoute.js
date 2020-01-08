@@ -111,7 +111,7 @@ pressRoute.post("/upload", async (req, res) => {
 });
 pressRoute.post("/image", (req, res) => {
   upload(req, res, error => {
-    console.log(res.file);
+    console.log(res.req.file);
     if (error) {
       return res.status(400).json({ success: false, error: error.message });
     }

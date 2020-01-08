@@ -3,7 +3,7 @@ import path from "path";
 
 let storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "upload/");
+    callback(null, "server/uploads/");
   },
   filename: (req, file, callback) => {
     callback(null, `${Date.now()}_${file.originalname}`);

@@ -134,8 +134,7 @@ export default props => {
     checkedA: false,
     checkedB: false,
     logo: null,
-    poster: null,
-    files: []
+    poster: null
   });
   // const { mediaLink, mediaName, regDate, title, description } = formData;
   //handleSubmit ------------------------------
@@ -157,10 +156,10 @@ export default props => {
     });
   };
   const updateLogo = file => {
-    setFormData({ ...formData, logo: file.logo, files: [file.file] });
+    setFormData({ ...formData, logo: file });
   };
   const updatePoster = file => {
-    setFormData({ ...formData, poster: file.poster, files: [file.file] });
+    setFormData({ ...formData, poster: file });
   };
   const classes = useStyles();
   const contextValue = {
