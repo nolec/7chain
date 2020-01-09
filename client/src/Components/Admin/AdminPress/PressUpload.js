@@ -11,12 +11,12 @@ import {
   withStyles
 } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
-import { uploadPress, uploadImage } from "../../../actions/press";
-import { useDispatch } from "react-redux";
+import { uploadImage } from "../../../actions/press";
+import { useDispatch, useSelector } from "react-redux";
 import Poster from "../Dropzone/Poster";
 import Logo from "../Dropzone/Logo";
 import DropzoneContext from "../context";
-import Drop from "../Dropzone/DropZone";
+
 const useStyles = makeStyles(theme => ({
   root: {
     "& .MuiOutlinedInput-root": {
@@ -117,13 +117,14 @@ const theme = createMuiTheme({
 
 export default props => {
   const dispatch = useDispatch();
+  const imageName = useSelector(state => state.image.fileName);
+  console.log(imageName);
   //Check Box ------------------------------
   const [state, setState] = useState({
     checkedA: false,
     checkedB: false
   });
   //TextField Box ------------------------------
-  // const [error, setError] = useState(false);
   //FormData ------------------------------
   const [formData, setFormData] = useState({
     mediaLink: "",
@@ -136,15 +137,15 @@ export default props => {
     logo: null,
     poster: null
   });
+
   // const { mediaLink, mediaName, regDate, title, description } = formData;
   //handleSubmit ------------------------------
+
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(formData);
-    // dispatch(uploadPress(formData));
-    dispatch(uploadImage(formData.logo, formData.poster));
+    console.log(formData, logoFile, posterFile);
+    dispatch(uploadImage(logoFile, posterFile, formData));
   };
-
   const hadnleForm = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -155,19 +156,21 @@ export default props => {
       [name]: event.target.checked
     });
   };
-  const updateLogo = file => {
-    setFormData({ ...formData, logo: file });
+  const [logoFile, setLogoFile] = useState();
+  const [posterFile, setPosterFile] = useState();
+  const fileLogo = accept => {
+    setLogoFile(accept[0]);
   };
-  const updatePoster = file => {
-    setFormData({ ...formData, poster: file });
+  const filePoster = accept => {
+    setPosterFile(accept[0]);
   };
+  // let uploadFile = new FormData();
   const classes = useStyles();
   const contextValue = {
     formData,
-    updateLogo,
-    updatePoster
+    fileLogo,
+    filePoster
   };
-  console.log(formData, "여기는 PressUpload");
   return (
     <UploadBox>
       <DropzoneContext.Provider value={contextValue}>

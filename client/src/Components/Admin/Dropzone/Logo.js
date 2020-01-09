@@ -7,10 +7,10 @@ export default () => {
   //   URL.revokeObjectURL(logo);
   // }, [logo]);
   const [logo, setLogo] = useState(null);
-  const { getInputProps, getRootProps } = Drop(logo, setLogo);
+  const { getInputProps, getRootProps, acceptedFiles } = Drop(logo, setLogo);
   return (
     <DropzoneContext.Consumer>
-      {({ updateLogo }) => {
+      {({ fileLogo }) => {
         return (
           <div {...getRootProps()}>
             <p>Logo 이미지</p>
@@ -20,7 +20,13 @@ export default () => {
                 alt="logo"
               />
             ) : (
-              <img src={logo} alt="logo" onLoad={() => updateLogo(logo)} />
+              <img
+                src={logo}
+                alt="logo"
+                onLoad={() => {
+                  fileLogo(acceptedFiles);
+                }}
+              />
             )}
             <input className="logo" {...getInputProps()} />
           </div>

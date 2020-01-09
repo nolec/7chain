@@ -1,6 +1,8 @@
 import express from "express";
 import db from "../db";
 import upload from "../middleware/upload";
+import fs from "fs";
+import path, { dirname } from "path";
 
 const pressRoute = express.Router();
 
@@ -25,6 +27,18 @@ pressRoute.get("/", async (req, res) => {
   }
 });
 pressRoute.get("/all/:page", async (req, res) => {
+  const uploadData = [];
+  fs.readdir(
+    path.join(__dirname, "../uploads"),
+    { encoding: "utf8", flag: "r" },
+    (err, data) => {
+      if (err) {
+        return console.log("file 읽기 실패");
+      }
+      data.map(d => uploadData.push(d));
+      console.log("Loaded", uploadData);
+    }
+  );
   try {
     const page = parseInt(req.params.page) * 8;
     db.getConnection((err, con) => {
@@ -50,9 +64,9 @@ pressRoute.get("/all/:page", async (req, res) => {
           const result = rows.filter(
             (row, i) => row.constructor.name !== "OkPacket"
           );
-          console.log(result);
+          // console.log(result);
           con.release();
-          return res.send(result);
+          return res.json({ result, uploadData });
         }
       );
     });
@@ -72,10 +86,8 @@ pressRoute.post("/upload", async (req, res) => {
     poster: _poster_img_filename,
     logo: _logo_img_filename
   } = req.body;
-  _is_7chain ? 1 : 0;
-  _is_7chain ? 1 : 0;
-
   try {
+    console.log(req.body, _is_7chain, _is_numbers);
     await db.getConnection((err, con) => {
       if (err) {
         con.release();
@@ -95,11 +107,11 @@ pressRoute.post("/upload", async (req, res) => {
           _logo_img_filename
         ],
         (err, rows, fields) => {
-          console.log(rows);
           if (err) {
             con.release();
             throw err;
           }
+          console.log(rows, fields);
           con.release();
           return res.send(rows);
         }
@@ -111,11 +123,33 @@ pressRoute.post("/upload", async (req, res) => {
 });
 pressRoute.post("/image", (req, res) => {
   upload(req, res, error => {
-    console.log(res.req.file);
+    console.log(res.req.files, "어디죠");
     if (error) {
       return res.status(400).json({ success: false, error: error.message });
     }
-    return res.json({ success: true, file: res.req.file });
+    return res.json({ success: true, files: res.req.files });
   });
+});
+pressRoute.get("/delete/:no", async (req, res) => {
+  const no = req.params.no;
+  try {
+    await db.getConnection((err, con) => {
+      if (err) {
+        con.release();
+        throw err;
+      }
+      con.query(`CALL spt_RemoveArticle(?)`, [no], (err, rows, fields) => {
+        if (err) {
+          con.release();
+          throw err;
+        }
+        console.log(rows);
+        con.release();
+        return res.json({ success: true });
+      });
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
 });
 export default pressRoute;

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getPressAll } from "../../../actions/press";
-import { Link, useLocation } from "react-router-dom";
+import { getPressAll, deletePress } from "../../../actions/press";
+import { Link } from "react-router-dom";
 
 const Section = styled.section`
   margin-top: 80px;
@@ -65,6 +65,33 @@ const Item = styled.div`
     }
   }
 `;
+const Type = styled.div`
+  color: #fff;
+  padding: 5px;
+  font-size: 18px;
+  min-height: 40px;
+  display: flex;
+  > div {
+    width: 45%;
+    padding: 0 10px;
+  }
+`;
+const Close = styled.div`
+  position: absolute;
+  right: 16px;
+  top: 5px;
+  margin: 0;
+  width: 33px;
+  height: 28px;
+  opacity: 1;
+  z-index: 998;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+  }
+`;
 const Logo = styled.div`
   position: absolute;
   left: 16px;
@@ -116,16 +143,26 @@ const SLink = styled(Link)`
   font-size: 22px;
 `;
 export default () => {
+  const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
   const { press, cnt } = useSelector(state => ({
+    test: state.press,
     press: state.press.adminPress,
     cnt: state.press.cnt
   }));
-  const dispatch = useDispatch();
+
   const handleClick = () => {
     setCurrentPage(currentPage + 1);
   };
-  console.log(press, cnt, useLocation());
+  const handleDelete = no => {
+    const r = window.confirm("hello");
+    if (r) {
+      dispatch(deletePress(no));
+    } else {
+      return false;
+    }
+  };
   useEffect(() => {
     dispatch(getPressAll(currentPage));
   }, [currentPage]);
@@ -139,10 +176,19 @@ export default () => {
           {press &&
             press.map(pr => (
               <Item key={pr.no}>
+                <Type>
+                  <div>{pr.is_7chain === 1 ? "7Chain" : null}</div>
+                  <div>{pr.is_numbers === 1 ? "Numbers" : null}</div>
+                </Type>
+                <Close onClick={() => handleDelete(pr.no)}>
+                  <img
+                    src={require("../../../assets/images/MVPGame_Close.png")}
+                  />
+                </Close>
                 <a href={pr.media_link} target="_blank">
-                  <figure src="#" alt="poster">
+                  <figure src={pr.poster_img_filename} alt="poster">
                     <Logo>
-                      <img src="#" alt="logo" />
+                      <img src={pr.logo_img_filename} alt="logo" />
                     </Logo>
                   </figure>
                   <Sub>

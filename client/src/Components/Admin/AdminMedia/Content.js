@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getMediaAll } from "../../../actions/media";
-import { Link, useLocation } from "react-router-dom";
+import { getMediaAll, deleteMedia } from "../../../actions/media";
+import { Link } from "react-router-dom";
 
 const Section = styled.section`
   margin-top: 80px;
@@ -65,6 +65,33 @@ const Item = styled.div`
     }
   }
 `;
+const Type = styled.div`
+  color: #fff;
+  padding: 5px;
+  font-size: 18px;
+  min-height: 40px;
+  display: flex;
+  > div {
+    width: 45%;
+    padding: 0 10px;
+  }
+`;
+const Close = styled.div`
+  position: absolute;
+  right: 16px;
+  top: 5px;
+  margin: 0;
+  width: 33px;
+  height: 28px;
+  opacity: 1;
+  z-index: 998;
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+  }
+`;
 const Logo = styled.div`
   position: absolute;
   left: 16px;
@@ -116,16 +143,24 @@ const SLink = styled(Link)`
   font-size: 22px;
 `;
 export default () => {
+  const dispatch = useDispatch();
+
   const [currentPage, setCurrentPage] = useState(1);
   const { media, cnt } = useSelector(state => ({
     media: state.media.adminMedia,
     cnt: state.media.cnt
   }));
-  const dispatch = useDispatch();
   const handleClick = () => {
     setCurrentPage(currentPage + 1);
   };
-  console.log(media, cnt, useLocation());
+  const handleDelete = no => {
+    const r = window.confirm("hello");
+    if (r) {
+      dispatch(deleteMedia(no));
+    } else {
+      return false;
+    }
+  };
   useEffect(() => {
     dispatch(getMediaAll(currentPage));
   }, [currentPage]);
@@ -139,6 +174,15 @@ export default () => {
           {media &&
             media.map(me => (
               <Item key={me.no}>
+                <Type>
+                  <div>{me.is_7chain === 1 ? "7Chain" : null}</div>
+                  <div>{me.is_numbers === 1 ? "Numbers" : null}</div>
+                </Type>
+                <Close onClick={() => handleDelete(me.no)}>
+                  <img
+                    src={require("../../../assets/images/MVPGame_Close.png")}
+                  />
+                </Close>
                 <a href={me.media_link} target="_blank">
                   <figure src="#" alt="poster">
                     <Logo>

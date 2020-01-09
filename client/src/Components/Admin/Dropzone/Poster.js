@@ -7,10 +7,13 @@ export default () => {
   //   URL.revokeObjectURL(file.poster);
   // }, [file]);
   const [poster, setPoster] = useState(null);
-  const { getInputProps, getRootProps } = Drop(poster, setPoster);
+  const { getInputProps, getRootProps, acceptedFiles } = Drop(
+    poster,
+    setPoster
+  );
   return (
     <DropzoneContext.Consumer>
-      {({ updatePoster }) => {
+      {({ filePoster }) => {
         return (
           <div {...getRootProps()}>
             <p>Poster 이미지</p>
@@ -23,7 +26,9 @@ export default () => {
               <img
                 src={poster}
                 alt="poster"
-                onLoad={() => updatePoster(poster)}
+                onLoad={() => {
+                  filePoster(acceptedFiles);
+                }}
               />
             )}
             <input className="poster" {...getInputProps()} />

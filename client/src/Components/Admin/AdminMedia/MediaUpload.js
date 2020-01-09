@@ -7,10 +7,15 @@ import {
   ThemeProvider,
   Button,
   Checkbox,
-  withStyles,
-  FormControlLabel
+  FormControlLabel,
+  withStyles
 } from "@material-ui/core";
-import { green, blue } from "@material-ui/core/colors";
+import { blue } from "@material-ui/core/colors";
+import { uploadImage } from "../../../actions/media";
+import { useDispatch, useSelector } from "react-redux";
+import Poster from "../Dropzone/Poster";
+import Logo from "../Dropzone/Logo";
+import DropzoneContext from "../context";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,20 +46,20 @@ const UploadBox = styled.div`
 `;
 const PostBox = styled.div`
   padding: 0 20px;
-  display: flex;
   color: #fff;
 `;
 const PostImg = styled.div`
+  display: flex;
   p {
     margin: 0;
   }
-  img:nth-of-type(1) {
+  :nth-of-type(1) img {
     width: 600px;
     height: 370px;
     cursor: pointer;
     border: 1px solid #fff;
   }
-  img:nth-of-type(2) {
+  :nth-of-type(2) img {
     width: 120px;
     height: 52px;
     cursor: pointer;
@@ -63,7 +68,7 @@ const PostImg = styled.div`
 `;
 const Form = styled.form`
   padding-left: 40px;
-  padding-top: 10px;
+  padding-top: 28px;
   width: 500px;
   position: relative;
   display: flex;
@@ -81,10 +86,17 @@ const Group = styled(TextField)`
   }
   p {
     color: #fff;
-    visibility: hidden;
+    visibility: ${props => (props.error ? "visibility" : "hidden")};
   }
   label {
     color: #707070;
+  }
+  &:nth-child(2) {
+    width: calc(50% - 5px);
+    margin-right: 10px;
+  }
+  &:nth-child(3) {
+    width: calc(50% - 5px);
   }
 `;
 const SubBox = styled.div`
@@ -103,61 +115,119 @@ const theme = createMuiTheme({
 });
 
 export default () => {
+  const dispatch = useDispatch();
+  const imageName = useSelector(state => state.image.fileName);
+  console.log(imageName);
+  //Check Box ------------------------------
   const [state, setState] = useState({
     checkedA: false,
     checkedB: false
   });
-
+  //TextField Box ------------------------------
+  //FormData ------------------------------
+  const [formData, setFormData] = useState({
+    mediaLink: "",
+    mediaName: "",
+    regDate: "",
+    title: "",
+    description: "",
+    checkedA: false,
+    checkedB: false,
+    logo: null,
+    poster: null
+  });
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(formData, logoFile, posterFile);
+    dispatch(uploadImage(logoFile, posterFile, formData));
+  };
+  const hadnleForm = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+    setFormData({
+      ...formData,
+      [name]: event.target.checked
+    });
+  };
+  const [logoFile, setLogoFile] = useState();
+  const [posterFile, setPosterFile] = useState();
+  const fileLogo = accept => {
+    setLogoFile(accept[0]);
+  };
+  const filePoster = accept => {
+    setPosterFile(accept[0]);
   };
   const classes = useStyles();
+  const contextValue = {
+    formData,
+    fileLogo,
+    filePoster
+  };
   return (
     <UploadBox>
-      <PostBox>
-        <PostImg>
-          <p>Poster 이미지</p>
-          <img src={require("../../../assets/images/blank.png")} alt="poster" />
-          <p>Logo 이미지</p>
-          <img src={require("../../../assets/images/blank.png")} alt="logo" />
-        </PostImg>
-      </PostBox>
+      <DropzoneContext.Provider value={contextValue}>
+        <PostBox>
+          <PostImg>
+            <Poster />
+          </PostImg>
+          <PostImg>
+            <Logo />
+          </PostImg>
+        </PostBox>
+      </DropzoneContext.Provider>
       <Form className={classes.root}>
         <ThemeProvider theme={theme}>
           <Group
             error={false}
-            id="outlined-basic"
+            id="outlined-error-helper-text"
             helperText="hello"
             label="Link 주소"
             variant="outlined"
+            name="mediaLink"
+            value={formData.mediaLink}
+            onChange={hadnleForm}
           />
           <Group
             error={false}
-            id="outlined-basic"
+            id="outlined-error-helper-text"
             helperText="hello"
             label="미디어 명"
             variant="outlined"
+            name="mediaName"
+            value={formData.mediaName}
+            onChange={hadnleForm}
           />
           <Group
             error={false}
-            id="outlined-basic"
+            id="outlined-error-helper-text"
             helperText="hello"
             label="등록일(yyyy.mm.dd)"
             variant="outlined"
+            name="regDate"
+            value={formData.regDate}
+            onChange={hadnleForm}
           />
           <Group
             error={false}
-            id="outlined-basic"
+            id="outlined-error-helper-text"
             helperText="hello"
             label="제목"
             variant="outlined"
+            name="title"
+            value={formData.title}
+            onChange={hadnleForm}
           />
           <Group
             error={false}
-            id="outlined-basic"
+            id="outlined-error-helper-text"
             helperText="hello"
             label="내용"
             variant="outlined"
+            name="description"
+            value={formData.description}
+            onChange={hadnleForm}
           />
           <SubBox>
             <CheckCard>

@@ -19,7 +19,6 @@ export default (state = initialState, action) => {
     case LOAD_ADMINPRESS:
       return {
         ...state,
-        press: payload,
         adminPress: payload[0],
         cnt: payload[1][0].total_row_count,
         loading: false

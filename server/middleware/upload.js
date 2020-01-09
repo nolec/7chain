@@ -1,12 +1,19 @@
 import multer from "multer";
 import path from "path";
+import dateFormat from "dateformat";
 
 let storage = multer.diskStorage({
   destination: (req, file, callback) => {
+    console.log(req.body.media_name, file, "destination");
     callback(null, "server/uploads/");
   },
   filename: (req, file, callback) => {
-    callback(null, `${Date.now()}_${file.originalname}`);
+    console.log(file, "upload file");
+    const date = dateFormat(new Date(), "yyyymmddHHMMssl");
+    callback(
+      null,
+      `${req.body.media_name}_${date}${path.extname(file.originalname)}`
+    );
   }
 });
 
@@ -21,6 +28,6 @@ let upload = multer({
     }
     cb({ message: "파일 형식이 잘 못 되었습니다." }, false);
   }
-}).single("file");
+}).array("file", 2);
 
 export default upload;
