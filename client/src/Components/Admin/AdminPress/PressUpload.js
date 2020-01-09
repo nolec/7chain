@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import {
   makeStyles,
@@ -125,6 +125,30 @@ export default props => {
     checkedB: false
   });
   //TextField Box ------------------------------
+  const [error, setError] = useState({
+    a: false,
+    b: false,
+    c: false,
+    d: false,
+    e: false
+  });
+  const compare = () => {
+    const { mediaLink, mediaName, regDate, title, description } = formData;
+    console.log("실행?");
+    if (mediaLink === "") {
+      setError({ a: true });
+    } else if (mediaName === "") {
+      setError({ b: true });
+    } else if (regDate === "") {
+      setError({ c: true });
+    } else if (title === "") {
+      setError({ d: true });
+    } else if (description === "") {
+      setError({ e: true });
+    } else {
+      return false;
+    }
+  };
   //FormData ------------------------------
   const [formData, setFormData] = useState({
     mediaLink: "",
@@ -138,13 +162,14 @@ export default props => {
     poster: null
   });
 
-  // const { mediaLink, mediaName, regDate, title, description } = formData;
   //handleSubmit ------------------------------
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(formData, logoFile, posterFile);
-    dispatch(uploadImage(logoFile, posterFile, formData));
+    if (!compare()) {
+      console.log(formData, logoFile, posterFile);
+      dispatch(uploadImage(logoFile, posterFile, formData));
+    }
   };
   const hadnleForm = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -186,7 +211,7 @@ export default props => {
       <Form className={classes.root}>
         <ThemeProvider theme={theme}>
           <Group
-            error={false}
+            error={error.a}
             id="outlined-error-helper-text"
             helperText="hello"
             label="Link 주소"
@@ -196,7 +221,7 @@ export default props => {
             onChange={hadnleForm}
           />
           <Group
-            error={false}
+            error={error.b}
             id="outlined-error-helper-text"
             helperText="hello"
             label="미디어 명"
@@ -206,7 +231,7 @@ export default props => {
             onChange={hadnleForm}
           />
           <Group
-            error={false}
+            error={error.c}
             id="outlined-error-helper-text"
             helperText="hello"
             label="등록일(yyyy.mm.dd)"
