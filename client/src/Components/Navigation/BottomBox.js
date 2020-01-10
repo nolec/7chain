@@ -50,7 +50,7 @@ const Alink = styled(Link)`
   color: #fff;
   opacity: 0.8;
 `;
-export default () => {
+export default ({ handleGo }) => {
   return (
     <BottomBox>
       <div>
@@ -62,22 +62,22 @@ export default () => {
         <NavBar>
           <Ul>
             <Li>
-              <Alink to="#">
+              <Alink onClick={handleGo} to="#overview">
                 <span>Roger Caillois</span>
               </Alink>
             </Li>
             <Li>
-              <Alink to="#">
+              <Alink onClick={handleGo} to="#analysis">
                 <span>Global Gaming Market Analysis</span>
               </Alink>
             </Li>
             <Li>
-              <Alink to="#">
+              <Alink onClick={handleGo} to="#why">
                 <span>Why 7Chain?</span>
               </Alink>
             </Li>
             <Li>
-              <Alink to="#">
+              <Alink onClick={handleGo} to="#economic">
                 <span>7Chain's Economics</span>
               </Alink>
             </Li>

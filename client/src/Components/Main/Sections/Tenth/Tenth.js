@@ -129,7 +129,7 @@ const Timeline = styled.ul`
 `;
 export default () => {
   return (
-    <Section>
+    <Section id="roadmap">
       <Container>
         <HBox>
           <h2>Roadmap</h2>

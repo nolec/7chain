@@ -52,6 +52,11 @@ const Item = styled.div`
       background: #fff;
       overflow: hidden;
       border: 1px solid #fff;
+      > img {
+        width: 100%;
+        height: 12vw;
+        max-height: 160px;
+      }
     }
     p {
       text-align: left;
@@ -186,9 +191,22 @@ export default () => {
                   />
                 </Close>
                 <a href={pr.media_link} target="_blank">
-                  <figure src={pr.poster_img_filename} alt="poster">
+                  <figure>
+                    <img
+                      src={`http://localhost:5000/${encodeURIComponent(
+                        pr.poster_img_filename,
+                        "euc-kr"
+                      )}`}
+                      alt="poster"
+                    />
                     <Logo>
-                      <img src={pr.logo_img_filename} alt="logo" />
+                      <img
+                        src={`http://localhost:5000/${encodeURIComponent(
+                          pr.logo_img_filename,
+                          "euc-kr"
+                        )}`}
+                        alt="logo"
+                      />
                     </Logo>
                   </figure>
                   <Sub>

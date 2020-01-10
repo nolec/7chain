@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import SectionOne from "./Sections/First";
 import SectionTwo from "./Sections/Second";
@@ -15,6 +15,7 @@ import SectionTwelfth from "./Sections/Twelfth";
 import Join from "./Sections/Join";
 import Partner from "./Sections/Partner";
 import { withRouter } from "react-router-dom";
+import Scene from "./ScrollMagic";
 
 const Main = styled.main`
   h1,
@@ -36,10 +37,16 @@ const Main = styled.main`
 `;
 
 export default withRouter(({ location: { pathname } }) => {
+  const childRef = useRef(null);
+  useEffect(() => {
+    Scene(childRef);
+    console.log(childRef.current, "Parent Component");
+    return () => Scene(childRef);
+  });
   return (
     <Main>
       <SectionOne />
-      <SectionTwo />
+      <SectionTwo forwardedRef={childRef} />
       <SectionThree />
       <SectionFour />
       <SectionFifth />

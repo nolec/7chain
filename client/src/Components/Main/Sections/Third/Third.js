@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import GraphAreaOne from "./Graph/AreaOne";
 import GraphAreaTwo from "./Graph/AreaTwo";
+import Scene from "../../ScrollMagic";
+import ScrollMagic from "scrollmagic";
 
 const Section = styled.section`
   padding-bottom: 120px;
@@ -11,6 +13,17 @@ const Container = styled.div`
   max-width: 1260px;
   width: 1162px;
   margin: auto;
+  > div {
+    opacity: 0;
+    position: relative;
+    top: -100;
+    transition: 0.3s linear;
+  }
+  .active {
+    position: relative;
+    opacity: 1;
+    top: 0;
+  }
 `;
 const HBox = styled.div`
   position: relative;
@@ -69,9 +82,14 @@ const GraphArea = styled.div`
   }
 `;
 export default () => {
+  const gsap = useRef(null);
+  useEffect(() => {
+    Scene(gsap);
+    return () => Scene(gsap);
+  }, []);
   return (
-    <Section>
-      <Container>
+    <Section id="analysis">
+      <Container ref={gsap}>
         <HBox>
           <h2>글로벌 게이밍 마켓 분석</h2>
         </HBox>

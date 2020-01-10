@@ -132,7 +132,7 @@ export default () => {
   }, []);
   return (
     <>
-      <Section>
+      <Section id="press">
         <Container>
           <HBox>
             <h2>Press</h2>
@@ -161,14 +161,14 @@ export default () => {
           </SeeMore>
         </Container>
       </Section>
-      <Section>
+      <Section id="media">
         <Container>
           <HBox>
             <h2>Media</h2>
           </HBox>
           <Articles>
-            {media.media.map(me => (
-              <Item key={me.no}>
+            {media.media.map((me, i) => (
+              <Item key={i}>
                 <a href={me.media_link} target="_blank">
                   <figure src="#" alt="poster">
                     <Logo>

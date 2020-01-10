@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Poster from "../Dropzone/Poster";
 import Logo from "../Dropzone/Logo";
 import DropzoneContext from "../context";
+import { string as yupString, object as yupObject } from "yup";
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,7 +69,7 @@ const PostImg = styled.div`
     border: 1px solid #fff;
   }
 `;
-const Form = styled.form`
+const FormUpload = styled.form`
   padding-left: 40px;
   padding-top: 28px;
   width: 500px;
@@ -87,7 +89,6 @@ const Group = styled(TextField)`
   }
   p {
     color: #fff;
-    visibility: ${props => (props.error ? "visibility" : "hidden")};
   }
   label {
     color: #707070;
@@ -118,37 +119,12 @@ const theme = createMuiTheme({
 export default props => {
   const dispatch = useDispatch();
   const imageName = useSelector(state => state.image.fileName);
-  console.log(imageName);
   //Check Box ------------------------------
   const [state, setState] = useState({
     checkedA: false,
     checkedB: false
   });
   //TextField Box ------------------------------
-  const [error, setError] = useState({
-    a: false,
-    b: false,
-    c: false,
-    d: false,
-    e: false
-  });
-  const compare = () => {
-    const { mediaLink, mediaName, regDate, title, description } = formData;
-    console.log("실행?");
-    if (mediaLink === "") {
-      setError({ a: true });
-    } else if (mediaName === "") {
-      setError({ b: true });
-    } else if (regDate === "") {
-      setError({ c: true });
-    } else if (title === "") {
-      setError({ d: true });
-    } else if (description === "") {
-      setError({ e: true });
-    } else {
-      return false;
-    }
-  };
   //FormData ------------------------------
   const [formData, setFormData] = useState({
     mediaLink: "",
@@ -164,12 +140,29 @@ export default props => {
 
   //handleSubmit ------------------------------
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!compare()) {
-      console.log(formData, logoFile, posterFile);
-      dispatch(uploadImage(logoFile, posterFile, formData));
+  const submit = () => {
+    console.log(errors, handleSubmit(), Object.keys(errors));
+    if (
+      Object.keys(errors).length === 0 &&
+      formData.mediaLink !== "" &&
+      formData.mediaName !== "" &&
+      formData.regDate !== "" &&
+      formData.title !== "" &&
+      formData.description !== ""
+    ) {
+      if (state.checkedA === false && state.checkedB === false) {
+        alert("체크해주세요");
+        return false;
+      } else {
+        if (formData.logo === null || formData.poster === null) {
+          alert("이미지를 채워 넣어주세요.");
+          return false;
+        } else {
+          dispatch(uploadImage(logoFile, posterFile, formData));
+        }
+      }
     }
+    return false;
   };
   const hadnleForm = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -189,13 +182,22 @@ export default props => {
   const filePoster = accept => {
     setPosterFile(accept[0]);
   };
-  // let uploadFile = new FormData();
   const classes = useStyles();
   const contextValue = {
     formData,
     fileLogo,
     filePoster
   };
+  const ContactFormSchema = yupObject().shape({
+    mediaLink: yupString().required("빈 칸을 채워주세요"),
+    mediaName: yupString().required("빈 칸을 채워주세요"),
+    regDate: yupString().required("빈 칸을 채워주세요"),
+    title: yupString().required("빈 칸을 채워주세요"),
+    description: yupString().required("빈 칸을 채워주세요")
+  });
+  const { register, errors, handleSubmit } = useForm({
+    validationSchema: ContactFormSchema
+  });
   return (
     <UploadBox>
       <DropzoneContext.Provider value={contextValue}>
@@ -208,12 +210,17 @@ export default props => {
           </PostImg>
         </PostBox>
       </DropzoneContext.Provider>
-      <Form className={classes.root}>
+      <FormUpload
+        autoComplete="off"
+        onSubmit={handleSubmit(submit)}
+        className={classes.root}
+      >
         <ThemeProvider theme={theme}>
           <Group
-            error={error.a}
+            error={errors.mediaLink ? true : false}
+            helperText={errors.mediaLink ? errors.mediaLink.message : null}
+            inputRef={register}
             id="outlined-error-helper-text"
-            helperText="hello"
             label="Link 주소"
             variant="outlined"
             name="mediaLink"
@@ -221,9 +228,10 @@ export default props => {
             onChange={hadnleForm}
           />
           <Group
-            error={error.b}
+            error={errors.mediaName ? true : false}
+            helperText={errors.mediaName ? errors.mediaName.message : ""}
+            inputRef={register}
             id="outlined-error-helper-text"
-            helperText="hello"
             label="미디어 명"
             variant="outlined"
             name="mediaName"
@@ -231,9 +239,10 @@ export default props => {
             onChange={hadnleForm}
           />
           <Group
-            error={error.c}
+            error={errors.regDate ? true : false}
+            helperText={errors.regDate ? errors.regDate.message : ""}
+            inputRef={register}
             id="outlined-error-helper-text"
-            helperText="hello"
             label="등록일(yyyy.mm.dd)"
             variant="outlined"
             name="regDate"
@@ -241,9 +250,10 @@ export default props => {
             onChange={hadnleForm}
           />
           <Group
-            error={false}
+            error={errors.title ? true : false}
+            helperText={errors.title ? errors.title.message : ""}
+            inputRef={register}
             id="outlined-error-helper-text"
-            helperText="hello"
             label="제목"
             variant="outlined"
             name="title"
@@ -251,9 +261,10 @@ export default props => {
             onChange={hadnleForm}
           />
           <Group
-            error={false}
+            error={errors.description ? true : false}
+            helperText={errors.description ? errors.description.message : ""}
+            inputRef={register}
             id="outlined-error-helper-text"
-            helperText="hello"
             label="내용"
             variant="outlined"
             name="description"
@@ -286,7 +297,8 @@ export default props => {
               />
             </CheckCard>
             <Button
-              onClick={handleSubmit}
+              type="submit"
+              onClick={handleSubmit(submit)}
               color="primary"
               variant="contained"
               style={{ alignSelf: "center" }}
@@ -295,7 +307,7 @@ export default props => {
             </Button>
           </SubBox>
         </ThemeProvider>
-      </Form>
+      </FormUpload>
     </UploadBox>
   );
 };

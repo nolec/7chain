@@ -2,7 +2,7 @@ import express from "express";
 import db from "../db";
 import upload from "../middleware/upload";
 import fs from "fs";
-import path, { dirname } from "path";
+import path from "path";
 
 const pressRoute = express.Router();
 
@@ -64,9 +64,10 @@ pressRoute.get("/all/:page", async (req, res) => {
           const result = rows.filter(
             (row, i) => row.constructor.name !== "OkPacket"
           );
-          // console.log(result);
+          console.log(encodeURIComponent(uploadData));
+          const send = encodeURIComponent(uploadData);
           con.release();
-          return res.json({ result, uploadData });
+          return res.json({ result, send });
         }
       );
     });

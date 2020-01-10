@@ -156,7 +156,7 @@ const SubContent = styled.div`
 `;
 export default () => {
   return (
-    <Section>
+    <Section id="why">
       <Container>
         <HBox>
           <h2>왜 7Chain 일까요?</h2>

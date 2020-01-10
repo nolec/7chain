@@ -49,7 +49,7 @@ const Content = styled.div`
 `;
 export default () => {
   return (
-    <Section>
+    <Section id="economic">
       <Container>
         <HBox>
           <h2>7Chain의 플랫폼 경제</h2>

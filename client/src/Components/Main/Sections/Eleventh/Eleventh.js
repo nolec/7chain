@@ -112,7 +112,7 @@ const Bottom = styled.div`
 `;
 export default () => {
   return (
-    <Section>
+    <Section id="token">
       <Container>
         <HBox>
           <h2>토큰 할당 정책</h2>

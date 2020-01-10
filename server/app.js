@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/press", pressRoute);
 app.use("/api/media", mediaRoute);
 //------------------------------------
-app.use("/server", express.static("uploads"));
+app.use("/", express.static("uploads"));
+console.log(__dirname);
 //------------------------------------
 const port = process.env.PORT || 5000;
 const handleListen = () => {

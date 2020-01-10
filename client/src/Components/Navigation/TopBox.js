@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { TweenMax } from "gsap";
-import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
 const TopBox = styled.div`
   max-width: 1162px;
@@ -62,17 +60,13 @@ const UtilBox = styled(Link)`
     margin-right: 5px;
   }
 `;
-export default ({ history, location }) => {
+export default ({ handleClick, history, location, handleGo }) => {
   const ul = useRef(null);
-  const handleGo = e => {
-    const id = e.currentTarget.hash;
-    e.preventDefault();
-    TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
-  };
+
   return (
     <TopBox>
       <div>
-        <LogoBox to="/">
+        <LogoBox onClick={handleClick} to="/">
           <img
             src={require("../../assets/images/logo/7chain-logo-white.svg")}
             alt="logo"
@@ -100,22 +94,22 @@ export default ({ history, location }) => {
                   </Alink>
                 </Li>
                 <Li>
-                  <Alink to="#">
+                  <Alink onClick={handleGo} to="#roadmap">
                     <span>Roadmap</span>
                   </Alink>
                 </Li>
                 <Li>
-                  <Alink to="#">
+                  <Alink onClick={handleGo} to="#token">
                     <span>Token Distribution</span>
                   </Alink>
                 </Li>
                 <Li>
-                  <Alink to="#">
+                  <Alink onClick={handleGo} to="#press">
                     <span>Press</span>
                   </Alink>
                 </Li>
                 <Li>
-                  <Alink to="#">
+                  <Alink onClick={handleGo} to="#media">
                     <span>Media</span>
                   </Alink>
                 </Li>

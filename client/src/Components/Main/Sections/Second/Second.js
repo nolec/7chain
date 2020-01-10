@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import ScrollMagic from "scrollmagic";
 
 const Section = styled.section`
   padding-bottom: 120px;
@@ -66,29 +65,10 @@ const TextBox = styled.div`
     opacity: 0.9;
   }
 `;
-export default () => {
-  const controller = new ScrollMagic.Controller();
-  const gsap = useRef(null);
-  console.log("second 실행");
-  useEffect(() => {
-    const Scene = () => {
-      for (let i = 0; i < gsap.current.children.length; i++) {
-        new ScrollMagic.Scene({
-          triggerElement: gsap.current.children[i],
-          offset: 50,
-          triggerHook: 0.7
-        })
-          .setClassToggle(gsap.current.children[i], "active")
-          .addTo(controller);
-      }
-    };
-    Scene();
-
-    return () => Scene();
-  }, []);
+export default ({ forwardedRef }) => {
   return (
     <Section id="overview">
-      <Container ref={gsap}>
+      <Container ref={forwardedRef}>
         <HBox>
           <h2>탈중앙화된 확률의 중요성</h2>
         </HBox>
