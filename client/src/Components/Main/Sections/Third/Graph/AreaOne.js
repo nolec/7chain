@@ -1,6 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useRef, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
+import Scene from "../../../ScrollMagic";
+const transform = keyframes`
 
+`;
 const GraphArea = styled.div`
   margin-top: 45px;
   h4 {
@@ -10,6 +13,15 @@ const GraphArea = styled.div`
   > div {
     margin-top: 25px;
   }
+  * {
+    transition: 1s linear;
+    transform-origin: left;
+  }
+  .transform {
+    transform: scaleX(1);
+    transform-origin: left;
+    opacity: 1 !important;
+  }
 `;
 const FootNote = styled.div`
   position: absolute;
@@ -17,6 +29,7 @@ const FootNote = styled.div`
   bottom: -15px;
   font-size: 0;
   margin-bottom: 15px;
+  opacity: 0;
   span {
     display: inline-block;
     margin-left: 20px;
@@ -56,7 +69,7 @@ const BoxOne = styled.div`
     display: block;
     height: 15px;
     background-size: 100% 100% !important;
-
+    transform: scaleX(0);
     &:nth-of-type(1) {
       width: 100%;
       margin-top: 0;
@@ -68,24 +81,24 @@ const BoxOne = styled.div`
       margin-top: 45px;
       background: url(${require("../../../../../assets/images/graph/graph_1_2.jpg")})
         0 0 no-repeat;
-      transition: width 1.5s;
-      transition-delay: 0.5s;
+      /* transition: width 1.5s;
+      transition-delay: 0.5s; */
     }
     &:nth-of-type(3) {
       width: 51.7%;
       margin-top: 45px;
       background: url(${require("../../../../../assets/images/graph/graph_1_3.jpg")})
         0 0 no-repeat;
-      transition: width 1.5s;
-      transition-delay: 1s;
+      /* transition: width 1.5s;
+      transition-delay: 1s; */
     }
     &:nth-of-type(4) {
       width: 39.2%;
       margin-top: 45px;
       background: url(${require("../../../../../assets/images/graph/graph_1_4.jpg")})
         0 0 no-repeat;
-      transition: width 1.5s;
-      transition-delay: 1.5s;
+      /* transition: width 1.5s;
+      transition-delay: 1.5s; */
     }
   }
 `;
@@ -111,10 +124,15 @@ const BoxTwo = styled.div`
   }
 `;
 export default () => {
+  const gsap = useRef(null);
+
+  useEffect(() => {
+    Scene(gsap.current.children[0].children, 1, "transform");
+  }, []);
   return (
     <GraphArea>
       <h4>Mobile</h4>
-      <div>
+      <div ref={gsap}>
         <BoxOne>
           <span></span>
           <div>2021</div>

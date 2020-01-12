@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
+import Scene from "../../../ScrollMagic";
 
 const GraphArea = styled.div`
   margin-top: 45px;
@@ -9,6 +10,15 @@ const GraphArea = styled.div`
   }
   > div {
     margin-top: 25px;
+  }
+  * {
+    transition: 1s linear;
+    transform-origin: left;
+  }
+  .transform {
+    transform: scaleX(1);
+    transform-origin: left;
+    opacity: 1 !important;
   }
 `;
 const BoxOne = styled.div`
@@ -27,7 +37,7 @@ const BoxOne = styled.div`
     display: block;
     height: 15px;
     background-size: 100% 100% !important;
-
+    transform: scaleX(0);
     &:nth-of-type(1) {
       width: 100%;
       margin-top: 0;
@@ -55,8 +65,6 @@ const BoxOne = styled.div`
               background: `url(${require("../../../../../assets/images/graph/graph_2_4.jpg")})
         0 0 no-repeat`
             }}
-      transition: width 1.5s;
-      transition-delay: 0.5s;
     }
     &:nth-of-type(3) {
       width: 51.7%;
@@ -71,8 +79,6 @@ const BoxOne = styled.div`
               background: `url(${require("../../../../../assets/images/graph/graph_3_3.jpg")})
         0 0 no-repeat`
             }}
-      transition: width 1.5s;
-      transition-delay: 1s;
     }
     &:nth-of-type(4) {
       width: 39.2%;
@@ -87,8 +93,6 @@ const BoxOne = styled.div`
               background: `url(${require("../../../../../assets/images/graph/graph_3_4.jpg")})
         0 0 no-repeat`
             }}
-      transition: width 1.5s;
-      transition-delay: 1.5s;
     }
   }
 `;
@@ -113,11 +117,18 @@ const BoxTwo = styled.div`
   }
 `;
 export default () => {
+  const gsap = useRef(null);
+  const gsap2 = useRef(null);
+
+  useEffect(() => {
+    Scene(gsap.current.children[0].children, 1, "transform");
+    Scene(gsap2.current.children[0].children, 1, "transform");
+  }, []);
   return (
     <>
       <GraphArea>
         <h4>Interactive (excl. Mobile)</h4>
-        <div>
+        <div ref={gsap}>
           <BoxOne count="one">
             <span></span>
             <div>2022</div>
@@ -136,7 +147,7 @@ export default () => {
       </GraphArea>
       <GraphArea>
         <h4>Mobile</h4>
-        <div>
+        <div ref={gsap2}>
           <BoxOne count="two">
             <span></span>
             <div>2022</div>

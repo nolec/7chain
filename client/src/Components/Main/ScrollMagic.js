@@ -1,15 +1,15 @@
 import ScrollMagic from "scrollmagic";
 
 const controller = new ScrollMagic.Controller();
-const Scene = gsap => {
-  console.log(gsap.current);
-  for (let i = 0; i < gsap.current.children.length; i++) {
+const Scene = (gsap, trigger, className) => {
+  console.log(gsap);
+  for (let i = 0; i < gsap.length; i++) {
     new ScrollMagic.Scene({
-      triggerElement: gsap.current.children[i],
+      triggerElement: gsap[i],
       offset: 50,
-      triggerHook: 0.7
+      triggerHook: trigger
     })
-      .setClassToggle(gsap.current.children[i], "active")
+      .setClassToggle(gsap[i], className)
       .addTo(controller);
   }
 };

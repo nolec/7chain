@@ -84,8 +84,7 @@ const GraphArea = styled.div`
 export default () => {
   const gsap = useRef(null);
   useEffect(() => {
-    Scene(gsap);
-    return () => Scene(gsap);
+    Scene(gsap.current.children, 0.7, "active");
   }, []);
   return (
     <Section id="analysis">

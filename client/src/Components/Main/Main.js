@@ -39,9 +39,9 @@ const Main = styled.main`
 export default withRouter(({ location: { pathname } }) => {
   const childRef = useRef(null);
   useEffect(() => {
-    Scene(childRef);
+    Scene(childRef.current.children, 0.7, "active");
     console.log(childRef.current, "Parent Component");
-    return () => Scene(childRef);
+    return () => Scene(childRef.current.children);
   });
   return (
     <Main>
