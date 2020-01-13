@@ -3,26 +3,17 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Section = styled.section`
-  padding: 0 0 60px;
-  overflow: hidden;
-  background: #1c1c1c;
+${props => props.theme.style.SectionStyle(0, 120)}
+  background: ${props => props.theme.css.evenColor};
   * {
     z-index: 2;
   }
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
-  position: relative;
-  width: 1162px;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
+  ${props => props.theme.style.HboxStyle(45, 15)}
   h2 {
     font-size: 40px;
     color: #fff;

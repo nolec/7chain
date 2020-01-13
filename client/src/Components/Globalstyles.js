@@ -34,9 +34,7 @@ a {
   text-decoration : none;
 }
 
-a:hover {
-  color: #fec503;
-}
+a:hover {text-decoration:none !important;color:#bfab7c;}
 h1,
 h2,
 h3,

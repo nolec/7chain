@@ -2,22 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
-  padding-bottom: 120px;
-  overflow: hidden;
+  ${props => props.theme.style.SectionStyle(0, 120)}
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
-  position: relative;
-  width: 1162px;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
+  ${props => props.theme.style.HboxStyle(45, 15)}
   margin-bottom: 55px;
   h2 {
     font-size: 40px;

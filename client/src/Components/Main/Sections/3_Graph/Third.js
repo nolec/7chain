@@ -1,41 +1,20 @@
 import React, { useRef, useEffect } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import { theme } from "../../Main";
 import GraphAreaOne from "./Graph/AreaOne";
 import GraphAreaTwo from "./Graph/AreaTwo";
 import Scene from "../../ScrollMagic";
-import ScrollMagic from "scrollmagic";
 
 const Section = styled.section`
-  padding-bottom: 120px;
-  margin: auto;
+${props => props.theme.style.SectionStyle(0, 120)}
+  background: ${props => props.theme.css.defaultColor};
 `;
 const Container = styled.div`
-  max-width: 1260px;
-  width: 1162px;
-  margin: auto;
-  > div {
-    opacity: 0;
-    position: relative;
-    top: -100;
-    transition: 0.3s linear;
-  }
-  .active {
-    position: relative;
-    opacity: 1;
-    top: 0;
-  }
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const HBox = styled.div`
-  position: relative;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
+  ${props => props.theme.style.HboxStyle(45, 15)}
 `;
 const GraphBox = styled.div`
   margin-top: 40px;
@@ -55,8 +34,7 @@ const GraphBox = styled.div`
       width: 7px;
       height: 22px;
       margin-right: 10px;
-      background: url(${require("../../../../assets/images/ico_arr_r.png")}) 50%
-        70% no-repeat;
+      background: url(${props => props.theme.file.arr}) 50% 70% no-repeat;
     }
     span {
       display: block;

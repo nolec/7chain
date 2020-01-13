@@ -1,55 +1,66 @@
 import React from "react";
 import styled from "styled-components";
+import device from "../../../../device";
 
 const Section = styled.section`
-  padding-top: 45px;
-  padding-bottom: 120px;
-  overflow: hidden;
+  ${props => props.theme.style.SectionStyle(45, 120)};
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const Hbox = styled.div`
-  position: relative;
-  margin-bottom: 0;
-  font-size: 30px;
-  h3 {
-    color: #a7dede;
-    ::before {
-      display: inline-block;
-      content: "";
-      width: 7px;
-      height: 22px;
-      margin-right: 10px;
-      background: url(${require("../../../../assets/images/ico_arr_r.png")}) 50%
-        70% no-repeat;
-    }
-  }
+  ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
 `;
 const ContentBox = styled.div`
   display: inline-block;
   height: 610px;
   width: 377px;
   margin-top: 60px;
-  padding-top: 401px !important;
   padding: 0 10px;
   text-align: center;
   vertical-align: top;
   background-image: ${props => {
-    if (props.name === "one")
-      return `url(${require("../../../../assets/images/Icon_DecentralizationRNG.png")})`;
-    else if (props.name === "two")
-      return `url(${require("../../../../assets/images/Icon_Dapp.png")})`;
-    else if (props.name === "three")
-      return `url(${require("../../../../assets/images/Icon_View.png")})`;
+    if (props.name === "one") return `url(${props.theme.file.rng})`;
+    else if (props.name === "two") return `url(${props.theme.file.dapp})`;
+    else if (props.name === "three") return `url(${props.theme.file.view})`;
   }};
   background-repeat: no-repeat;
   background-position: 0 0;
   background-size: contain;
-  :not(:nth-of-type(2)) {
+  &:not(:nth-of-type(2)) {
     margin-left: 15px;
+  }
+  &:not(:nth-child(1)) > div {
+    padding-top: 401px;
+    ${device.PC`padding-top : 20px;`};
+  }
+  ${device.PC`
+    position: relative;
+    width: 90%;
+    height: auto;
+    min-height: 200px;
+    padding-top: 20px;
+    background-size: 200px 200px;
+    > div{
+      text-align : left;
+      }
+      br{
+        display : none;
+      }
+      `};
+  :nth-child(even) {
+    ${device.PC`
+    margin: 40px 0 0 5%;
+    padding-left: 220px;
+    background-position: top left;
+    `}
+  }
+  :nth-child(3) {
+    ${device.PC`
+    margin: 40px 15px 0 5%;
+    padding-right: 220px;
+    background-position: top right;
+    `}
   }
 `;
 const TextBox = styled.div`
@@ -65,6 +76,7 @@ const TextBox = styled.div`
     margin-top: 20px;
     color: #fff;
     opacity: 0.9;
+    margin-bottom: 1rem;
   }
 `;
 export default () => {

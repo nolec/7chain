@@ -1,23 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import device from "../../../../device";
 
 const Section = styled.section`
-  padding-bottom: 120px;
-  overflow: hidden;
-  background: #1c1c1c;
+${props => props.theme.style.SectionStyle(40, 120)}
+  background: ${props => props.theme.css.evenColor};
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
-  position: relative;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
+  ${props => props.theme.style.HboxStyle(45, 15)}
   h2 {
     font-size: 40px;
     color: #fff;
@@ -37,14 +30,24 @@ const ImgBox = styled.div`
     width: 100%;
     height: 100%;
   }
+  ${device.PC920`    
+    width: 300px;
+    height: 300px;`}
 `;
 const Content = styled.div`
   padding: 0px 0px 0 420px;
   opacity: 0.9;
   min-height: 400px;
+  ${device.PC920`  
+      padding:0px 10px 0px 340px;
+      height:100%;`}
+  }
   p {
     font-size: 20px;
     color: #fff;
+    ${device.PC`
+      font-size: 18px;
+  `}
   }
 `;
 export default () => {

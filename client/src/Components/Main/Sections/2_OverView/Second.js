@@ -1,34 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
+import device from "../../../../device";
+// import { SectionStyle } from "../../Main";
 
 const Section = styled.section`
-  padding-bottom: 120px;
-  background: #1c1c1c;
-  margin: auto;
+${props => props.theme.style.SectionStyle(0, 120)}
+  background: ${props => props.theme.css.evenColor};
 `;
 const Container = styled.div`
-  max-width: 1260px;
-  width: 1162px;
-  margin: auto;
-  > div {
-    opacity: 0;
-    position: relative;
-    top: -100;
-    transition: 0.3s linear;
-  }
-  .active {
-    position: relative;
-    opacity: 1;
-    top: 0;
-  }
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const HBox = styled.div`
-  position: relative;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
+  ${props => props.theme.style.HboxStyle(45, 15)}
   h2 {
     font-size: 40px;
     color: #fff;
@@ -45,24 +29,30 @@ const ImgBox = styled.div`
   left: 0;
   width: 400px;
   height: 450px;
-  background: url(${props => props.back}) center 0 no-repeat;
+  background: url(${props => props.theme.file.man}) center 0 no-repeat;
   background-size: contain;
   margin-top: 60px;
+  ${device.PC`width : 300px; height : 350px; margin-top: 90px;`}
   p {
     padding: 390px 0 0 0px;
     margin: 0 0 0 -50px;
     font-size: 16px;
     text-align: center;
-    color: #fff;
+    color: ${props => props.theme.css.fontWhite};
     opacity: 1;
+    ${device.PC`padding: 300px 0 0 0; font-size: 15px;`}
+    ${device.PC920`font-size: 14px;`}
   }
 `;
 const TextBox = styled.div`
   padding: 80px 30px 0 300px;
+  ${device.PC`padding: 80px 10px 0px 200px;`}
+  ${device.PC920`padding: 60px 10px 0px 200px;`}
   p {
     font-size: 20px;
-    color: #fff;
+    color: ${props => props.theme.css.fontWhite};
     opacity: 0.9;
+    ${device.PC`font-size: 18px;`}
   }
 `;
 export default ({ forwardedRef }) => {
@@ -73,7 +63,7 @@ export default ({ forwardedRef }) => {
           <h2>탈중앙화된 확률의 중요성</h2>
         </HBox>
         <ContentBox>
-          <ImgBox back={require("../../../../assets/images/man_2.png")}>
+          <ImgBox>
             <p>
               로제 카이와 - 사회학자, 문학평론가
               <br />

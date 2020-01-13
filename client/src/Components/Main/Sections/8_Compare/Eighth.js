@@ -2,31 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
-  padding-top: 40px;
-  padding-bottom: 120px;
-  overflow: hidden;
+  ${props => props.theme.style.SectionStyle(40, 120)}
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  font-size: 0;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const Hbox = styled.div`
-  position: relative;
-  margin-bottom: 0;
-  font-size: 30px;
-  h3 {
-    color: #a7dede;
-    ::before {
-      display: inline-block;
-      content: "";
-      width: 7px;
-      height: 22px;
-      margin-right: 10px;
-      background: url(${require("../../../../assets/images/ico_arr_r.png")}) 50%
-        70% no-repeat;
-    }
-  }
+  ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)};
   p {
     margin: 25px 0 0 0;
     color: #fff;

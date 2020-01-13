@@ -2,32 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
-  padding-bottom: 120px;
-  overflow: hidden;
+  ${props => props.theme.style.SectionStyle(45, 120)};
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  font-size: 0;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
   border-top: 1px dotted #a59f91;
-  margin: auto;
 `;
 const Hbox = styled.div`
-  padding-top: 40px;
-  position: relative;
-  margin-bottom: 0;
-  font-size: 30px;
-  h3 {
-    color: #a7dede;
-    ::before {
-      display: inline-block;
-      content: "";
-      width: 7px;
-      height: 22px;
-      margin-right: 10px;
-      background: url(${require("../../../../assets/images/ico_arr_r.png")}) 50%
-        70% no-repeat;
-    }
-  }
+  ${props => props.theme.style.Hbox2Style(40, props.theme.file.arr)}
 `;
 const ImgBox = styled.div`
   position: relative;
@@ -40,6 +22,9 @@ const ImgBox = styled.div`
     display: inline;
   }
 `;
+const Img = styled.img.attrs({
+  src: props => props.theme.file.architecture
+})``;
 export default () => {
   return (
     <Section>
@@ -48,9 +33,7 @@ export default () => {
           <h3>7Chain 아키텍처</h3>
         </Hbox>
         <ImgBox>
-          <img
-            src={require("../../../../assets/images/bg_7ChainArchitecture_h.png")}
-          />
+          <Img />
         </ImgBox>
       </Container>
     </Section>

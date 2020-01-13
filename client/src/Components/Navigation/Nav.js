@@ -4,9 +4,8 @@ import TopBox from "./TopBox";
 import BottomBox from "./BottomBox";
 import { withRouter } from "react-router-dom";
 import { TweenMax } from "gsap";
-import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
-const Header = styled.div`
+const Header = styled.header`
   position: fixed;
   top: 0;
   right: 0;

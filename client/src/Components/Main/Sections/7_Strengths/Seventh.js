@@ -2,32 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
-  padding-top: 40px;
-  padding-bottom: 120px;
-  background: #1c1c1c;
-  overflow: hidden;
+${props => props.theme.style.SectionStyle(40, 120)}
+  background: ${props => props.theme.css.evenColor};
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  font-size: 0;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const Hbox = styled.div`
-  position: relative;
-  margin-bottom: 0;
-  font-size: 30px;
-  h3 {
-    color: #a7dede;
-    ::before {
-      display: inline-block;
-      content: "";
-      width: 7px;
-      height: 22px;
-      margin-right: 10px;
-      background: url(${require("../../../../assets/images/ico_arr_r.png")}) 50%
-        70% no-repeat;
-    }
-  }
+  ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
 `;
 const SubBox = styled.div`
   color: #a7dede;
@@ -50,12 +32,11 @@ const SubContent = styled.div`
     width: 180px;
     height: 142px;
     background-image: ${props => {
-      if (props.name === "first")
-        return `url(${require("../../../../assets/images/Icon_B2B.png")})`;
+      if (props.name === "first") return `url(${props.theme.file.b2b})`;
       else if (props.name === "second")
-        return `url(${require("../../../../assets/images/Icon_Collabo.png")})`;
+        return `url(${props.theme.file.collabo})`;
       else if (props.name === "third")
-        return `url(${require("../../../../assets/images/Icon_Expansion.png")})`;
+        return `url(${props.theme.file.expansion})`;
     }};
     background-position: 0 0;
     background-repeat: no-repeat;

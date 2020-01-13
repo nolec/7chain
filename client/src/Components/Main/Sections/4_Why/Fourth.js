@@ -1,35 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import device from "../../../../device";
 
 const Section = styled.section`
-  padding-bottom: 120px;
-  overflow: hidden;
-  background: #1c1c1c;
+${props => props.theme.style.SectionStyle(0, 120)}
+  background: ${props => props.theme.css.evenColor};
 `;
 const Container = styled.div`
-  max-width: 1260px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
-  position: relative;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
+  ${props => props.theme.style.HboxStyle(45, 15)}
 `;
 const ContentBox = styled.div`
   padding-bottom: 120px;
   margin-top: 40px;
+  ${device.PC`text-align: center;`}
   h3 {
     position: relative;
     margin-bottom: 0;
     font-size: 30px;
+    text-align: left;
     color: #a7dede;
     ::before {
       display: inline-block;
@@ -37,78 +28,90 @@ const ContentBox = styled.div`
       width: 7px;
       height: 22px;
       margin-right: 10px;
-      background: url(${require("../../../../assets/images/ico_arr_r.png")}) 50%
-        70% no-repeat;
+      background: url(${props => props.theme.file.arr}) 50% 70% no-repeat;
     }
   }
   > div {
     display: inline-block;
     width: 33.33%;
     vertical-align: top;
-    > div {
+    text-align: left;
+    color: #fff;
+    ${device.PC`
       position: relative;
-      top: 0px;
-      display: inline-block;
-      p {
-        padding: 0;
-        line-height: 1.5;
-        margin-bottom: 1rem;
-        b {
-          font-size: 18px;
-          color: #a7dede;
-          font-weight: normal;
-        }
-        span {
-          display: block;
-          margin-top: 0px;
-          padding-left: 11px;
-          font-size: 16px;
-          color: #fff;
-          opacity: 0.9;
-          background: url(${require("../../../../assets/images/arr_r_why.png")})
-            0 50% no-repeat;
-        }
-      }
-    }
+      width: auto;`};
   }
 `;
 const Legacy = styled.div`
-  width: 420px;
-  padding: 120px 0 0 140px;
-  left: 0px;
-  margin: 210px 0px 0px;
-  background: url(${require("../../../../assets/images/Why_legacy.png")}) center
-    top no-repeat;
-  background-size: contain;
+  ${props =>
+    props.theme.style.handleWhyBox(
+      420,
+      "120px 0 0 140px",
+      0,
+      "210px 0 0",
+      props.theme.file.legacy,
+      "center top"
+    )};
+  ${props => props.theme.style.whyBoxStyle(18, props.theme.css.whyBcolor, 16)};
+  ${device.PC`    
+    padding: 140px 0 0 150px;
+    left: 60px;
+    margin: 100px 0px 0px;
+    width: 460px;`}
+  ${device.PC990`    
+    padding: 100px 0 0 120px;
+    top: 50px;
+    left: 50px;
+    margin: 70px 0px;
+    width: 355px;`}
 `;
 const BlockChain = styled.div`
-  width: 420px;
-  padding: 200px 0 0 115px;
-  left: -42px;
-  margin: 429px 0px 0px;
-  background: url(${require("../../../../assets/images/Why_blockchain.png")})
-    center top no-repeat;
-  background-size: contain;
+  ${props =>
+    props.theme.style.handleWhyBox(
+      420,
+      "200px 0 0 115px",
+      42,
+      "429px 0 0",
+      props.theme.file.blockChain,
+      "center top"
+    )}
+  ${props => props.theme.style.whyBoxStyle(18, props.theme.css.whyBcolor, 16)};
+  ${device.PC`    
+    padding: 230px 0 0 125px;
+    left: -60px;
+    margin: 100px 0px 0px;
+    width: 460px;`}
+  ${device.PC990`    
+    padding: 190px 0 0 130px;
+    top: 50px;
+    left: -50px;
+    margin: 70px 0px;
+    width: 355px;`}
 `;
 const SevenChain = styled.div`
-  width: 500px;
-  text-align: left;
-  padding: 550px 0 0 140px;
-  top: 0px;
-  left: -82px;
-  margin: 70px 0px 0px;
-  background: url(${require("../../../../assets/images/Why_7chain_gray.png")})
-    center top no-repeat;
-  background-size: contain;
-  p {
-    b {
-      color: #5fdafe !important;
-      font-size: 18.5px !important;
-    }
-    span {
-      font-size: 16.5px !important;
-    }
+  ${props =>
+    props.theme.style.handleWhyBox(
+      500,
+      "550px 0 0 140px",
+      82,
+      "70px 0 0",
+      props.theme.file.chainGray,
+      "center top"
+    )}
+  p b {
+    font-size: 18.5px;
   }
+  ${props =>
+    props.theme.style.whyBoxStyle(18.5, props.theme.css.whyCcolor, 16.5)};
+  ${device.PC`
+    padding: 160px 0 0 420px;
+    top: -150px;
+    left: 0px;
+    margin: 30px 0px 0px;
+    width: 710px;
+    background-size : 410px;
+    background-position : left top;
+    `}
 `;
 const SubBox = styled.div`
   color: #a7dede;
@@ -132,12 +135,11 @@ const SubContent = styled.div`
     width: 180px;
     height: 142px;
     background-image: ${props => {
-      if (props.name === "first")
-        return `url(${require("../../../../assets/images/Icon_Equity.png")})`;
+      if (props.name === "first") return `url(${props.theme.file.equity})`;
       else if (props.name === "second")
-        return `url(${require("../../../../assets/images/Icon_Transparency.png")})`;
+        return `url(${props.theme.file.transparency})`;
       else if (props.name === "third")
-        return `url(${require("../../../../assets/images/Icon_BlueOcean.png")})`;
+        return `url(${props.theme.file.blueOcean})`;
     }};
     background-position: 0 0;
     background-repeat: no-repeat;
