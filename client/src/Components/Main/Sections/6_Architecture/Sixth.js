@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../../../../device";
 
 const Section = styled.section`
-  ${props => props.theme.style.SectionStyle(45, 120)};
+  ${props => props.theme.style.SectionStyle(0, 120)};
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
@@ -16,15 +17,24 @@ const ImgBox = styled.div`
   margin-top: 40px;
   text-align: center;
   width: 100%;
-  img {
-    position: relative;
-    width: 95%;
-    display: inline;
-  }
 `;
 const Img = styled.img.attrs({
   src: props => props.theme.file.architecture
-})``;
+})`
+  position: relative;
+  width: 95%;
+  display: inline;
+  ${device.PC768`display : none`};
+`;
+const ImgV = styled.img.attrs({
+  src: props => props.theme.file.architecture_v
+})`
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  display: none;
+  ${device.PC768`display : inline`};
+`;
 export default () => {
   return (
     <Section>
@@ -34,6 +44,7 @@ export default () => {
         </Hbox>
         <ImgBox>
           <Img />
+          <ImgV />
         </ImgBox>
       </Container>
     </Section>

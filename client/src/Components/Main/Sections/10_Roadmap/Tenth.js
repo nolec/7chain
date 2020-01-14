@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device, minDevice } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -11,16 +12,13 @@ const Container = styled.div`
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
   margin-bottom: 55px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 
 const TimeList = styled.div`
   margin-bottom: -1.5em;
 `;
 const Timeline = styled.ul`
+  margin-bottom: 1rem;
   position: relative;
   padding: 0;
   list-style: none;
@@ -34,16 +32,23 @@ const Timeline = styled.ul`
     margin-left: -1.5px;
     content: "";
     background-color: #a9dede;
-    left: 50%;
+    ${minDevice.minPC768`left : 50%;`}
   }
   li {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 0;
     display: flex;
     ::before {
       display: table;
       content: "";
     }
+    ::after {
+      clear: both;
+      display: table;
+      content: "";
+    }
+    ${device.PC767`padding : 1em 0 1em 0`}
+    ${minDevice.minPC768`margin-bottom: 40px;`}
     h3 {
       position: relative;
       margin-right: 60px;
@@ -67,21 +72,51 @@ const Timeline = styled.ul`
     width: 50%;
     text-align: left;
     padding-left: 0;
+    ${minDevice.minPC768`float : left;`}
+    &.year {
+      display: none;
+      ${minDevice.minPC768`display : block;`}
+    }
     &.left {
-      text-align: right;
-      padding-right: 90px;
+      position: relative;
+      float: left;
+      width: 100%;
+      text-align: left;
+      padding-left: 55px;
+      ${minDevice.minPC768` 
+          float: left;
+    width: 50%;
+    padding-left: 0;
+    display: block; 
+    text-align: right;
+    padding-right: 90px;`}
     }
     &.right {
+      position: relative;
+      float: left;
+      width: 100%;
       text-align: left;
-      padding-left: 85px;
+      padding-left: 55px;
+      ${minDevice.minPC768` 
+      width : 50%;
+    display: block; 
+    text-align: left;
+    padding-left: 85px;`}
+    }
+    &.blank {
+      display: none;
+      ${minDevice.minPC768`display : block;`}
     }
     h4 {
       font-size: 23px;
       margin-bottom: 0;
       color: #a9dede;
+      ${minDevice.minPC768`    margin-bottom: 10px; 
+`}
     }
     p {
       font-size: 17px;
+      ${device.PC1199`font-size : 15px;`}
       margin-bottom: 0;
       color: #fff;
       padding-top: 15px;
@@ -89,14 +124,20 @@ const Timeline = styled.ul`
   }
   .timeline-image {
     position: absolute;
-    left: 50%;
-    width: 32px;
-    height: 32px;
-    margin-left: -16px;
+    left: 0;
+    width: 16px;
+    height: 16px;
     border-radius: 100%;
     z-index: 100;
     background-color: #a9dede;
+    margin-left: 18px;
+    ${minDevice.minPC768` 
+    left: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: -16px;`};
     ::after {
+      ${minDevice.minPC768` 
       display: block;
       content: "";
       position: absolute;
@@ -106,12 +147,15 @@ const Timeline = styled.ul`
       height: 12px;
       margin: -6px 0 0 -6px;
       background: #1c1c1c;
-      border-radius: 50%;
+      border-radius: 50%;`};
     }
     &.small {
       width: 16px;
       height: 16px;
-      margin-left: -9px;
+      margin-left: 18px;
+      font-size: 80%;
+      font-weight: 400;
+      ${minDevice.minPC768`margin-left: -9px;`}
       ::after {
         content: none;
       }

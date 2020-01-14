@@ -16,7 +16,7 @@ import Join from "./Sections/13_Join";
 import Partner from "./Sections/14_Partner";
 import { withRouter } from "react-router-dom";
 import Scene from "./ScrollMagic";
-import device from "../../device";
+import { device } from "../../device";
 
 const Main = styled.main`
   h1,
@@ -27,6 +27,7 @@ const Main = styled.main`
   h6 {
     font-family: inherit;
     line-height: 1.2;
+    margin-bottom: 0.5rem;
   }
   button,
   input {
@@ -35,32 +36,31 @@ const Main = styled.main`
     font-size: inherit;
     line-height: inherit;
   }
+  p {
+    margin-bottom: 1rem;
+  }
 `;
 const SectionStyle = (paddingTop, paddingBottom) => css`
   padding-top: ${paddingTop}px;
   padding-bottom: ${paddingBottom}px;
   margin: auto;
   overflow: hidden;
+  ${device.PC770`padding-bottom : 60px;`}
 `;
 const ContainerStyle = (maxWidth, width) => css`
   max-width: ${maxWidth}px;
   width: ${width}px;
   margin: auto;
-  @media ${device.pc} {
-    width: 95%;
-  }
+  ${device.PC`width : 95%;`}
 `;
 const GsapStyle = () => css`
   > div {
     opacity: 0;
-    position: relative;
-    top: -100px;
-    transition: 0.3s linear;
+    transition: all 0.3s ease-out;
   }
   .active {
-    position: relative;
     opacity: 1;
-    top: 0;
+    transform: translateY(0);
   }
 `;
 const handleWhyBox = (width, padding, left, margin, image, position) => css`
@@ -83,6 +83,7 @@ const HboxStyle = (paddingTop, paddingBottom) => css`
   h2 {
     font-size: 40px;
     color: #fff;
+    ${device.PC768`font-size: 28px;`}
   }
 `;
 const Hbox2Style = (paddingTop, image) => css`
@@ -100,6 +101,109 @@ const Hbox2Style = (paddingTop, image) => css`
       margin-right: 10px;
       background: url(${image}) 50% 70% no-repeat;
     }
+  }
+`;
+const GraphArea = () => css`
+  margin-top: 45px;
+  position: relative;
+  h4 {
+    font-size: 36px;
+    ${device.PC768`font-size: 32px;`}
+    color: #5fdbff;
+  }
+  > div {
+    margin-top: 25px;
+  }
+  * {
+    transition: 1s linear;
+    transform-origin: left;
+  }
+  .transform {
+    transform: scaleX(1);
+    transform-origin: left;
+    opacity: 1 !important;
+  }
+`;
+const GraphBox = (
+  background_1,
+  background_2,
+  background_3,
+  background_4
+) => css`
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  padding: 20px 0;
+  width: calc(100% - 314px);
+  ${device.PC768`width: calc(100% - 42px);
+    padding-top: 50px;`}
+  > div {
+    position: relative;
+    font-size: 18px;
+    padding: 5px 0 0 2px;
+    color: #a6a6a6;
+  }
+  > span {
+    display: block;
+    height: 15px;
+    background-size: 100% 100% !important;
+    transform: scaleX(0);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    &:nth-of-type(1) {
+      width: 100%;
+      margin-top: 0;
+      ${background_1}
+    }
+    &:nth-of-type(2) {
+      width: 76.6%;
+      margin-top: 45px;
+      ${background_2}
+    }
+    &:nth-of-type(3) {
+      width: 51.7%;
+      margin-top: 45px;
+      ${background_3}
+    }
+    &:nth-of-type(4) {
+      width: 39.2%;
+      margin-top: 45px;
+      ${background_4}
+    }
+  }
+`;
+const GraphBox2 = () => css`
+  display: inline-block;
+  vertical-align: top;
+  width: 272px;
+  ${device.PC768`    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 25px;`}
+  b {
+    display: block;
+    font-size: 42px;
+    margin-left: 20px;
+    letter-spacing: -0.1em;
+    color: #5fdbff;
+    letter-spacing: 1px;
+    font-weight: bolder;
+    ${device.PC768`    
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 0;
+    font-size: 36px;`}
+  }
+  span {
+    display: block;
+    font-size: 18px;
+    margin-left: 25px;
+    color: #fff;
+    ${device.PC768`    
+    display: inline-block;
+    margin-left: 6px;`}
   }
 `;
 //Why - Fourth
@@ -125,14 +229,22 @@ const whyBoxStyle = (bSize, color, spanSize) => css`
     }
   }
   ${color === "#a7dede"
-    ? device.PC990`
+    ? [
+        device.PC990`
         p b{font-size: 15.5px;}
         p span {font-size : 14px}
-      `
-    : device.PC990`
+      `,
+        device.PC770`
+        p b{font-size: 18px;}`
+      ]
+    : [
+        device.PC990`
         p b{font-size: 16px;}
         p span {font-size : 14px}
-      `}
+        `,
+        device.PC770`
+        p b{font-size: 18px;}`
+      ]}
 `;
 const theme = {
   css: {
@@ -149,7 +261,10 @@ const theme = {
     Hbox2Style,
     GsapStyle,
     handleWhyBox,
-    whyBoxStyle
+    whyBoxStyle,
+    GraphArea,
+    GraphBox,
+    GraphBox2
   },
   file: {
     man: require("../../assets/images/man_2.png"),
@@ -165,19 +280,34 @@ const theme = {
     dapp: require("../../assets/images/Icon_Dapp.png"),
     view: require("../../assets/images/Icon_View.png"),
     architecture: require("../../assets/images/bg_7ChainArchitecture_h.png"),
+    architecture_v: require("../../assets/images/bg_7ChainArchitecture_v.png"),
     b2b: require("../../assets/images/Icon_B2B.png"),
     collabo: require("../../assets/images/Icon_Collabo.png"),
-    expansion: require("../../assets/images/Icon_Expansion.png")
+    expansion: require("../../assets/images/Icon_Expansion.png"),
+    graph_1_1: require("../../assets/images/graph/graph_1_1.jpg"),
+    graph_1_2: require("../../assets/images/graph/graph_1_2.jpg"),
+    graph_1_3: require("../../assets/images/graph/graph_1_3.jpg"),
+    graph_1_4: require("../../assets/images/graph/graph_1_4.jpg"),
+    graph_2_1: require("../../assets/images/graph/graph_2_1.jpg"),
+    graph_3_1: require("../../assets/images/graph/graph_3_1.jpg"),
+    graph_2_2: require("../../assets/images/graph/graph_2_2.jpg"),
+    graph_2_4: require("../../assets/images/graph/graph_2_4.jpg"),
+    graph_2_3: require("../../assets/images/graph/graph_2_3.jpg"),
+    graph_3_3: require("../../assets/images/graph/graph_3_3.jpg"),
+    graph_2_4: require("../../assets/images/graph/graph_2_4.jpg"),
+    graph_3_4: require("../../assets/images/graph/graph_3_4.jpg")
   }
 };
 
 export default withRouter(({ location: { pathname } }) => {
   const childRef = useRef(null);
   useEffect(() => {
-    Scene(childRef.current.children, 0.7, "active");
+    setTimeout(() => {
+      Scene(childRef.current.children, 0.7, "active");
+    }, 500);
     console.log(childRef.current, "Parent Component");
-    return () => Scene(childRef.current.children);
-  });
+    //  return () => Scene(childRef.current.children);
+  }, [Scene]);
   console.log(device.pc);
   return (
     <Main>

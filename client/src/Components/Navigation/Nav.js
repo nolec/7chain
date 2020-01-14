@@ -15,6 +15,7 @@ const Header = styled.header`
 const TopContainer = styled.div`
   display: flex;
   background-color: #202020;
+  position: relative;
 `;
 const BottomContainer = styled.div`
   background: rgba(5, 5, 5, 0.8);

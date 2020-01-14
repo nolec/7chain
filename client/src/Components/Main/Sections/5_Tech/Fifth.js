@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import device from "../../../../device";
+import { device } from "../../../../device";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(45, 120)};
@@ -10,6 +10,9 @@ const Container = styled.div`
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
+  h3 {
+    margin-bottom: 0 !important;
+  }
 `;
 const ContentBox = styled.div`
   display: inline-block;
@@ -33,6 +36,7 @@ const ContentBox = styled.div`
   &:not(:nth-child(1)) > div {
     padding-top: 401px;
     ${device.PC`padding-top : 20px;`};
+    ${device.PC768`padding-top : 0px;`};
   }
   ${device.PC`
     position: relative;
@@ -48,12 +52,19 @@ const ContentBox = styled.div`
         display : none;
       }
       `};
+  ${device.PC768`padding-top : 0px; min-height : 120px;`};
   :nth-child(even) {
     ${device.PC`
     margin: 40px 0 0 5%;
     padding-left: 220px;
     background-position: top left;
     `}
+    ${device.PC768`    
+    padding-top: 0;
+    width: 100%;
+    margin: 40px 0 0;
+    padding-left: 130px;
+    background-size: 120px 120px;`}
   }
   :nth-child(3) {
     ${device.PC`
@@ -61,6 +72,12 @@ const ContentBox = styled.div`
     padding-right: 220px;
     background-position: top right;
     `}
+    ${device.PC768`    
+    padding-top: 0;
+    width: 100%;
+    margin: 40px 0 0;
+    padding-right: 130px;
+    background-size: 120px 120px;`}
   }
 `;
 const TextBox = styled.div`
@@ -70,6 +87,7 @@ const TextBox = styled.div`
     font-size: 24px;
     color: #a9dede;
     font-weight: bolder;
+    ${device.PC768`font-size: 20px;`};
   }
   p {
     font-size: 20px;
@@ -77,6 +95,7 @@ const TextBox = styled.div`
     color: #fff;
     opacity: 0.9;
     margin-bottom: 1rem;
+    ${device.PC768`font-size: 15px; margin-top : 10px;`};
   }
 `;
 export default () => {

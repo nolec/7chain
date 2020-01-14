@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import device from "../../../../device";
+import { device } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -16,6 +16,7 @@ const ContentBox = styled.div`
   padding-bottom: 120px;
   margin-top: 40px;
   ${device.PC`text-align: center;`}
+  ${device.PC770`padding-bottom: 60px;`}
   h3 {
     position: relative;
     margin-bottom: 0;
@@ -40,6 +41,10 @@ const ContentBox = styled.div`
     ${device.PC`
       position: relative;
       width: auto;`};
+    ${device.PC770`
+    text-align: center;
+    width: 95%;
+    padding: 0px;`};
   }
 `;
 const Legacy = styled.div`
@@ -64,6 +69,14 @@ const Legacy = styled.div`
     left: 50px;
     margin: 70px 0px;
     width: 355px;`}
+  ${device.PC770`    
+    padding: 145px 0 0 165px;
+    top: 0;
+    left: 0px;
+    margin: 70px 0 20px 0;
+    width: 470px;
+    background-position: center top;
+    text-align: left;`}
 `;
 const BlockChain = styled.div`
   ${props =>
@@ -87,6 +100,14 @@ const BlockChain = styled.div`
     left: -50px;
     margin: 70px 0px;
     width: 355px;`}
+  ${device.PC770`    
+    padding: 230px 0 0 140px;
+    top: 10px;
+    left: 0px;
+    margin: 0px 0 20px 0;
+    width: 470px;
+    background-position: center top;
+    text-align: left;`}
 `;
 const SevenChain = styled.div`
   ${props =>
@@ -112,6 +133,14 @@ const SevenChain = styled.div`
     background-size : 410px;
     background-position : left top;
     `}
+  ${device.PC770`    
+    padding: 460px 0 0 120px;
+    top: 10px;
+    left: 0px;
+    margin: 0px 0 20px 0;
+    width: 440px;
+    background-position: center top;
+    text-align: left;`}
 `;
 const SubBox = styled.div`
   color: #a7dede;
@@ -128,6 +157,9 @@ const SubContent = styled.div`
   padding-left: 200px;
   width: 100%;
   height: 142px;
+  ${device.PC770`    
+    padding: 0 10px 0 140px;
+    height: auto;`}
   > div {
     position: absolute;
     top: 0;
@@ -144,16 +176,25 @@ const SubContent = styled.div`
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: 180px 142px;
+    ${device.PC770`    
+width: 120px;
+    height: 91px;
+    background-size: 120px 91px;`}
   }
   h4 {
     font-size: 24px;
     color: #a9dede;
     padding-top: 20px;
+    ${device.PC770`    
+font-size: 20px;
+    padding-top: 10px;`}
   }
   p {
     font-size: 20px;
     color: #fff;
     opacity: 0.9;
+    ${device.PC770`    
+    font-size: 15px;`}
   }
 `;
 export default () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { device } from "../../device";
 
 const BottomBox = styled.div`
   max-width: 1162px;
@@ -34,6 +35,9 @@ const Li = styled.li`
   position: relative;
   font-size: 16px;
   padding-right: 28px;
+  &:not(:last-child) {
+    ${device.PC1000`display : none;`}
+  }
   :last-child {
     padding-right: 0;
     position: relative;

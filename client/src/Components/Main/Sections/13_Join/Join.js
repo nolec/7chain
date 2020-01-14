@@ -1,19 +1,17 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { device, minDevice } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
   background: ${props => props.theme.css.evenColor};
+  ${device.PC1000`padding : 0`}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 const SubText = styled.div`
   padding-top: 15px;
@@ -21,6 +19,7 @@ const SubText = styled.div`
   p {
     color: #fff;
     font-size: 20px;
+    ${device.PC768`font-size : 16px; margin : 0 !important`}
   }
 `;
 const InputBox = styled.div`
@@ -31,6 +30,7 @@ const InputEmail = styled.div`
   position: relative;
   display: inline-block;
   width: 550px;
+  ${device.PC1000`margin-bottom : 75px; width : 100%;`}
   input[type="text"] {
     width: 400px;
     height: 40px;
@@ -58,6 +58,7 @@ const Group = styled.div`
   div {
     position: absolute;
     text-align: left;
+    ${device.PC1000`text-align: center;`}
     left: 14px;
     top: 55px;
     width: 100%;

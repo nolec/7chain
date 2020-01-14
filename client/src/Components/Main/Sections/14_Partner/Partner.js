@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { device } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -8,16 +9,13 @@ ${props => props.theme.style.SectionStyle(0, 120)}
   * {
     z-index: 2;
   }
+  ${device.PC1000`padding : 0 0 30px`}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 const Partners = styled.div`
   display: flex;
@@ -29,6 +27,10 @@ const Item = styled.div`
   padding: 15px 0px;
   flex: 0 0 20%;
   max-width: 20%;
+  ${device.PC767`flex : 0 0 50%; max-width : 50%;`}
+  img {
+    max-width: 100%;
+  }
 `;
 export default () => {
   return (

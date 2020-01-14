@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(40, 120)}
   background: ${props => props.theme.css.evenColor};
+${device.PC768`padding-bottom: 15%;`}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
@@ -24,7 +26,6 @@ const SubContent = styled.div`
   position: relative;
   padding: 15px 20px 0 200px;
   width: 100%;
-  height: 142px;
   > div {
     position: absolute;
     top: 0;
@@ -43,13 +44,19 @@ const SubContent = styled.div`
     background-size: 180px 142px;
   }
   h4 {
+    margin-bottom: 0.5rem;
+    ${device.PC990`font-size : 22px`}
     font-size: 24px;
     color: #a9dede;
+    ${device.PC768`font-size : 20px`}
   }
   p {
+    margin-bottom: 1rem;
     font-size: 20px;
+    ${device.PC990`font-size : 19px`}
     color: #fff;
     opacity: 0.9;
+    ${device.PC768`font-size : 18px`}
   }
 `;
 export default () => {

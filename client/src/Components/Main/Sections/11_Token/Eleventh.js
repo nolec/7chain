@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../../../../device";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(0, 120)}
@@ -17,6 +18,7 @@ const HBox = styled.div`
 `;
 const ChartBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 const Chart = styled.div`
   position: relative;
@@ -25,6 +27,9 @@ const Chart = styled.div`
   text-align: center;
   flex: 0 0 50%;
   max-width: 50%;
+  ${device.PC860`
+  flex: 0 0 100%;
+  max-width: 100%;`}
 `;
 const Top = styled.div`
   position: relative;
@@ -77,6 +82,9 @@ const Bottom = styled.div`
       font-weight: 600;
       padding-bottom: 10px;
       text-align: left;
+      ${device.PC860`
+  padding-bottom: 5px;
+  font-size : 18px;`}
       b {
         padding-right: 10px;
       }

@@ -1,11 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import device from "../../../../device";
+import { device } from "../../../../device";
 // import { SectionStyle } from "../../Main";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
   background: ${props => props.theme.css.evenColor};
+  ${device.PC768`padding-bottom: 60px;`}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
@@ -13,10 +14,6 @@ const Container = styled.div`
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 const ContentBox = styled.div`
   margin-top: 0px;
@@ -53,6 +50,7 @@ const TextBox = styled.div`
     color: ${props => props.theme.css.fontWhite};
     opacity: 0.9;
     ${device.PC`font-size: 18px;`}
+    ${device.PC768`font-size: 16px;`}
   }
 `;
 export default ({ forwardedRef }) => {

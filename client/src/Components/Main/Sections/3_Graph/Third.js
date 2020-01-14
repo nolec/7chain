@@ -4,10 +4,12 @@ import { theme } from "../../Main";
 import GraphAreaOne from "./Graph/AreaOne";
 import GraphAreaTwo from "./Graph/AreaTwo";
 import Scene from "../../ScrollMagic";
+import { device } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
   background: ${props => props.theme.css.defaultColor};
+  ${device.PC768`padding-bottom : 60px;`}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
@@ -17,6 +19,7 @@ const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
 `;
 const GraphBox = styled.div`
+  position: relative;
   margin-top: 40px;
   > div:nth-child(2) {
     margin-top: 100px;
@@ -27,6 +30,7 @@ const GraphBox = styled.div`
     position: relative;
     margin-bottom: 0;
     font-size: 30px;
+    ${device.PC768`    font-size: 24px;`}
     color: #a7dede;
     ::before {
       display: inline-block;
@@ -46,17 +50,11 @@ const GraphBox = styled.div`
     margin: 25px 0 0 0;
     color: #fff;
     font-size: 20px;
+    ${device.PC768`    font-size: 17px;`}
     b {
       color: #bfaa7b;
       font-weight: bolder;
     }
-  }
-`;
-const GraphArea = styled.div`
-  margin-top: 45px;
-  h4 {
-    font-size: 36px;
-    color: #5fdbff;
   }
 `;
 export default () => {

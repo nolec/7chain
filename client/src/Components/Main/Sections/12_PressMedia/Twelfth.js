@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPress } from "../../../../actions/press";
 import { Link } from "react-router-dom";
 import { getMedia } from "../../../../actions/media";
+import { device } from "../../../../device";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -15,10 +16,6 @@ const Container = styled.div`
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
   margin-bottom: 55px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 const Articles = styled.div`
   display: flex;
@@ -43,6 +40,10 @@ const Item = styled.div`
       background: #fff;
       overflow: hidden;
       border: 1px solid #fff;
+      img {
+        ${device.PC1199`height: 16vw; max-height : none;`}
+        ${device.PC991`height: 25vw;`}
+      }
     }
     p {
       text-align: left;
@@ -134,6 +135,7 @@ export default () => {
               <Item key={i}>
                 <a href={pr.media_link} target="_blank">
                   <figure src="#" alt="poster">
+                    <img src="#" alt="poster" />
                     <Logo>
                       <img src="#" alt="logo" />
                     </Logo>
@@ -162,9 +164,7 @@ export default () => {
               <Item key={i}>
                 <a href={me.media_link} target="_blank">
                   <figure src="#" alt="poster">
-                    <Logo>
-                      <img src="#" alt="logo" />
-                    </Logo>
+                    <img src="#" alt="logo" />
                   </figure>
                   <Sub>
                     <span>{me.media_name}</span>

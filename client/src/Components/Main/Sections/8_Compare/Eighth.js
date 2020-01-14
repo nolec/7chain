@@ -1,8 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "../../../../device";
 
 const Section = styled.section`
-  ${props => props.theme.style.SectionStyle(40, 120)}
+  ${props => props.theme.style.SectionStyle(40, 120)};
+  ${device.PC768`padding-bottom: 15%;`};
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
@@ -13,6 +15,7 @@ const Hbox = styled.div`
     margin: 25px 0 0 0;
     color: #fff;
     font-size: 20px;
+    ${device.PC768`font-size : 18px;`}
   }
 `;
 const TableBox = styled.div``;
@@ -31,9 +34,11 @@ const Table = styled.table`
     text-align: center;
     width: 16.5%;
     height: 65px;
+    ${device.PC992`height : 50px; font-size : 14px;`}
     font-size: 20px;
     vertical-align: middle;
     font-weight: bold;
+    ${device.PC768`height : 45px; font-size : 10px;`}
   }
   tbody td {
     display: table-cell;
@@ -43,7 +48,9 @@ const Table = styled.table`
     text-align: center;
     border: 1px solid #888888;
     height: 65px;
+    ${device.PC992`height : 45px; font-size : 11px;`}
     font-size: 15px;
+    ${device.PC768`height : 40px; font-size : 9px;`}
   }
   .column1 {
     color: #fff;
@@ -61,7 +68,9 @@ const Table = styled.table`
       left: -1px;
       width: calc(100% + 2px);
       height: 65px;
+      ${device.PC992`height : 45px;`}
       border: 1px solid #a9dede;
+      ${device.PC768`height : 40px;`}
     }
   }
 `;

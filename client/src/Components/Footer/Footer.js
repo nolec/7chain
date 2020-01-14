@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
+import { device } from "../../device";
 
 const Footer = styled.footer`
   padding: 0 0 1px;
@@ -11,8 +12,7 @@ const Footer = styled.footer`
   }
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
+  max-width: 1260px;
   margin: auto;
 `;
 const Copy = styled.div`
@@ -23,6 +23,7 @@ const Copy = styled.div`
   font-size: 16px;
   padding-top: 30px;
   padding-bottom: 10px;
+  ${device.PC1000`padding : 0; text-align: center;`}
   p {
     border-top: 1px solid #333;
     padding-top: 4px;
