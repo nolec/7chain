@@ -18,13 +18,12 @@ const TopBox = styled.div`
   }
 `;
 const LogoBox = styled(Link)`
-  display: flex;
-  align-items: center;
+  padding: 5px 0 0 0;
+  display: inline-block;
   margin-right: 1rem;
   font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
-  padding: 0;
   margin-left: 0;
   img {
     height: 32px;
@@ -80,6 +79,10 @@ const ToggleBox = styled.button`
   color: rgba(255, 255, 255, 0.5);
   padding: 0.25rem 0.75rem;
   cursor: pointer;
+`;
+const Collapse = styled.div`
+  display: none;
+  margin-top: 13px;
 `;
 export default ({ handleClick, history, location, handleGo }) => {
   const ul = useRef(null);
@@ -154,6 +157,40 @@ export default ({ handleClick, history, location, handleGo }) => {
           <ToggleBox>
             <FontAwesomeIcon icon={faBars} />
           </ToggleBox>
+          <Collapse>
+            <ul>
+              <Li>
+                <Alink onClick={handleGo} to="#overview">
+                  <span>Overview</span>
+                </Alink>
+              </Li>
+              <Li>
+                <Alink onClick={handleGo} to="#roadmap">
+                  <span>Roadmap</span>
+                </Alink>
+              </Li>
+              <Li>
+                <Alink onClick={handleGo} to="#token">
+                  <span>Token Distribution</span>
+                </Alink>
+              </Li>
+              <Li>
+                <Alink onClick={handleGo} to="#press">
+                  <span>Press</span>
+                </Alink>
+              </Li>
+              <Li>
+                <Alink onClick={handleGo} to="#media">
+                  <span>Media</span>
+                </Alink>
+              </Li>
+              <Li>
+                <Alink to="#">
+                  <span>Contact</span>
+                </Alink>
+              </Li>
+            </ul>
+          </Collapse>
         </div>
       </TopBox>
     </>
