@@ -9,7 +9,7 @@ const GraphArea = styled.div`
   ${props => props.theme.style.GraphArea()};
 `;
 const FootNote = styled.div`
-  position: absolute;
+  position: absolute !important;
   right: 0;
   bottom: -15px;
   font-size: 0;
