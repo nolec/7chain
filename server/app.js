@@ -21,6 +21,11 @@ app.use("/api/media", mediaRoute);
 app.use("/", express.static("uploads"));
 console.log(__dirname);
 //------------------------------------
+app.use("/", express.static(path.resolve(__dirname, "../client/build")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
+});
+//------------------------------------
 const port = process.env.PORT || 5000;
 const handleListen = () => {
   console.log(`Listened on Server - PORT : ${port} `);

@@ -11,7 +11,7 @@ const TopBox = styled.div`
   margin: auto;
   padding: 0px 5px 0;
   > div {
-    ${device.PC992`padding : 5px 5px`}
+    /* ${device.PC992`padding : 5px 5px`} */
     position: relative;
     display: flex;
     justify-content: space-between;
