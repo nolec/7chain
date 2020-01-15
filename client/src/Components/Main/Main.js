@@ -110,6 +110,7 @@ const GraphArea = () => css`
     font-size: 36px;
     ${device.PC768`font-size: 32px;`}
     color: #5fdbff;
+    ${device.PC450`font-size: 26px;`}
   }
   > div {
     margin-top: 25px;
@@ -195,6 +196,7 @@ const GraphBox2 = () => css`
     margin-top: 20px;
     margin-left: 0;
     font-size: 36px;`}
+    ${device.PC450`font-size: 30px;`}
   }
   span {
     display: block;
@@ -235,7 +237,9 @@ const whyBoxStyle = (bSize, color, spanSize) => css`
         p span {font-size : 14px}
       `,
         device.PC770`
-        p b{font-size: 18px;}`
+        p b{font-size: 18px;}`,
+        device.PC490` p b {font-size: 15px;} p span {font-size : 12.5px}`,
+        device.PC380` p b {font-size: 11.5px;} p span {font-size : 11px}`
       ]
     : [
         device.PC990`
@@ -243,7 +247,8 @@ const whyBoxStyle = (bSize, color, spanSize) => css`
         p span {font-size : 14px}
         `,
         device.PC770`
-        p b{font-size: 18px;}`
+        p b{font-size: 18px;}`,
+        device.PC490` p b {font-size: 15px;}`
       ]}
 `;
 const theme = {

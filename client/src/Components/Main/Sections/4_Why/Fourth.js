@@ -23,6 +23,7 @@ const ContentBox = styled.div`
     font-size: 30px;
     text-align: left;
     color: #a7dede;
+    ${device.PC450`font-size: 20px;`}
     ::before {
       display: inline-block;
       content: "";
@@ -77,6 +78,8 @@ const Legacy = styled.div`
     width: 470px;
     background-position: center top;
     text-align: left;`}
+  ${device.PC490`padding: 120px 0 0 105px; width: 350px;`};
+  ${device.PC380`padding: 28% 0 0 32%; max-width: 100%;`};
 `;
 const BlockChain = styled.div`
   ${props =>
@@ -108,6 +111,8 @@ const BlockChain = styled.div`
     width: 470px;
     background-position: center top;
     text-align: left;`}
+  ${device.PC490`padding: 180px 0 0 75px; width: 350px;`};
+  ${device.PC380`padding: 46% 0 0 20%; max-width: 100%;`};
 `;
 const SevenChain = styled.div`
   ${props =>
@@ -141,6 +146,8 @@ const SevenChain = styled.div`
     width: 440px;
     background-position: center top;
     text-align: left;`}
+  ${device.PC490`padding: 380px 0 0 60px; width: 350px; background-size : contain`};
+  ${device.PC380`padding: 100% 0 0 12%; max-width: 90%;`};
 `;
 const SubBox = styled.div`
   color: #a7dede;
@@ -160,6 +167,7 @@ const SubContent = styled.div`
   ${device.PC770`    
     padding: 0 10px 0 140px;
     height: auto;`}
+  ${device.PC450`padding: 0;`}
   > div {
     position: absolute;
     top: 0;
@@ -180,6 +188,9 @@ const SubContent = styled.div`
 width: 120px;
     height: 91px;
     background-size: 120px 91px;`}
+    ${device.PC490`top: 0px;
+    left: 0px;`}
+    ${device.PC450`display: none;`}
   }
   h4 {
     font-size: 24px;
@@ -188,6 +199,8 @@ width: 120px;
     ${device.PC770`    
 font-size: 20px;
     padding-top: 10px;`}
+    ${device.PC490`font-size: 16px;`}
+    ${device.PC450`font-size: 16px;`}
   }
   p {
     font-size: 20px;

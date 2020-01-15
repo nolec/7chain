@@ -111,8 +111,8 @@ const Timeline = styled.ul`
       font-size: 23px;
       margin-bottom: 0;
       color: #a9dede;
-      ${minDevice.minPC768`    margin-bottom: 10px; 
-`}
+      ${minDevice.minPC768`    margin-bottom: 10px; `}
+      ${device.PC600`font-size : 18px;`}
     }
     p {
       font-size: 17px;
@@ -120,6 +120,12 @@ const Timeline = styled.ul`
       margin-bottom: 0;
       color: #fff;
       padding-top: 15px;
+      ${device.PC600`font-size : 14px;`}
+      &.sub-txt {
+        font-weight: 300;
+        opacity: 0.8;
+        ${device.PC600`font-size : 13px;`}
+      }
     }
   }
   .timeline-image {

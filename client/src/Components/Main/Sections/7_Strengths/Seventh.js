@@ -12,20 +12,26 @@ const Container = styled.div`
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
+  ${device.PC450`font-size : 20px;`}
 `;
 const SubBox = styled.div`
   color: #a7dede;
   width: 100%;
   text-align: left;
   padding-top: 40px;
+  ${device.PC450`padding-top : 20px;`}
   > div:not(:first-child) {
     margin-top: 40px;
+    ${device.PC450`margin-top: 30px;`}
   }
 `;
 const SubContent = styled.div`
   position: relative;
   padding: 15px 20px 0 200px;
   width: 100%;
+  ${device.PC660`position: relative;
+    padding-left: 130px;`}
+  ${device.PC450`padding : 0;`}
   > div {
     position: absolute;
     top: 0;
@@ -42,6 +48,12 @@ const SubContent = styled.div`
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: 180px 142px;
+    ${device.PC660`
+    width: 120px;
+    height: 91px;
+    background-size: 120px 91px;
+    top : 20px;`}
+    ${device.PC450`display : none;`}
   }
   h4 {
     margin-bottom: 0.5rem;
@@ -49,6 +61,7 @@ const SubContent = styled.div`
     font-size: 24px;
     color: #a9dede;
     ${device.PC768`font-size : 20px`}
+    ${device.PC450`font-size : 16px;`}
   }
   p {
     margin-bottom: 1rem;
@@ -57,6 +70,7 @@ const SubContent = styled.div`
     color: #fff;
     opacity: 0.9;
     ${device.PC768`font-size : 18px`}
+    ${device.PC450`font-size : 14px;`}
   }
 `;
 export default () => {

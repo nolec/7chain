@@ -11,10 +11,6 @@ const Container = styled.div`
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
   margin-bottom: 55px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 const ChartBox = styled.div`
   display: flex;
@@ -36,6 +32,12 @@ const Top = styled.div`
   width: 450px;
   height: 450px;
   margin: 0 auto;
+  ${device.PC500`
+  width: 400px;
+  height: 400px;`}
+  ${device.PC420`
+  width: 350px;
+  height: 350px;`}
 `;
 const ImgBox = styled.div`
   position: absolute;
@@ -85,6 +87,9 @@ const Bottom = styled.div`
       ${device.PC860`
   padding-bottom: 5px;
   font-size : 18px;`}
+      ${device.PC420`
+  padding-bottom: 3px;
+  font-size : 16px;`}
       b {
         padding-right: 10px;
       }

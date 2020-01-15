@@ -31,6 +31,8 @@ const InputEmail = styled.div`
   display: inline-block;
   width: 550px;
   ${device.PC1000`margin-bottom : 75px; width : 100%;`}
+  ${device.PC570`margin-bottom : 55px; width : 100%;`}
+  ${device.PC400`width: 100%; margin-bottom : 80px;`}
   input[type="text"] {
     width: 400px;
     height: 40px;
@@ -40,6 +42,8 @@ const InputEmail = styled.div`
     border-radius: 7px;
     border: none;
     padding-bottom: 4px;
+    ${device.PC570`width: 260px;`}
+    ${device.PC400`width: 200px;`}
   }
   input[type="submit"] {
     display: inline-block;
@@ -50,6 +54,7 @@ const InputEmail = styled.div`
     border-radius: 7px;
     border: none;
     margin-left: 5px;
+    ${device.PC570`width: 70px;font-size: 11px;`}
   }
 `;
 const Group = styled.div`
@@ -64,6 +69,7 @@ const Group = styled.div`
     width: 100%;
     color: #fff;
     font-size: 18px;
+    ${device.PC570`left : 0; font-size : 15px;`}
   }
 `;
 const Social = styled.div`

@@ -11,11 +11,13 @@ const Container = styled.div`
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)};
+  ${device.PC450`font-size : 20px;`}
   p {
-    margin: 25px 0 0 0;
+    margin: 25px 0 0 0 !important;
     color: #fff;
     font-size: 20px;
     ${device.PC768`font-size : 18px;`}
+    ${device.PC450`font-size: 14px;`}
   }
 `;
 const TableBox = styled.div``;
@@ -24,10 +26,21 @@ const Table = styled.table`
   margin: 40px auto 0;
   border-collapse: collapse;
   border-top: 5px solid #a9dede;
+  ${device.PC580`border-top: none;
+    border-right: none; margin-top : 20px;`}
+  * {
+    ${device.PC580`display: block !important;`}
+  }
+
   tr {
     display: table-row;
     vertical-align: middle;
     border-color: inherit;
+    ${device.PC580`    border: 1px solid #ccc;
+    margin-top: 2em;`}
+  }
+  thead {
+    ${device.PC580`display: none !important;`}
   }
   thead th {
     color: #eee;
@@ -51,11 +64,61 @@ const Table = styled.table`
     ${device.PC992`height : 45px; font-size : 11px;`}
     font-size: 15px;
     ${device.PC768`height : 40px; font-size : 9px;`}
-  }
-  .column1 {
-    color: #fff;
-    background: #393939;
-    font-weight: normal;
+    ${device.PC580`border: 1px solid #888888;
+    position: relative;
+    padding-left: 45%;
+    height: 45px;
+    padding-top: 10px;`}
+    &.column1 {
+      color: #fff;
+      background: #393939;
+      font-weight: normal;
+      ${device.PC580`    
+      color: #fff;
+      background: #515151;
+      padding: 11px 0 0 0;
+      font-size: 15px;`}
+    }
+    span {
+      ${device.PC580`text-align: center;width: 100%;`};
+    }
+    ::before {
+      ${device.PC580`
+    position: absolute;
+    top: 13px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    `}
+    }
+    &:nth-of-type(2)::before {
+      ${device.PC580`
+      content: "Funfair";
+    font-size: 13px;`}
+    }
+    &:nth-of-type(3)::before {
+      ${device.PC580`
+      content: "Edgeless";
+    font-size: 13px;`}
+    }
+    &:nth-of-type(4)::before {
+      ${device.PC580`
+      content: "CoinPoker";
+    font-size: 13px;`}
+    }
+    &:nth-of-type(5)::before {
+      ${device.PC580`
+      content: "SP8DE";
+    font-size: 13px;`}
+    }
+    &:nth-of-type(6)::before {
+      ${device.PC580`
+      content: "7Chain";
+    font-size: 13px;`}
+    }
+    img {
+      margin: auto;
+    }
   }
   .brg {
     position: relative;
@@ -72,6 +135,9 @@ const Table = styled.table`
       border: 1px solid #a9dede;
       ${device.PC768`height : 40px;`}
     }
+  }
+  .m-text br {
+    ${device.PC768`display : none !important;`}
   }
 `;
 export default () => {

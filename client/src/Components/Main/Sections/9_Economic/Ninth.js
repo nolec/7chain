@@ -36,6 +36,8 @@ const ImgBox = styled.div`
     max-width: 350px;
     width: 100%;
     height: auto;`}
+    ${device.PC660`
+      max-width: 300px;`}
   }
   ${device.PC920`    
     width: 300px;
@@ -55,11 +57,16 @@ const Content = styled.div`
   ${device.PC768`
     padding: 80px 0 0 0;
     width: 100%;`}
+  ${device.PC660`
+    padding: 40px 0 0 0;`}
   p {
     font-size: 20px;
     color: #fff;
     ${device.PC`
       font-size: 18px;
+  `}
+      ${device.PC450`
+      font-size: 16px;
   `}
   }
 `;

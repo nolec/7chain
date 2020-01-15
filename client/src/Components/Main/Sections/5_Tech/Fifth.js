@@ -10,6 +10,7 @@ const Container = styled.div`
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
+  ${device.PC450`font-size : 20px;`}
   h3 {
     margin-bottom: 0 !important;
   }
@@ -65,6 +66,10 @@ const ContentBox = styled.div`
     margin: 40px 0 0;
     padding-left: 130px;
     background-size: 120px 120px;`}
+        ${device.PC450`    
+    padding: 190px 0 0;    
+    background-position: center top;
+    background-size: 180px 180px;`}
   }
   :nth-child(3) {
     ${device.PC`
@@ -78,6 +83,10 @@ const ContentBox = styled.div`
     margin: 40px 0 0;
     padding-right: 130px;
     background-size: 120px 120px;`}
+        ${device.PC450`    
+    padding: 190px 0 0;    
+    background-position: center top;
+    background-size: 180px 180px;`}
   }
 `;
 const TextBox = styled.div`
@@ -88,6 +97,10 @@ const TextBox = styled.div`
     color: #a9dede;
     font-weight: bolder;
     ${device.PC768`font-size: 20px;`};
+    ${device.PC450`    display: block;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;`}
   }
   p {
     font-size: 20px;
@@ -96,6 +109,7 @@ const TextBox = styled.div`
     opacity: 0.9;
     margin-bottom: 1rem;
     ${device.PC768`font-size: 15px; margin-top : 10px;`};
+    ${device.PC450`font-size: 14px;`}
   }
 `;
 export default () => {

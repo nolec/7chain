@@ -32,6 +32,7 @@ const GraphBox = styled.div`
     font-size: 30px;
     ${device.PC768`    font-size: 24px;`}
     color: #a7dede;
+    ${device.PC450`font-size: 20px;`}
     ::before {
       display: inline-block;
       content: "";
@@ -44,6 +45,7 @@ const GraphBox = styled.div`
       display: block;
       margin-top: 8px;
       font-size: 18px;
+      ${device.PC450`font-size: 14px;`}
     }
   }
   p {
@@ -51,6 +53,7 @@ const GraphBox = styled.div`
     color: #fff;
     font-size: 20px;
     ${device.PC768`    font-size: 17px;`}
+    ${device.PC450`font-size: 14px;`}
     b {
       color: #bfaa7b;
       font-weight: bolder;
