@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import path from "path";
-import db from "./db";
+// import db from "./db";
 import pressRoute from "./routes/pressRoute";
 import mediaRoute from "./routes/mediaRoute";
 
