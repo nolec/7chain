@@ -17,14 +17,14 @@
 // db.on("error", handleError);
 import mysql from "mysql";
 
-const db = mysql.createPool({
-  host: "211.251.239.224",
-  user: "num_local",
-  password: "num_local",
-  post: 3306,
-  database: "7chain_official",
-  multipleStatements: true
-});
+// const db = mysql.createPool({
+//   host: "211.251.239.224",
+//   user: "num_local",
+//   password: "num_local",
+//   post: 3306,
+//   database: "7chain_official",
+//   multipleStatements: true
+// });
 // const db = mysql.createPool({
 //   host: "127.0.0.1",
 //   user: "root",
@@ -33,4 +33,4 @@ const db = mysql.createPool({
 //   database: "nolec",
 //   multipleStatements: true
 // });
-export default db;
+// export default db;
