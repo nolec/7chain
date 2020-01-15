@@ -32,9 +32,10 @@ a {
   color: #fed136;
   cursor:pointer;
   text-decoration : none;
+  transition : all .3s cubic-bezier(0.42, 0, 0.58, 1);
 }
 
-a:hover {text-decoration:none !important;color:#bfab7c;}
+a:hover {text-decoration:none !important;    color: #a6a6a6;}
 h1,
 h2,
 h3,

@@ -9,6 +9,7 @@ const BottomBox = styled.div`
   margin: auto;
   padding: 10px 5px 10px;
   border-bottom: 1px solid #282828;
+  z-index: -1;
   > div {
     display: flex;
   }

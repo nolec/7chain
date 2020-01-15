@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import TopBox from "./TopBox";
 import BottomBox from "./BottomBox";
 import { withRouter } from "react-router-dom";
 import { TweenMax } from "gsap";
+import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
 const Header = styled.header`
   position: fixed;
@@ -15,23 +16,50 @@ const Header = styled.header`
 const TopContainer = styled.div`
   display: flex;
   background-color: #202020;
-  position: relative;
+  position: fixed;
+  width: 100%;
 `;
 const BottomContainer = styled.div`
   background: rgba(5, 5, 5, 0.8);
   display: flex;
+  position: fixed;
+  width: 100%;
+  top: 44px;
+  z-index: -1;
 `;
 
 export default withRouter(({ history, location }) => {
+  const plugins = [ScrollToPlugin];
+
+  const [active, setActive] = useState(false);
+
   const handleGo = e => {
     const id = e.currentTarget.hash;
+    setActive(false);
+
     e.preventDefault();
+    console.log(e.currentTarget, "Go");
     TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
   };
   const handleClick = e => {
-    console.log(e.target);
     const body = document.querySelector("body");
-    TweenMax.to(window, 1, { scrollTo: body.offsetTop });
+    TweenMax.to(body, 1, { scrollTo: body.offsetTop });
+  };
+  //-----------------------------------------------------
+  const handleToggle = () => {
+    if (active) {
+      console.log(active, "close");
+      close();
+    } else {
+      console.log(active, "open");
+      open();
+    }
+  };
+  const open = () => {
+    setActive(true);
+  };
+  const close = () => {
+    setActive(false);
   };
   return (
     <Header>
@@ -41,6 +69,8 @@ export default withRouter(({ history, location }) => {
           handleGo={handleGo}
           history={history}
           location={location}
+          handleToggle={handleToggle}
+          active={active}
         />
       </TopContainer>
       {(location && location.pathname === "/admin/press") ||

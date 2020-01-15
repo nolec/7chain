@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faBars } from "@fortawesome/free-solid-svg-icons";
-import { device } from "../../device";
+import { device, minDevice } from "../../device";
 
 const TopBox = styled.div`
   max-width: 1162px;
@@ -11,10 +11,10 @@ const TopBox = styled.div`
   margin: auto;
   padding: 0px 5px 0;
   > div {
-    /* ${device.PC992`padding : 5px 5px`} */
-    position: relative;
+    /* ${device.PC992`padding : 5px 5px;`} */
+    ${minDevice.minPC992`    position: relative;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;`}
   }
 `;
 const LogoBox = styled(Link)`
@@ -81,12 +81,32 @@ const ToggleBox = styled.button`
   cursor: pointer;
 `;
 const Collapse = styled.div`
-  display: none;
-  margin-top: 13px;
+  /* display: none; */
+  z-index: 100;
+  /* margin-top: 13px; */
+  transition: 0.4s linear;
+  a {
+    padding: 0.6em 1em;
+    border-bottom: 1px solid #393939;
+    font-size: 16px;
+    :hover {
+      background: #393939;
+    }
+  }
 `;
-export default ({ handleClick, history, location, handleGo }) => {
-  const ul = useRef(null);
+const SubUl = styled.ul`
+  background-color: transparent;
+  border-top: 1px solid #e0e0e0;
+  padding: 2px 0;
+`;
+export default ({ handleClick, handleToggle, active, location, handleGo }) => {
+  // const ref = useRef(null);
 
+  // useEffect(() => {
+  //   if (ref.current !== null) {
+  //     console.log(ref.current.children);
+  //   }
+  // }, [active]);
   return (
     <>
       <TopBox>
@@ -112,7 +132,7 @@ export default ({ handleClick, history, location, handleGo }) => {
           ) : (
             <>
               <NavBar>
-                <Ul ref={ul}>
+                <Ul>
                   <Li>
                     <Alink onClick={handleGo} to="#overview">
                       <span>Overview</span>
@@ -154,43 +174,45 @@ export default ({ handleClick, history, location, handleGo }) => {
               </Util>
             </>
           )}
-          <ToggleBox>
+          <ToggleBox onClick={handleToggle}>
             <FontAwesomeIcon icon={faBars} />
           </ToggleBox>
-          <Collapse>
-            <ul>
-              <Li>
-                <Alink onClick={handleGo} to="#overview">
-                  <span>Overview</span>
-                </Alink>
-              </Li>
-              <Li>
-                <Alink onClick={handleGo} to="#roadmap">
-                  <span>Roadmap</span>
-                </Alink>
-              </Li>
-              <Li>
-                <Alink onClick={handleGo} to="#token">
-                  <span>Token Distribution</span>
-                </Alink>
-              </Li>
-              <Li>
-                <Alink onClick={handleGo} to="#press">
-                  <span>Press</span>
-                </Alink>
-              </Li>
-              <Li>
-                <Alink onClick={handleGo} to="#media">
-                  <span>Media</span>
-                </Alink>
-              </Li>
-              <Li>
-                <Alink to="#">
-                  <span>Contact</span>
-                </Alink>
-              </Li>
-            </ul>
-          </Collapse>
+          {active ? (
+            <Collapse>
+              <SubUl>
+                <Li>
+                  <Alink onClick={handleGo} to="#overview">
+                    <span>Overview</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink onClick={handleGo} to="#roadmap">
+                    <span>Roadmap</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink onClick={handleGo} to="#token">
+                    <span>Token Distribution</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink onClick={handleGo} to="#press">
+                    <span>Press</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink onClick={handleGo} to="#media">
+                    <span>Media</span>
+                  </Alink>
+                </Li>
+                <Li>
+                  <Alink to="#">
+                    <span>Contact</span>
+                  </Alink>
+                </Li>
+              </SubUl>
+            </Collapse>
+          ) : null}
         </div>
       </TopBox>
     </>
