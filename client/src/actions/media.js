@@ -2,6 +2,7 @@ import {
   LOAD_MEDIA,
   FAIL_LOAD,
   LOAD_ADMINMEDIA,
+  LOAD_7CHAINMEDIA,
   SUCCESS_IMAGE,
   IMAGE_FAIL,
   SUCCESS_UPLOAD,
@@ -24,6 +25,16 @@ export const getMediaAll = page => async dispatch => {
     console.log(res.data);
     dispatch({ type: LOAD_ADMINMEDIA, payload: res.data });
   } catch (error) {
+    dispatch({ type: FAIL_LOAD, payload: error });
+  }
+};
+export const getMeida7chain = page => async dispatch => {
+  try {
+    const res = await axios.get(`/api/media/all/7chain/${page}`);
+    console.log(res);
+    dispatch({ type: LOAD_7CHAINMEDIA, payload: res.data.result });
+  } catch (error) {
+    console.log(error);
     dispatch({ type: FAIL_LOAD, payload: error });
   }
 };

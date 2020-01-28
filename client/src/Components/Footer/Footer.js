@@ -12,7 +12,7 @@ const Footer = styled.footer`
   }
 `;
 const Container = styled.div`
-  max-width: 1260px;
+  max-width: 1162px;
   margin: auto;
 `;
 const Copy = styled.div`

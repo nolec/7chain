@@ -194,8 +194,7 @@ export default () => {
                   <figure>
                     <img
                       src={`http://localhost:5000/${encodeURIComponent(
-                        pr.poster_img_filename,
-                        "euc-kr"
+                        pr.poster_img_filename
                       )}`}
                       alt="poster"
                     />

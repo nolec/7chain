@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getPressAll } from "../../actions/press";
+import { getPressAll, getPress7chain } from "../../actions/press";
 
 const Section = styled.section`
   padding: 0 0 120px;
@@ -28,9 +28,72 @@ const HBox = styled.div`
     color: #fff;
   }
 `;
+const MainArticle = styled.div`
+  width: 100%;
+  margin-top: 60px;
+  padding: 0 20px;
+  display: flex;
+  color: #fff;
+`;
+
+const Poster = styled.div`
+  position: relative;
+  max-height: 470px;
+  width: 60%;
+  border: 1px solid #fff;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+const MainContent = styled.div`
+  padding-left: 20px;
+  width: 40%;
+  position: relative;
+`;
+const ContentMeta = styled.div`
+  margin: 0;
+  padding: 0;
+  display: flex;
+  span:nth-child(1) {
+    position: relative;
+    height: 52px;
+    color: #bab1a4;
+    width: 70%;
+    text-align: left;
+    font-size: 33px;
+    font-weight: 800;
+  }
+  span:nth-child(2) {
+    position: relative;
+    opacity: 0.9;
+    width: 30%;
+    padding: 17px 15px 0;
+    height: 52px;
+    text-align: right;
+  }
+`;
+const ContentTitle = styled.div`
+  p {
+    padding-top: 20px;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1.5;
+  }
+`;
+const ContentDesc = styled.div`
+  p {
+    color: #fff;
+    font-size: 19px;
+  }
+`;
 const Articles = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-top: 80px;
 `;
 const Item = styled.div`
   position: relative;
@@ -51,6 +114,12 @@ const Item = styled.div`
       background: #fff;
       overflow: hidden;
       border: 1px solid #fff;
+      img {
+        width: 100%;
+        height: 12vw;
+        max-height: 160px;
+        transition: 0.3s ease-in-out;
+      }
     }
     p {
       text-align: left;
@@ -116,21 +185,97 @@ const SLink = styled(Link)`
 `;
 export default () => {
   const press = useSelector(state => state.press);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const dispatch = useDispatch();
+  const handleClick = () => {
+    setCurrentPage(currentPage + 1);
+  };
   useEffect(() => {
-    // dispatch(getPressAll());
-  }, []);
+    dispatch(getPress7chain(currentPage));
+  }, [currentPage]);
   return (
     <Section>
       <Container>
         <HBox>
           <h2>Press</h2>
         </HBox>
+        <MainArticle>
+          <Poster>
+            <a
+              href={
+                press.chainPress.length > 0 && press.chainPress[0].media_link
+              }
+              target="_blank"
+            >
+              <img
+                src={
+                  press.chainPress.length > 0 &&
+                  `http://localhost:5000/${encodeURIComponent(
+                    press.chainPress[0].poster_img_filename
+                  )}`
+                }
+              />
+              <Logo>
+                <img
+                  style={{ width: "120px", height: "52px" }}
+                  src={
+                    press.chainPress.length > 0 &&
+                    `http://localhost:5000/${encodeURIComponent(
+                      press.chainPress[0].poster_img_filename
+                    )}`
+                  }
+                  alt="logo"
+                />
+              </Logo>
+            </a>
+          </Poster>
+          <MainContent>
+            <ContentMeta>
+              <span>
+                {press.chainPress.lenght > 0 && press.chainPress[0].media_name}
+              </span>
+              <span>
+                {press.chainPress.lenght > 0 && press.chainPress[0].reg_date}
+              </span>
+            </ContentMeta>
+            <ContentTitle>
+              <a
+                href={
+                  press.chainPress.length > 0 && press.chainPress[0].media_link
+                }
+                target="_blank"
+              >
+                <p>
+                  {press.chainPress.lenght > 0 && press.chainPress[0].title}
+                </p>
+              </a>
+            </ContentTitle>
+            <ContentDesc>
+              <a
+                href={
+                  press.chainPress.length > 0 && press.chainPress[0].media_link
+                }
+                target="_blank"
+              >
+                <p>
+                  {press.chainPress.lenght > 0 && press.chainPress[0].content}
+                </p>
+              </a>
+            </ContentDesc>
+          </MainContent>
+        </MainArticle>
         <Articles>
-          {press.press.map(pr => (
+          {press.chainPress.map(pr => (
             <Item key={pr.no}>
               <a href={pr.media_link} target="_blank">
                 <figure src="#" alt="poster">
+                  <img
+                    src={`http://localhost:5000/${encodeURIComponent(
+                      pr.poster_img_filename
+                    )}`}
+                    alt="poster"
+                  />
                   <Logo>
                     <img src="#" alt="logo" />
                   </Logo>
@@ -145,7 +290,11 @@ export default () => {
           ))}
         </Articles>
         <SeeMore>
-          <SLink to="#">더보기</SLink>
+          {press.cnt && press.chainPress.length === press.cnt - 1 ? null : (
+            <SLink to="#" onClick={handleClick}>
+              더보기
+            </SLink>
+          )}
         </SeeMore>
       </Container>
     </Section>

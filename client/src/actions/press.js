@@ -2,6 +2,7 @@ import {
   FAIL_LOAD,
   LOAD_PRESS,
   LOAD_ADMINPRESS,
+  LOAD_7CHAINPRESS,
   SUCCESS_IMAGE,
   IMAGE_FAIL,
   SUCCESS_UPLOAD,
@@ -37,6 +38,16 @@ export const getPressAll = page => async dispatch => {
     // console.log(test);
     dispatch({ type: LOAD_ADMINPRESS, payload: res.data.result });
   } catch (error) {
+    dispatch({ type: FAIL_LOAD, payload: error });
+  }
+};
+export const getPress7chain = page => async dispatch => {
+  try {
+    const res = await axios.get(`/api/press/all/7chain/${page}`);
+    console.log(res);
+    dispatch({ type: LOAD_7CHAINPRESS, payload: res.data.result });
+  } catch (error) {
+    console.log(error);
     dispatch({ type: FAIL_LOAD, payload: error });
   }
 };

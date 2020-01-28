@@ -315,7 +315,7 @@ export default withRouter(({ location: { pathname } }) => {
   }, [Scene]);
   console.log(device.pc);
   return (
-    <Main>
+    <Main id="home">
       <ThemeProvider theme={theme}>
         <SectionOne />
         <SectionTwo forwardedRef={childRef} />

@@ -1,8 +1,14 @@
-import { LOAD_MEDIA, FAIL_LOAD, LOAD_ADMINMEDIA } from "../actions/types";
+import {
+  LOAD_MEDIA,
+  FAIL_LOAD,
+  LOAD_ADMINMEDIA,
+  LOAD_7CHAINMEDIA
+} from "../actions/types";
 
 const initialState = {
   media: [],
   adminMedia: [],
+  chainMedia: [],
   error: null,
   loading: true,
   cnt: null
@@ -17,6 +23,13 @@ export default (state = initialState, action) => {
         ...state,
         media: payload,
         adminMedia: payload[0],
+        cnt: payload[1][0].total_row_count,
+        loading: false
+      };
+    case LOAD_7CHAINMEDIA:
+      return {
+        ...state,
+        chainMedia: payload[0],
         cnt: payload[1][0].total_row_count,
         loading: false
       };

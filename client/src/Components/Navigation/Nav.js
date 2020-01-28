@@ -24,7 +24,7 @@ const BottomContainer = styled.div`
   display: flex;
   position: fixed;
   width: 100%;
-  top: 44px;
+  top: 43px;
   z-index: -1;
 `;
 
@@ -38,11 +38,19 @@ export default withRouter(({ history, location }) => {
     setActive(false);
 
     e.preventDefault();
-    console.log(e.currentTarget, "Go");
-    TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+    console.log(e.currentTarget, id, "Go", location.pathname);
+    if (location.pathname !== "/") {
+      history.push("/");
+      setTimeout(() => {
+        TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+      }, 750);
+    } else {
+      TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+    }
   };
   const handleClick = e => {
     const body = document.querySelector("body");
+    console.log(e.target.hash);
     TweenMax.to(body, 1, { scrollTo: body.offsetTop });
   };
   //-----------------------------------------------------

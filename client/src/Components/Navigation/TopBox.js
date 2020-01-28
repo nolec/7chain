@@ -66,6 +66,39 @@ const UtilBox = styled(Link)`
     margin-right: 5px;
   }
 `;
+const LanguageBox = styled.div`
+  opacity: 0;
+  max-height: 125px;
+  width: 120px;
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  background: #1c1c1c;
+  border: 1px solid #a6a6a6;
+  padding: 5px 5px 5px 5px !important;
+  color: #000;
+  z-index: 102;
+
+  ul {
+    padding: 0;
+    right: 60px;
+    li {
+      padding: 2px;
+      i {
+        line-height: 0.9em;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+`;
+const Language = styled(Link)`
+  font-size: 16px !important;
+  word-break: normal;
+  color: #fff;
+  opacity: 0.9;
+  padding: 8px 0;
+`;
 const ToggleBox = styled.button`
   ${device.PC992`  position: absolute; display : block`}
   display : none;
@@ -99,19 +132,23 @@ const SubUl = styled.ul`
   border-top: 1px solid #e0e0e0;
   padding: 2px 0;
 `;
-export default ({ handleClick, handleToggle, active, location, handleGo }) => {
+export default ({ handleToggle, active, location, handleGo }) => {
   // const ref = useRef(null);
 
   // useEffect(() => {
   //   if (ref.current !== null) {
-  //     console.log(ref.current.children);
+  //     console.log(ref.current);
   //   }
-  // }, [active]);
+  //   console.log(ref.current);
+  // }, []);
+  const handleHover = e => {
+    console.log(LanguageBox);
+  };
   return (
     <>
       <TopBox>
         <div>
-          <LogoBox onClick={handleClick} to="/">
+          <LogoBox onClick={handleGo} to="#home">
             <img
               src={require("../../assets/images/logo/7chain-logo-white.svg")}
               alt="logo"
@@ -166,11 +203,27 @@ export default ({ handleClick, handleToggle, active, location, handleGo }) => {
                 </Ul>
               </NavBar>
               <Util>
-                <UtilBox to="/">
+                <UtilBox to="/" onMouseEnter={handleHover}>
                   <i className="flag-icon flag-icon-kr"></i>
                   <span>Korean</span>
                   <FontAwesomeIcon icon={faAngleDown} />
                 </UtilBox>
+                <LanguageBox>
+                  <ul>
+                    <li>
+                      <Language to="/">
+                        <i className="flag-icon flag-icon-kr"></i>
+                        <span>Korean</span>
+                      </Language>
+                    </li>
+                    <li>
+                      <Language to="/eng">
+                        <i className="flag-icon flag-icon-us"></i>
+                        <span>English</span>
+                      </Language>
+                    </li>
+                  </ul>
+                </LanguageBox>
               </Util>
             </>
           )}

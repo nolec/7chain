@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getMedia, getMediaAll } from "../../actions/media";
+import { getMedia, getMediaAll, getMeida7chain } from "../../actions/media";
 
 const Section = styled.section`
   padding: 0 0 120px;
@@ -116,10 +116,14 @@ const SLink = styled(Link)`
 `;
 export default () => {
   const media = useSelector(state => state.media);
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
+  const handleClick = () => {
+    setCurrentPage(currentPage + 1);
+  };
   useEffect(() => {
-    dispatch(getMediaAll());
-  }, []);
+    dispatch(getMeida7chain(currentPage));
+  }, [currentPage]);
   return (
     <Section>
       <Container>
@@ -127,10 +131,11 @@ export default () => {
           <h2>Media</h2>
         </HBox>
         <Articles>
-          {media.media.map(me => (
+          {media.chainMedia.map(me => (
             <Item key={me.no}>
               <a href={me.media_link} target="_blank">
                 <figure src="#" alt="poster">
+                  <img src={me.media_link} alt="poster" />
                   <Logo>
                     <img src="#" alt="logo" />
                   </Logo>
@@ -145,7 +150,11 @@ export default () => {
           ))}
         </Articles>
         <SeeMore>
-          <SLink to="#">더보기</SLink>
+          {media.cnt && media.chainMedia.length === media.cnt - 1 ? null : (
+            <SLink to="#" onClick={handleClick}>
+              더보기
+            </SLink>
+          )}
         </SeeMore>
       </Container>
     </Section>

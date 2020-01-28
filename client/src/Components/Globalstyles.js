@@ -23,7 +23,10 @@ body {
     background-color: #000;
     font-family : 'notopen_numbers', sans-serif;
 }
-
+img{
+    vertical-align: middle;
+    border-style: none;
+}
 p {
     line-height: 1.75;
 }

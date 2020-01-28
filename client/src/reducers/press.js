@@ -1,8 +1,14 @@
-import { LOAD_PRESS, FAIL_LOAD, LOAD_ADMINPRESS } from "../actions/types";
+import {
+  LOAD_PRESS,
+  FAIL_LOAD,
+  LOAD_ADMINPRESS,
+  LOAD_7CHAINPRESS
+} from "../actions/types";
 
 const initialState = {
   press: [],
   adminPress: [],
+  chainPress: [],
   error: null,
   loading: true,
   cnt: null
@@ -20,6 +26,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         adminPress: payload[0],
+        cnt: payload[1][0].total_row_count,
+        loading: false
+      };
+    case LOAD_7CHAINPRESS:
+      return {
+        ...state,
+        chainPress: payload[0],
         cnt: payload[1][0].total_row_count,
         loading: false
       };
