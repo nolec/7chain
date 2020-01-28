@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
   background: ${props => props.theme.css.evenColor};
 `;
 const Container = styled.div`
-  ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.ContainerStyle(1260, 1162)};
+  ${props => props.theme.style.GsapStyle()}
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
@@ -211,9 +213,13 @@ font-size: 20px;
   }
 `;
 export default () => {
+  const why = useRef(null);
+  useEffect(() => {
+    Scene(why.current.children, 0.7, "active");
+  }, []);
   return (
     <Section id="why">
-      <Container>
+      <Container ref={why}>
         <HBox>
           <h2>왜 7Chain 일까요?</h2>
         </HBox>

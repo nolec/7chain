@@ -49,6 +49,37 @@ const Alink = styled(Link)`
   color: #fff;
   padding: 0.6em 1em;
 `;
+const LanguageBox = styled.div`
+  transition: 0.3s linear;
+  :hover {
+    opacity: 1;
+    visibility: visible;
+  }
+  opacity: 0;
+  visibility: hidden;
+  max-height: 125px;
+  width: 120px;
+  position: absolute;
+  top: 40px;
+  right: 0px;
+  background: #1c1c1c;
+  border: 1px solid #a6a6a6;
+  padding: 5px 5px 5px 5px !important;
+  color: #000;
+  z-index: 102;
+  ul {
+    padding: 0;
+    right: 60px;
+    li {
+      padding: 2px;
+      i {
+        line-height: 0.9em;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
+  }
+`;
 const Util = styled.div`
   display: flex;
   align-items: center;
@@ -65,33 +96,12 @@ const UtilBox = styled(Link)`
     margin-left: 5px;
     margin-right: 5px;
   }
-`;
-const LanguageBox = styled.div`
-  opacity: 0;
-  max-height: 125px;
-  width: 120px;
-  position: absolute;
-  top: 40px;
-  right: 0px;
-  background: #1c1c1c;
-  border: 1px solid #a6a6a6;
-  padding: 5px 5px 5px 5px !important;
-  color: #000;
-  z-index: 102;
-
-  ul {
-    padding: 0;
-    right: 60px;
-    li {
-      padding: 2px;
-      i {
-        line-height: 0.9em;
-        margin-left: 5px;
-        margin-right: 5px;
-      }
-    }
+  :hover + ${LanguageBox} {
+    opacity: 1;
+    visibility: visible;
   }
 `;
+
 const Language = styled(Link)`
   font-size: 16px !important;
   word-break: normal;
@@ -141,9 +151,6 @@ export default ({ handleToggle, active, location, handleGo }) => {
   //   }
   //   console.log(ref.current);
   // }, []);
-  const handleHover = e => {
-    console.log(LanguageBox);
-  };
   return (
     <>
       <TopBox>
@@ -203,7 +210,7 @@ export default ({ handleToggle, active, location, handleGo }) => {
                 </Ul>
               </NavBar>
               <Util>
-                <UtilBox to="/" onMouseEnter={handleHover}>
+                <UtilBox to="/">
                   <i className="flag-icon flag-icon-kr"></i>
                   <span>Korean</span>
                   <FontAwesomeIcon icon={faAngleDown} />
