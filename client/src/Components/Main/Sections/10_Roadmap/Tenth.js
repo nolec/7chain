@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { device, minDevice } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -169,6 +170,7 @@ const Timeline = styled.ul`
   }
 `;
 export default () => {
+  const { lang } = useContext(LangContext);
   return (
     <Section id="roadmap">
       <Container>
@@ -183,9 +185,9 @@ export default () => {
               </div>
               <div className="timeline-image"></div>
               <div className="timeline-panel right">
-                <h4>2017년 4분기</h4>
-                <p>주요 멤버 영입</p>
-                <p>블록체인기술 R&amp;D</p>
+                <h4>{lang.roadmap01}</h4>
+                <p>{lang.roadmap02}</p>
+                <p>{lang.roadmap03}</p>
               </div>
             </li>
           </Timeline>
@@ -198,10 +200,10 @@ export default () => {
               </div>
               <div className="timeline-image"></div>
               <div className="timeline-panel right">
-                <h4>2018년 1분기</h4>
-                <p>Numbers21 PTE.LTD 싱가포르 법인 설립</p>
-                <p>게임 플레이어 참여형 RNG 기술 개발</p>
-                <p>7Chain 프로젝트 착수</p>
+                <h4>{lang.roadmap04}</h4>
+                <p>{lang.roadmap05}</p>
+                <p>{lang.roadmap06}</p>
+                <p>{lang.roadmap07}</p>
               </div>
             </li>
           </Timeline>
@@ -210,8 +212,8 @@ export default () => {
           <Timeline>
             <li className="year-p">
               <div className="timeline-panel left">
-                <h4>2018년 4~5월</h4>
-                <p>7Chain RNG v0.1 개발 완료</p>
+                <h4>{lang.roadmap08}</h4>
+                <p>{lang.roadmap09}</p>
               </div>
               <div className="timeline-image small"></div>
               <div className="timeline-panel right blank">&nbsp;</div>
@@ -224,9 +226,9 @@ export default () => {
               <div className="timeline-panel left blank">&nbsp;</div>
               <div className="timeline-image small"></div>
               <div className="timeline-panel right">
-                <h4>2018년 6월</h4>
-                <p>7Chain RNG v0.2 업데이트</p>
-                <p>7Chain RNG v0.2 가 적용된 포커게임과 슬롯게임 MVP 공개</p>
+                <h4>{lang.roadmap10}</h4>
+                <p>{lang.roadmap11}</p>
+                <p>{lang.roadmap12}</p>
               </div>
             </li>
           </Timeline>

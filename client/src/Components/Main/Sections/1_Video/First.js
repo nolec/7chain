@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
   position: relative;
@@ -46,23 +47,27 @@ export default () => {
     else setHeight(min_height - top_margin);
   }
   const press = useSelector(state => state.press);
+  const { korean } = useContext(LangContext);
   useEffect(() => {
     reSizeIntro();
     window.addEventListener("load", reSizeIntro);
     window.addEventListener("resize", reSizeIntro);
-    console.log("작동");
     return () => {
       window.removeEventListener("resize", reSizeIntro);
       window.removeEventListener("load", reSizeIntro);
     };
-  }, []);
+  }, [korean]);
   return (
     <Section>
       <Slider ref={slide} style={{ height: height }}>
         <Item>
           <video autoPlay="autoplay" preload="auto" muted="muted" playsInline>
             <source
-              src={require("../../../../assets/videos/7ChainIntroMovie_Korean.mp4")}
+              src={
+                korean
+                  ? require("../../../../assets/videos/7ChainIntroMovie_Korean.mp4")
+                  : require("../../../../assets/videos/7ChainIntroMovie_English.mp4")
+              }
               type="video/mp4"
             />
           </video>

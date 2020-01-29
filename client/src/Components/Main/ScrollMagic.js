@@ -2,7 +2,6 @@ import ScrollMagic from "scrollmagic";
 
 const controller = new ScrollMagic.Controller({ addIndicators: true });
 const Scene = (gsap, trigger, className) => {
-  console.log(gsap);
   for (let i = 0; i < gsap.length; i++) {
     new ScrollMagic.Scene({
       triggerElement: gsap[i],

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TopBox from "./TopBox";
 import BottomBox from "./BottomBox";
@@ -26,6 +26,8 @@ const BottomContainer = styled.div`
   width: 100%;
   top: 43px;
   z-index: -1;
+  ${props =>
+    props.border ? "border : none" : "border-bottom: 1px solid #282828;"}
 `;
 
 export default withRouter(({ history, location }) => {
@@ -69,6 +71,17 @@ export default withRouter(({ history, location }) => {
   const close = () => {
     setActive(false);
   };
+  const [border, setBorder] = useState(true);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        setBorder(false);
+      } else {
+        setBorder(true);
+      }
+    });
+  }, []);
   return (
     <Header>
       <TopContainer>
@@ -85,8 +98,8 @@ export default withRouter(({ history, location }) => {
       location.pathname === "/admin/media" ? (
         "null"
       ) : (
-        <BottomContainer>
-          <BottomBox handleGo={handleGo} />
+        <BottomContainer border={border}>
+          <BottomBox border={border} handleGo={handleGo} />
         </BottomContainer>
       )}
     </Header>

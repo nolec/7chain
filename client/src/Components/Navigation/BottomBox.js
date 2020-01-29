@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { device } from "../../device";
@@ -8,7 +8,8 @@ const BottomBox = styled.div`
   width: 100%;
   margin: auto;
   padding: 10px 5px 10px;
-  border-bottom: 1px solid #282828;
+  ${props =>
+    props.border ? "border-bottom: 1px solid #282828;" : "border : none"}
   z-index: -1;
   > div {
     display: flex;
@@ -55,9 +56,9 @@ const Alink = styled(Link)`
   color: #fff;
   opacity: 0.8;
 `;
-export default ({ handleGo }) => {
+export default ({ handleGo, border }) => {
   return (
-    <BottomBox>
+    <BottomBox border={border}>
       <div>
         <FontLogo>
           <img

@@ -33,7 +33,7 @@ const BoxOne = styled.div`
 const BoxTwo = styled.div`
   ${props => props.theme.style.GraphBox2()}
 `;
-export default () => {
+export default ({ lang }) => {
   const gsap = useRef(null);
   const gsap2 = useRef(null);
 
@@ -58,7 +58,7 @@ export default () => {
           </BoxOne>
           <BoxTwo>
             <b>$36.9BN</b>
-            <span>2013년 대비 1.4배 성장</span>
+            <span>{lang.analysis05}</span>
           </BoxTwo>
         </div>
       </GraphArea>
@@ -77,7 +77,7 @@ export default () => {
           </BoxOne>
           <BoxTwo>
             <b>$34.5BN</b>
-            <span>2013년 대비 4.6배 성장</span>
+            <span>{lang.analysis06}</span>
           </BoxTwo>
         </div>
       </GraphArea>

@@ -130,7 +130,6 @@ export default () => {
             <h2>Press</h2>
           </HBox>
           <Articles>
-            {console.log(press)}
             {press.press.map((pr, i) => (
               <Item key={i}>
                 <a href={pr.media_link} target="_blank">

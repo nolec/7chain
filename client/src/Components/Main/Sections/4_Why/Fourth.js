@@ -1,7 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
 import Scene from "../../ScrollMagic";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -214,6 +215,7 @@ font-size: 20px;
 `;
 export default () => {
   const why = useRef(null);
+  const { lang } = useContext(LangContext);
   useEffect(() => {
     Scene(why.current.children, 0.7, "active");
   }, []);
@@ -221,81 +223,77 @@ export default () => {
     <Section id="why">
       <Container ref={why}>
         <HBox>
-          <h2>왜 7Chain 일까요?</h2>
+          <h2>{lang.why01}</h2>
         </HBox>
         <ContentBox>
-          <h3>
-            7Chain은 가장 혁신적인 RNG를 통해 디지털 게임의 신뢰 문제를
-            해결합니다.
-          </h3>
+          <h3>{lang.why02}</h3>
           <div>
             <Legacy>
               <p>
-                <b>중앙화 시스템</b>
+                <b> {lang.legacy01}</b>
                 <br />
-                <span>데이터 조작 가능성</span>
+                <span>{lang.legacy02}</span>
               </p>
               <p>
-                <b>중앙화 서비스</b>
+                <b>{lang.legacy03}</b>
                 <br />
-                <span>디지털 자산 휘발성</span>
+                <span>{lang.legacy04}</span>
               </p>
               <p>
-                <b>제 3자 마케팅 인센티브</b>
-                <br />
-                <span>비용증가</span>
+                <b>{lang.legacy05}</b>
+                <span>{lang.legacy06}</span>
               </p>
             </Legacy>
           </div>
           <div>
             <BlockChain>
               <p>
-                <b>탈중앙화 시스템</b>
+                <b>{lang.blockChain01}</b>
                 <br />
-                <span>데이터 조작 불가</span>
+                <span>{lang.blockChain02}</span>
               </p>
               <p>
-                <b>탈중앙화 서비스</b>
-                <span>디지털 자산 영구 보존</span>
+                <b>{lang.blockChain03}</b>
+                <span>{lang.blockChain04}</span>
               </p>
               <p>
-                <b>TX 속도문제 / 실시간 게임 적용불가</b>
-                <span>거래비용증가</span>
+                <b>{lang.blockChain05}</b>
+                <span>{lang.blockChain06}</span>
               </p>
               <p>
-                <b>투명한 난수 생성 기술 증명 못함</b>
+                <b>{lang.blockChain07}</b>
               </p>
               <p>
-                <b>특정 OS 플랫폼에 대한 제한적 지원</b>
+                <b>{lang.blockChain08}</b>
               </p>
             </BlockChain>
           </div>
           <div>
             <SevenChain>
               <p>
-                <b>탈중앙화 시스템</b>
+                <b>{lang.sevenChain01}</b>
                 <br />
-                <span>데이터 조작 불가</span>
+                <span>{lang.sevenChain02}</span>
               </p>
               <p>
-                <b>탈중앙화 서비스</b>
+                <b>{lang.sevenChain03}</b>
                 <br />
-                <span>MVP를 통해 기술 증명</span>
+                <span>{lang.sevenChain04}</span>
               </p>
               <p>
-                <b>가장 공정하고 완벽하게 탈중앙화된 RNG</b>
+                <b>{lang.sevenChain05}</b>
                 <br />
-                <span>MVP를 통해 기술 증명</span>
+                <span>{lang.sevenChain06}</span>
               </p>
               <p>
-                <b>DPoS 기반 / 실시간 처리, 거래수수료 없음</b>
+                <b>{lang.sevenChain07}</b>
               </p>
               <p>
-                <b>Windows, Android, iOS, HTML5 지원</b>
+                <b>{lang.sevenChain08}</b>
               </p>
               <p>
-                <b>최저 플랫폼 수수료 / 거래비용 절감</b>
-                <span id="lblWhy7Chain024">게임사업자 수익 향상</span>
+                <b>{lang.sevenChain09}</b>
+                <span id="lblWhy7Chain024">{lang.sevenChain10}</span>
               </p>
             </SevenChain>
           </div>
@@ -303,30 +301,18 @@ export default () => {
         <SubBox>
           <SubContent name="first">
             <div></div>
-            <h4>공정성</h4>
-            <p>
-              7Chain의 RNG 알고리즘은 게임 플레이어와 게임 운영자가 직접 난수
-              생성에 참여함으로써 게임 결과에 대한 절대적인 공정성이 제공되는
-              세계 최초의 기술입니다.
-            </p>
+            <h4>{lang.whysub01}</h4>
+            <p>{lang.whysub02}</p>
           </SubContent>
           <SubContent name="second">
             <div></div>
-            <h4>투명성</h4>
-            <p>
-              게임 플레이어는 결과가 조작되지 않음을 알 수 있고, 게임 운영사는
-              그 대가로 고객의 신뢰를 보장받을 수 있으며, 관할 기관은 결과의
-              정확성을 쉽게 검증하고 인증할 수 있습니다.
-            </p>
+            <h4>{lang.whysub03}</h4>
+            <p>{lang.whysub04}</p>
           </SubContent>
           <SubContent name="third">
             <div></div>
-            <h4>블루오션 시장</h4>
-            <p>
-              인터렉티브 게임으로부터 소셜 게임 그리고 롤플레잉 게임에
-              이르기까지 7Chain 플랫폼은 RNG 알고리즘에 의존하는 모든 디지털
-              게임을 호스팅할 수 있습니다.
-            </p>
+            <h4>{lang.whysub05}</h4>
+            <p>{lang.whysub06}</p>
           </SubContent>
         </SubBox>
       </Container>

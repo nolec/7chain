@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(40, 120)};
@@ -144,17 +145,14 @@ export default () => {
   const check = require("../../../../assets/images/bullet-check-s2.png");
   const bulletX = require("../../../../assets/images/bullet-x-s.png");
   const triangle = require("../../../../assets/images/bullet-triangle2.png");
+
+  const { lang } = useContext(LangContext);
   return (
     <Section>
       <Container>
         <Hbox>
-          <h3>경쟁 프로젝트와 비교</h3>
-          <p>
-            7Chain 팀이 세계 최초로 구현한 탈중앙화 RNG 기술은 이미 국제 PCT
-            특허 출원으로 보호되고 있습니다. 실제 블록체인 네트워크에서 작동되는
-            게임을 공개하면서 탈중앙화된 RNG 기술의 투명성과 공정성이 검증되고
-            있으며, 실시간 온라인 게임에도 적용이 가능함을 증명하고 있습니다.
-          </p>
+          <h3>{lang.compare01}</h3>
+          <p>{lang.compare02}</p>
         </Hbox>
         <TableBox>
           <Table>
@@ -171,7 +169,7 @@ export default () => {
             <tbody>
               <tr>
                 <td className="column1">
-                  <span id="lblComparison007">암호화폐 형태</span>
+                  <span id="lblComparison007">{lang.compare03}</span>
                 </td>
                 <td>
                   <span id="lblComparison008">ERC-20/ETH</span>
@@ -191,7 +189,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1">
-                  <span id="lblComparison013">게이밍 플랫폼</span>
+                  <span id="lblComparison013">{lang.compare04}</span>
                 </td>
                 <td className="brg">
                   <img src={check} alt="Support" />
@@ -215,7 +213,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1">
-                  <span id="lblComparison015">모든 기기 OS 지원</span>
+                  <span id="lblComparison015">{lang.compare05}</span>
                 </td>
                 <td>
                   <img src={bulletX} alt="Not Support" />
@@ -235,7 +233,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1">
-                  <span id="lblComparison016">탈중앙화 RNG 구현</span>
+                  <span id="lblComparison016">{lang.compare06}</span>
                 </td>
                 <td className="m-text">
                   <img src={triangle} alt="Not proven" />
@@ -267,7 +265,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1">
-                  <span id="lblComparison020">게이머의 RNG 참여</span>
+                  <span id="lblComparison020">{lang.compare07}</span>
                 </td>
                 <td>
                   <img src={bulletX} alt="Not Support" />
@@ -287,7 +285,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1 animated fadeIn">
-                  <span id="lblComparison021">RNG 실시간 게임 적용</span>
+                  <span id="lblComparison021">{lang.compare08}</span>
                 </td>
                 <td className="m-text animated fadeIn">
                   <img src={triangle} alt="Not proven" />
@@ -315,7 +313,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1 animated fadeIn">
-                  <span id="lblComparison030">암호화폐 없이 적용</span>
+                  <span id="lblComparison030">{lang.compare09}</span>
                 </td>
                 <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
@@ -335,7 +333,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1 animated fadeIn">
-                  <span id="lblComparison024">멘탈 포커 알고리즘</span>
+                  <span id="lblComparison024">{lang.compare10}</span>
                 </td>
                 <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />
@@ -355,7 +353,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1 animated fadeIn">
-                  <span id="lblComparison025">거래 수수료 해결</span>
+                  <span id="lblComparison025">{lang.compare11}</span>
                 </td>
                 <td className="m-text animated fadeIn">
                   <img src={triangle} alt="Not proven" />
@@ -383,7 +381,7 @@ export default () => {
               </tr>
               <tr>
                 <td className="column1 animated fadeIn">
-                  <span id="lblComparison028">상용제품 보유</span>
+                  <span id="lblComparison028">{lang.compare12}</span>
                 </td>
                 <td className="animated fadeIn">
                   <img src={bulletX} alt="Not Support" />

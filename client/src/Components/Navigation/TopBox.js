@@ -1,9 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { device, minDevice } from "../../device";
+import UtilSeleted from "./Util";
+import LangContext from "../../Context";
 
 const TopBox = styled.div`
   max-width: 1162px;
@@ -60,7 +62,7 @@ const LanguageBox = styled.div`
   max-height: 125px;
   width: 120px;
   position: absolute;
-  top: 40px;
+  top: 100%;
   right: 0px;
   background: #1c1c1c;
   border: 1px solid #a6a6a6;
@@ -91,6 +93,10 @@ const Util = styled.div`
 const UtilBox = styled(Link)`
   font-size: 16px;
   color: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
   i,
   svg {
     margin-left: 5px;
@@ -151,6 +157,7 @@ export default ({ handleToggle, active, location, handleGo }) => {
   //   }
   //   console.log(ref.current);
   // }, []);
+  const { handleKor, handleEng } = useContext(LangContext);
   return (
     <>
       <TopBox>
@@ -211,20 +218,18 @@ export default ({ handleToggle, active, location, handleGo }) => {
               </NavBar>
               <Util>
                 <UtilBox to="/">
-                  <i className="flag-icon flag-icon-kr"></i>
-                  <span>Korean</span>
-                  <FontAwesomeIcon icon={faAngleDown} />
+                  <UtilSeleted />
                 </UtilBox>
                 <LanguageBox>
                   <ul>
                     <li>
-                      <Language to="/">
+                      <Language to="/kor" onClick={handleKor}>
                         <i className="flag-icon flag-icon-kr"></i>
                         <span>Korean</span>
                       </Language>
                     </li>
                     <li>
-                      <Language to="/eng">
+                      <Language to="/eng" onClick={handleEng}>
                         <i className="flag-icon flag-icon-us"></i>
                         <span>English</span>
                       </Language>

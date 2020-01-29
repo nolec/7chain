@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useContext } from "react";
 import styled, { css, ThemeProvider } from "styled-components";
 import SectionOne from "./Sections/1_Video";
 import SectionTwo from "./Sections/2_OverView";
@@ -15,8 +15,8 @@ import SectionTwelfth from "./Sections/12_PressMedia";
 import Join from "./Sections/13_Join";
 import Partner from "./Sections/14_Partner";
 import { withRouter } from "react-router-dom";
-import Scene from "./ScrollMagic";
 import { device } from "../../device";
+import LangContext from "../../Context";
 
 const Main = styled.main`
   h1,
@@ -305,20 +305,23 @@ const theme = {
 };
 
 export default withRouter(({ location: { pathname } }) => {
-  const childRef = useRef(null);
+  // const childRef = useRef(null);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     Scene(childRef.current.children, 0.7, "active");
+  //   }, 500);
+  //   console.log(childRef.current, "Parent Component");
+  // }, [Scene]);
+  // console.log(device.pc);
+  const { languageSetting, korean } = useContext(LangContext);
   useEffect(() => {
-    setTimeout(() => {
-      Scene(childRef.current.children, 0.7, "active");
-    }, 500);
-    console.log(childRef.current, "Parent Component");
-    //  return () => Scene(childRef.current.children);
-  }, [Scene]);
-  console.log(device.pc);
+    languageSetting();
+  }, [korean]);
   return (
     <Main id="home">
       <ThemeProvider theme={theme}>
         <SectionOne />
-        <SectionTwo forwardedRef={childRef} />
+        <SectionTwo />
         <SectionThree />
         <SectionFour />
         <SectionFifth />

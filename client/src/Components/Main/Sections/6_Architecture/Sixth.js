@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(0, 120)};
@@ -36,11 +37,12 @@ const ImgV = styled.img.attrs({
   ${device.PC768`display : inline`};
 `;
 export default () => {
+  const { lang } = useContext(LangContext);
   return (
     <Section>
       <Container>
         <Hbox>
-          <h3>7Chain 아키텍처</h3>
+          <h3>{lang.architecture}</h3>
         </Hbox>
         <ImgBox>
           <Img />

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(40, 120)}
@@ -74,40 +75,28 @@ const SubContent = styled.div`
   }
 `;
 export default () => {
+  const { lang } = useContext(LangContext);
   return (
     <Section>
       <Container>
         <Hbox>
-          <h3>7Chain의 강점</h3>
+          <h3>{lang.strength01}</h3>
         </Hbox>
         <SubBox>
           <SubContent name="first">
             <div></div>
-            <h4>개방형 B2B 플랫폼</h4>
-            <p>
-              7Chain의 RNG 프로토콜은 전세계 모든 권역의 암호화폐 법령 규제없이
-              현재 서비스 중인 모든 게임에 빠르게 적용할 수 있습니다. 7Chain
-              RNG는 게임 내 암호화폐를 통한 자산 거래 기능 없이도 작동할 수 있기
-              때문입니다. 7Chain은 게임 운영사에게 최소한의 수수료만 부과합니다.
-            </p>
+            <h4>{lang.strength02}</h4>
+            <p>{lang.strength03}</p>
           </SubContent>
           <SubContent name="second">
             <div></div>
-            <h4>콜라보레이션</h4>
-            <p>
-              7Chain 플랫폼은 다른 블록체인 플랫폼과 콜라보레이션이 가능합니다.
-              7Chain의 신뢰 기반 프로토콜이 타 생태계의 조력자로서 동작할 때
-              자체 생태계도 함께 성장할 수 있기 때문입니다.
-            </p>
+            <h4>{lang.strength04}</h4>
+            <p>{lang.strength05}</p>
           </SubContent>
           <SubContent name="third">
             <div></div>
-            <h4>확장성</h4>
-            <p>
-              7Chain 플랫폼은 HTML5 뿐만 아니라 게임 콘텐츠에 가장 많이 사용되는
-              Unity3d 엔진을 지원합니다. 즉, Web 기반 API와 Unity 3d 전용 SDK를
-              제공하여 7Chain 기술이 게임에 쉽고 빠르게 적용되도록 할 것 입니다.
-            </p>
+            <h4>{lang.strength06}</h4>
+            <p>{lang.strength07}</p>
           </SubContent>
         </SubBox>
       </Container>

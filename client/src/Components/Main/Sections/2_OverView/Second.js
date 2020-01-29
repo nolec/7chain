@@ -1,6 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import Scene from "../../ScrollMagic";
+import LangContext from "../../../../Context";
 // import { SectionStyle } from "../../Main";
 
 const Section = styled.section`
@@ -68,41 +70,25 @@ const TextBox = styled.div`
     ${device.PC450`font-size: 16px;`}
   }
 `;
-export default ({ forwardedRef }) => {
+export default () => {
+  const overview = useRef(null);
+  const { lang } = useContext(LangContext);
+  console.log(lang);
+  useEffect(() => {
+    Scene(overview.current.children, 0.7, "active");
+  }, []);
   return (
     <Section id="overview">
-      <Container ref={forwardedRef}>
+      <Container ref={overview}>
         <HBox>
-          <h2>탈중앙화된 확률의 중요성</h2>
+          <h2>{lang.overview01}</h2>
         </HBox>
         <ContentBox>
           <ImgBox>
-            <p>
-              로제 카이와 - 사회학자, 문학평론가
-              <br />
-              (1913년 3월 3일 ~ 1978년 12월 21일)
-            </p>
+            <p>{lang.overview02}</p>
           </ImgBox>
           <TextBox>
-            <p>
-              프랑스의 사회학자이자 평론가인 ‘로제카이와(Roger Caillois)’는
-              1958년 그의 저서 '인간과 놀이'에서 “게임은 역할과 경쟁 그리고 운,
-              이 3가지 재미요소를 통해 궁극적인 몰입 단계에 이른다.”라고
-              정의하고 있습니다.
-              <br />
-              <br />
-              현 시대의 디지털 게임 또한 그가 정의한 3가지 재미요소로 구성되어
-              있으며, 특히 운은 게임 전체에 영향을 주기 때문에 핵심 요소로
-              작용하고 있습니다.
-              <br />
-              <br />
-              하지만 운 즉, 확률은 중앙화 되어 있는 구조로 인해 악의적인 조작
-              여부와 관계없이 여전히 불신의 영역으로 남아 있으며 현재까지도 많은
-              분쟁이 발생하고 있습니다.
-              <br />
-              <br />
-              이제 7Chain을 통해 이러한 분쟁은 사라질 것 입니다.
-            </p>
+            <p>{lang.overview03}</p>
           </TextBox>
         </ContentBox>
       </Container>

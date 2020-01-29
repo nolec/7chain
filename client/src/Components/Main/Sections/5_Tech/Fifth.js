@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(45, 120)};
@@ -113,51 +114,29 @@ const TextBox = styled.div`
   }
 `;
 export default () => {
+  const { lang } = useContext(LangContext);
   return (
     <Section>
       <Container>
         <Hbox>
-          <h3>핵심기술</h3>
+          <h3>{lang.tech01}</h3>
         </Hbox>
         <ContentBox name="one">
           <TextBox>
-            <b>
-              세계최초의 탈중앙화 <br />
-              RNG 기술
-            </b>
-            <p>
-              게임 플레이어, 게임 운영사, 7Chain 3개의 <br />
-              그룹이 공동으로 난수 생성에 참여하여 <br />
-              절대적인 공정성을 제공합니다.
-            </p>
+            <b>{lang.tech02}</b>
+            <p>{lang.tech03}</p>
           </TextBox>
         </ContentBox>
         <ContentBox name="two">
           <TextBox>
-            <b>
-              EOS 기반 <br />
-              스마트 컨트랙트로 구현된 Dapp
-            </b>
-            <p>
-              난수생성을 비롯한 모든 과정이 <br />
-              EOS 기반 Smart contract로 구현되어 <br />
-              투명한 게임 환경을 제공합니다.
-            </p>
+            <b>{lang.tech04}</b>
+            <p>{lang.tech05}</p>
           </TextBox>
         </ContentBox>
         <ContentBox name="three">
           <TextBox>
-            <b>
-              사용자 맞춤형 <br />
-              Blockchain Scanner
-            </b>
-            <p>
-              사용자 편의에 맞춘 웹 뷰어를 제공하여
-              <br />
-              블록체인에 기록된 대량의 데이터를
-              <br />
-              보다 쉽게 확인 할 수 있습니다.
-            </p>
+            <b>{lang.tech06}</b>
+            <p>{lang.tech07}</p>
           </TextBox>
         </ContentBox>
       </Container>
