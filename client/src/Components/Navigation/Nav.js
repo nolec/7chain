@@ -24,7 +24,7 @@ const BottomContainer = styled.div`
   display: flex;
   position: fixed;
   width: 100%;
-  top: 43px;
+  top: 39px;
   z-index: -1;
   ${props =>
     props.border ? "border : none" : "border-bottom: 1px solid #282828;"}

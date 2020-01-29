@@ -130,7 +130,8 @@ const ToggleBox = styled.button`
   cursor: pointer;
 `;
 const Collapse = styled.div`
-  /* display: none; */
+  ${device.PC992`  display : block`}
+  display: none;
   z-index: 100;
   /* margin-top: 13px; */
   transition: 0.4s linear;

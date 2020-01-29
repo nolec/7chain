@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { getPress } from "../../../../actions/press";
 import { Link } from "react-router-dom";
 import { getMedia } from "../../../../actions/media";
 import { device } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -112,6 +113,7 @@ export default () => {
     state => ({ press: state.press, media: state.media }),
     []
   );
+  const { lang } = useContext(LangContext);
   // const tags = useMemo(() => {
   //   return [dispatch(getPress()), dispatch(getMedia())];
   // }, [press.loading]);
@@ -149,7 +151,7 @@ export default () => {
             ))}
           </Articles>
           <SeeMore>
-            <SLink to="/press">더보기</SLink>
+            <SLink to="/press">{lang.seeMore}</SLink>
           </SeeMore>
         </Container>
       </Section>
@@ -175,7 +177,7 @@ export default () => {
             ))}
           </Articles>
           <SeeMore>
-            <SLink to="/media">더보기</SLink>
+            <SLink to="/media">{lang.seeMore}</SLink>
           </SeeMore>
         </Container>
       </Section>

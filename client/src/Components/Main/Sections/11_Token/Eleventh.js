@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
+import LangContext from "../../../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(0, 120)}
@@ -115,11 +116,13 @@ const Bottom = styled.div`
   }
 `;
 export default () => {
+  const { lang } = useContext(LangContext);
+
   return (
     <Section id="token">
       <Container>
         <HBox>
-          <h2>토큰 할당 정책</h2>
+          <h2>{lang.token01}</h2>
         </HBox>
         <ChartBox>
           <Chart>
@@ -128,32 +131,34 @@ export default () => {
                 <img src={require("../../../../assets/images/Pie_1.png")} />
               </ImgBox>
               <TextBox>
-                <p>
-                  발행 토큰
-                  <br />
-                  할당 계획
-                </p>
+                <p>{lang.token03}</p>
               </TextBox>
             </Top>
             <Bottom>
               <ul>
                 <li>
-                  <b>◆</b>마케팅 5%
+                  <b>◆</b>
+                  {lang.token04}
                 </li>
                 <li>
-                  <b>◆</b>팀 (LOCKED) 7%
+                  <b>◆</b>
+                  {lang.token05}
                 </li>
                 <li>
-                  <b>◆</b>설립자 (LOCKED) 8%
+                  <b>◆</b>
+                  {lang.token06}
                 </li>
                 <li>
-                  <b>◆</b>커뮤니티 10%
+                  <b>◆</b>
+                  {lang.token07}
                 </li>
                 <li>
-                  <b>◆</b>개발사 투자 및 스테이킹 20%
+                  <b>◆</b>
+                  {lang.token08}
                 </li>
                 <li>
-                  <b>◆</b>토큰 세일 50%
+                  <b>◆</b>
+                  {lang.token09}
                 </li>
               </ul>
             </Bottom>
@@ -164,29 +169,30 @@ export default () => {
                 <img src={require("../../../../assets/images/Pie_2.png")} />
               </ImgBox>
               <TextBox>
-                <p>
-                  수익금
-                  <br />
-                  사용 계획
-                </p>
+                <p>{lang.token11}</p>
               </TextBox>
             </Top>
             <Bottom>
               <ul>
                 <li>
-                  <b>◆</b>콘텐츠 소싱 18%
+                  <b>◆</b>
+                  {lang.token12}
                 </li>
                 <li>
-                  <b>◆</b>개발 38%
+                  <b>◆</b>
+                  {lang.token13}
                 </li>
                 <li>
-                  <b>◆</b>마케팅, 운영비 30%
+                  <b>◆</b>
+                  {lang.token14}
                 </li>
                 <li>
-                  <b>◆</b>법율대응 10%
+                  <b>◆</b>
+                  {lang.token15}
                 </li>
                 <li>
-                  <b>◆</b>자문위원 4%
+                  <b>◆</b>
+                  {lang.token16}
                 </li>
               </ul>
             </Bottom>
