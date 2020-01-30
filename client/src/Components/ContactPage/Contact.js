@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 // import { isEmail, isValidation } from "./Auth";
+import PropTypes from "prop-types";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import {
@@ -148,24 +149,32 @@ export default () => {
   const recaptchaRef = useRef(null);
   const inquiry = useRef(null);
   const dispatch = useDispatch();
-  const [contact, setContact] = useState(true);
-  const [biz, setBiz] = useState(false);
-  const [developers, setDevelopers] = useState(false);
+  //--------------------------------------------
+  const [active, setActive] = useState({
+    contact: true,
+    biz: "",
+    developers: ""
+  });
   const activeChange = e => {
     e.preventDefault();
-    console.log(
-      Array.prototype.slice
-        .call(inquiry.current.children)
-        .filter(item => item === e.currentTarget),
-      e.currentTarget,
-      "작동"
-    );
-    Array.prototype.slice
-      .call(inquiry.current.children)
-      .map(item => (item.children[0] === e.currentTarget ? "" : ""));
+    console.log(e.currentTarget.hash.substring(1));
+    let current = e.currentTarget.hash.substring(1);
+    setActive({ contact: false, biz: false, developers: false });
+    setActive({ [current]: true });
+    // console.log(
+    //   Array.prototype.slice
+    //     .call(inquiry.current.children)
+    //     .filter(item => item === e.currentTarget),
+    //   e.currentTarget,
+    //   "작동"
+    // );
+    // Array.prototype.slice
+    //   .call(inquiry.current.children)
+    //   .map(item => (item.children[0] === e.currentTarget ? "" : ""));
   };
+  console.log(active);
+  //--------------------------------------------
   const { languageSetting, lang, korean } = useContext(LangContext);
-  console.log(lang);
   useEffect(() => {
     languageSetting();
   }, [korean]);
@@ -254,7 +263,7 @@ export default () => {
                       <Slink
                         onClick={activeChange}
                         to="#contact"
-                        active={contact}
+                        active={active.contact}
                       >
                         <div>
                           {lang.contact05}
@@ -264,7 +273,11 @@ export default () => {
                       </Slink>
                     </Inquiry>
                     <Inquiry>
-                      <Slink onClick={activeChange} to="#biz" active={biz}>
+                      <Slink
+                        onClick={activeChange}
+                        to="#biz"
+                        active={active.biz}
+                      >
                         <div>
                           {lang.contact06}
                           <br />
@@ -276,7 +289,7 @@ export default () => {
                       <Slink
                         onClick={activeChange}
                         to="#developers"
-                        active={developers}
+                        active={active.developers}
                       >
                         <div>
                           {lang.contact07}
@@ -297,7 +310,7 @@ export default () => {
                     color="primary"
                     className={classes.submit}
                   >
-                    {lang.contact08}
+                    {lang.contact08 !== undefined && lang.contact08}
                   </Button>
                 </ContactFooter>
               </Form>
