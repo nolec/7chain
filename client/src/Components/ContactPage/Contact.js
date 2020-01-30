@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 // import { isEmail, isValidation } from "./Auth";
 import { Formik, Form } from "formik";
@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { mailPost } from "../../actions/mail";
 import { Link } from "react-router-dom";
 import { device, minDevice } from "../../device";
+import LangContext from "../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(80, 120)}
@@ -93,6 +94,9 @@ const Slink = styled(Link)`
       color: #a4dada;
     }
   }
+  &.active div {
+    background-color: red;
+  }
 `;
 const useStyles = makeStyles(theme => ({
   root: {
@@ -142,11 +146,29 @@ let ContactSchema = yup.object().shape({
 export default () => {
   const classes = useStyles();
   const recaptchaRef = useRef(null);
+  const inquiry = useRef(null);
   const dispatch = useDispatch();
+  const [contact, setContact] = useState(true);
+  const [biz, setBiz] = useState(false);
+  const [developers, setDevelopers] = useState(false);
   const activeChange = e => {
     e.preventDefault();
-    console.log("작동");
+    console.log(
+      Array.prototype.slice
+        .call(inquiry.current.children)
+        .filter(item => item === e.currentTarget),
+      e.currentTarget,
+      "작동"
+    );
+    Array.prototype.slice
+      .call(inquiry.current.children)
+      .map(item => (item.children[0] === e.currentTarget ? "" : ""));
   };
+  const { languageSetting, lang, korean } = useContext(LangContext);
+  console.log(lang);
+  useEffect(() => {
+    languageSetting();
+  }, [korean]);
   return (
     <Section>
       <Container>
@@ -180,7 +202,7 @@ export default () => {
                       variant="outlined"
                       fullWidth
                       id="name"
-                      label="이름"
+                      label={lang.contact01}
                       autoFocus
                       helperText={
                         errors.name && touched.name ? errors.name : null
@@ -193,7 +215,7 @@ export default () => {
                       variant="outlined"
                       onChange={handleChange}
                       id="email"
-                      label="이메일 주소"
+                      label={lang.contact02}
                       name="email"
                       autoComplete="email"
                       helperText={
@@ -209,7 +231,7 @@ export default () => {
                       rows="3"
                       onChange={handleChange}
                       id="message"
-                      label="메시지"
+                      label={lang.contact03}
                       name="message"
                       autoComplete="message"
                       helperText={
@@ -225,22 +247,26 @@ export default () => {
                 </ContactBox>
                 <ContactFooter>
                   <FooterTitle>
-                    <p>아래 문의 유형을 선택해 주세요:</p>
+                    <p>{lang.contact04}</p>
                   </FooterTitle>
-                  <InquiryBox>
+                  <InquiryBox ref={inquiry}>
                     <Inquiry>
-                      <Slink onClick={activeChange} to="#contact" className="">
+                      <Slink
+                        onClick={activeChange}
+                        to="#contact"
+                        active={contact}
+                      >
                         <div>
-                          일반 문의
+                          {lang.contact05}
                           <br />
                           contact@7chain.io
                         </div>
                       </Slink>
                     </Inquiry>
                     <Inquiry>
-                      <Slink onClick={activeChange} to="#biz" className="">
+                      <Slink onClick={activeChange} to="#biz" active={biz}>
                         <div>
-                          사업 제휴
+                          {lang.contact06}
                           <br />
                           biz@7chain.io
                         </div>
@@ -250,10 +276,10 @@ export default () => {
                       <Slink
                         onClick={activeChange}
                         to="#developers"
-                        className=""
+                        active={developers}
                       >
                         <div>
-                          일반 문의
+                          {lang.contact07}
                           <br />
                           developers@7chain.io
                         </div>
@@ -271,7 +297,7 @@ export default () => {
                     color="primary"
                     className={classes.submit}
                   >
-                    문의하기
+                    {lang.contact08}
                   </Button>
                 </ContactFooter>
               </Form>

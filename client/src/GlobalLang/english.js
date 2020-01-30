@@ -191,5 +191,13 @@ export const en = {
   token14: "Marketing & Operation 30%",
   token15: "Legal 10%",
   token16: "Advisory committee 4%",
-  seeMore: "See More"
+  seeMore: "See More",
+  contact01: "Name",
+  contact02: "Email",
+  contact03: "Message",
+  contact04: "Please select the purpose for your inquiry:",
+  contact05: "Contact",
+  contact06: "Partnership",
+  contact07: "Developer Support",
+  contact08: "Submit"
 };

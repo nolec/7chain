@@ -272,7 +272,7 @@ export default ({ handleToggle, active, location, handleGo }) => {
                   </Alink>
                 </Li>
                 <Li>
-                  <Alink to="#">
+                  <Alink to="/contact">
                     <span>Contact</span>
                   </Alink>
                 </Li>

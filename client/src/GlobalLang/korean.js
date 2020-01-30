@@ -185,5 +185,13 @@ export const ko = {
   token14: "마케팅, 운영비 30%",
   token15: "법율대응 10%",
   token16: "자문위원 4%",
-  seeMore: "더보기"
+  seeMore: "더보기",
+  contact01: "이름",
+  contact02: "이메일 주소",
+  contact03: "메시지",
+  contact04: "아래 문의 유형을 선택해 주세요:",
+  contact05: "일반 문의",
+  contact06: "사업 제휴",
+  contact07: "개발자 지원",
+  contact08: "문의하기"
 };
