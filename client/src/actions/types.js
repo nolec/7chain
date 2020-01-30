@@ -10,3 +10,5 @@ export const IMAGE_FAIL = "IMAGE_FAIL";
 export const SUCCESS_UPLOAD = "SUCCESS_UPLOAD";
 export const UPLOAD_FAIL = "UPLOAD_FAIL";
 export const DELETE_PRESS = "DELETE_PRESS";
+export const MAIL_SUCCESS = "MAIL_SUCCESS";
+export const MAIL_FAIL = "MAIL_FAIL";

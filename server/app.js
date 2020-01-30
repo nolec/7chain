@@ -7,6 +7,7 @@ import path from "path";
 // import db from "./db";
 import pressRoute from "./routes/pressRoute";
 import mediaRoute from "./routes/mediaRoute";
+import contactRoute from "./routes/contactRoute";
 
 const app = express();
 app.use(helmet());
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/press", pressRoute);
 app.use("/api/media", mediaRoute);
+app.use("/api/mail", contactRoute);
 //------------------------------------
 app.use("/", express.static("uploads"));
 console.log(__dirname);

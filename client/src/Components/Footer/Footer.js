@@ -6,7 +6,9 @@ import { device } from "../../device";
 const Footer = styled.footer`
   padding: 0 0 1px;
   background: ${props =>
-    props.pathname === "/media" ? "tranparent" : "#1c1c1c"};
+    props.pathname === "/media" || props.pathname === "/contact"
+      ? "tranparent"
+      : "#1c1c1c"};
   * {
     z-index: 2;
   }

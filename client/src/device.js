@@ -13,6 +13,7 @@ const maxSize = {
   PC768: 768,
   PC770: 770,
   PC860: 860,
+  PC900: 900,
   PC920: 920,
   PC990: 990,
   PC991: 991,
@@ -22,6 +23,7 @@ const maxSize = {
   PC: 1200
 };
 const minSize = {
+  minPC576: 576,
   minPC768: 768,
   minPC992: 992,
   minPC: 1200

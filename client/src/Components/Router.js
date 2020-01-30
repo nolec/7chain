@@ -13,6 +13,7 @@ import Media from "./MediaPage";
 import Press from "./PressPage";
 import AdminPress from "./Admin/AdminPress";
 import AdminMedia from "./Admin/AdminMedia";
+import Contact from "./ContactPage";
 
 export default () => {
   return (
@@ -22,6 +23,7 @@ export default () => {
         <Route path="/" exact component={Main} />
         <Route path="/press" component={Press} />
         <Route path="/media" component={Media} />
+        <Route path="/contact" component={Contact} />
         <Route path="/admin/press" component={AdminPress} />
         <Route path="/admin/media" component={AdminMedia} />
         <Redirect from="/*" to="/" />

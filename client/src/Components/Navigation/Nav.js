@@ -81,6 +81,15 @@ export default withRouter(({ history, location }) => {
         setBorder(true);
       }
     });
+    return () => {
+      window.removeEventListener("scroll", () => {
+        if (window.scrollY > 0) {
+          setBorder(false);
+        } else {
+          setBorder(true);
+        }
+      });
+    };
   }, []);
   return (
     <Header>

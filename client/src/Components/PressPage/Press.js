@@ -5,28 +5,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPressAll, getPress7chain } from "../../actions/press";
 
 const Section = styled.section`
-  padding: 0 0 120px;
-  margin-top: 80px;
-  overflow: hidden;
+  ${props => props.theme.style.SectionStyle(80, 120)}
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
-  position: relative;
-  width: 1162px;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
-  margin-bottom: 55px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
+  ${props => props.theme.style.HboxStyle(45, 15)}
 `;
 const MainArticle = styled.div`
   width: 100%;
@@ -204,26 +189,30 @@ export default () => {
           <Poster>
             <a
               href={
-                press.chainPress.length > 0 && press.chainPress[0].media_link
+                press.chainPress.length > 0
+                  ? press.chainPress[0].media_link
+                  : undefined
               }
               target="_blank"
             >
               <img
                 src={
-                  press.chainPress.length > 0 &&
-                  `http://localhost:5000/${encodeURIComponent(
-                    press.chainPress[0].poster_img_filename
-                  )}`
+                  press.chainPress.length > 0
+                    ? `http://localhost:5000/${encodeURIComponent(
+                        press.chainPress[0].poster_img_filename
+                      )}`
+                    : null
                 }
               />
               <Logo>
                 <img
                   style={{ width: "120px", height: "52px" }}
                   src={
-                    press.chainPress.length > 0 &&
-                    `http://localhost:5000/${encodeURIComponent(
-                      press.chainPress[0].poster_img_filename
-                    )}`
+                    press.chainPress.length > 0
+                      ? `http://localhost:5000/${encodeURIComponent(
+                          press.chainPress[0].poster_img_filename
+                        )}`
+                      : null
                   }
                   alt="logo"
                 />
@@ -233,33 +222,37 @@ export default () => {
           <MainContent>
             <ContentMeta>
               <span>
-                {press.chainPress.lenght > 0 && press.chainPress[0].media_name}
+                {press.chainPress.length > 0 && press.chainPress[0].media_name}
               </span>
               <span>
-                {press.chainPress.lenght > 0 && press.chainPress[0].reg_date}
+                {press.chainPress.length > 0 && press.chainPress[0].reg_date}
               </span>
             </ContentMeta>
             <ContentTitle>
               <a
                 href={
-                  press.chainPress.length > 0 && press.chainPress[0].media_link
+                  press.chainPress.length > 0
+                    ? press.chainPress[0].media_link
+                    : undefined
                 }
                 target="_blank"
               >
                 <p>
-                  {press.chainPress.lenght > 0 && press.chainPress[0].title}
+                  {press.chainPress.length > 0 && press.chainPress[0].title}
                 </p>
               </a>
             </ContentTitle>
             <ContentDesc>
               <a
                 href={
-                  press.chainPress.length > 0 && press.chainPress[0].media_link
+                  press.chainPress.length > 0
+                    ? press.chainPress[0].media_link
+                    : undefined
                 }
                 target="_blank"
               >
                 <p>
-                  {press.chainPress.lenght > 0 && press.chainPress[0].content}
+                  {press.chainPress.length > 0 && press.chainPress[0].content}
                 </p>
               </a>
             </ContentDesc>

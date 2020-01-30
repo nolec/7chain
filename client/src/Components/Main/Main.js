@@ -251,7 +251,7 @@ const whyBoxStyle = (bSize, color, spanSize) => css`
         device.PC490` p b {font-size: 15px;}`
       ]}
 `;
-const theme = {
+export const theme = {
   css: {
     defaultColor: "transparent",
     evenColor: "#1c1c1c",
@@ -300,7 +300,8 @@ const theme = {
     graph_2_3: require("../../assets/images/graph/graph_2_3.jpg"),
     graph_3_3: require("../../assets/images/graph/graph_3_3.jpg"),
     graph_2_4: require("../../assets/images/graph/graph_2_4.jpg"),
-    graph_3_4: require("../../assets/images/graph/graph_3_4.jpg")
+    graph_3_4: require("../../assets/images/graph/graph_3_4.jpg"),
+    contact: require("../../assets/images/Icon_Contact.png")
   }
 };
 
