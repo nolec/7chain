@@ -31,6 +31,7 @@ const ContactBox = styled.div`
   display: flex;
   color: #fff;
   font-size: 22px;
+  justify-content: space-between;
 `;
 const Left = styled.div`
   width: 500px;
