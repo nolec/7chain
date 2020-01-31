@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
 import LangContext from "../../../../Context";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(45, 120)};
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
@@ -115,9 +117,13 @@ const TextBox = styled.div`
 `;
 export default () => {
   const { lang } = useContext(LangContext);
+  const tech = useRef(null);
+  useEffect(() => {
+    Scene(tech.current.children, 0.7, "active");
+  }, []);
   return (
     <Section>
-      <Container>
+      <Container ref={tech}>
         <Hbox>
           <h3>{lang.tech01}</h3>
         </Hbox>

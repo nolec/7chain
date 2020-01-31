@@ -42,10 +42,12 @@ export default withRouter(({ history, location }) => {
     e.preventDefault();
     console.log(e.currentTarget, id, "Go", location.pathname);
     if (location.pathname !== "/") {
-      history.push("/");
-      setTimeout(() => {
-        TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
-      }, 750);
+      const time = () =>
+        setTimeout(() => {
+          history.push("/");
+          TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+        }, 750);
+      time();
     } else {
       TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
     }
@@ -73,22 +75,17 @@ export default withRouter(({ history, location }) => {
   };
   const [border, setBorder] = useState(true);
 
+  const scrollHandler = () => {
+    if (window.scrollY > 0) {
+      setBorder(false);
+    } else {
+      setBorder(true);
+    }
+  };
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
-        setBorder(false);
-      } else {
-        setBorder(true);
-      }
-    });
+    window.addEventListener("scroll", scrollHandler);
     return () => {
-      window.removeEventListener("scroll", () => {
-        if (window.scrollY > 0) {
-          setBorder(false);
-        } else {
-          setBorder(true);
-        }
-      });
+      window.removeEventListener("scroll", scrollHandler);
     };
   }, []);
   return (

@@ -1,6 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
 import styled from "styled-components";
 import { device, minDevice } from "../../../../device";
+import { useDispatch } from "react-redux";
+import { mailPost } from "../../../../actions/mail";
+import { Formik, Form } from "formik";
+import * as yup from "yup";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -46,6 +50,7 @@ const InputEmail = styled.div`
     ${device.PC400`width: 200px;`}
   }
   input[type="submit"] {
+    cursor: pointer;
     display: inline-block;
     width: 120px;
     height: 40px;
@@ -60,6 +65,16 @@ const InputEmail = styled.div`
 const Group = styled.div`
   display: flex;
   justify-content: center;
+  .error-span {
+    display: block;
+    position: absolute;
+    top: -80%;
+    left: 0;
+    width: 100%;
+    color: red;
+    text-align: left;
+    padding-left: 20px;
+  }
   div {
     position: absolute;
     text-align: left;
@@ -87,7 +102,27 @@ const Social = styled.div`
     }
   }
 `;
+let ContactSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("유효하지 않은 이메일 입니다")
+    .required("이메일 주소를 입력해 주세요")
+});
 export default () => {
+  const [check, setCheck] = useState(true);
+  const submit = useRef(null);
+  const dispatch = useDispatch();
+  //checkBox
+  const handleCheck = () => {
+    setCheck(!check);
+  };
+  useEffect(() => {
+    if (check) {
+      submit.current.disabled = false;
+    } else {
+      submit.current.disabled = true;
+    }
+  }, [check]);
   return (
     <Section>
       <Container>
@@ -95,36 +130,60 @@ export default () => {
           <h2>Join our Community</h2>
         </HBox>
         <SubText>
-          <p> Join our mailling list to get immediate updates.</p>
+          <p>Join our mailling list to get immediate updates.</p>
         </SubText>
         <InputBox>
           <InputEmail>
-            <Group>
-              <input
-                name="tbxEmail"
-                type="text"
-                id="tbxEmail"
-                placeholder="Your e-mail address"
-              />
-              <input
-                type="submit"
-                name="btnSubscribe"
-                value="Subscribe"
-                id="btnSubscribe"
-              />
-              <div>
-                <span className="cbx">
-                  <input
-                    id="cbx"
-                    type="checkbox"
-                    name="cbx"
-                    // onClick=""
-                    // checked="checked"
-                  />
-                </span>
-                &nbsp; i would like to receive the 7Chain email Newsletter.
-              </div>
-            </Group>
+            <Formik
+              initialValues={{
+                email: ""
+              }}
+              validationSchema={ContactSchema}
+              onSubmit={values => {
+                console.log(values);
+                setTimeout(() => {
+                  dispatch(mailPost(values));
+                }, 1000);
+              }}
+            >
+              {({ errors, handleChange, touched }) => (
+                <Form>
+                  <Group>
+                    <span className="error-span">
+                      {errors.email && touched.email ? errors.email : null}
+                      {check === false ? " * 동의란에 체크하여 주십시오" : null}
+                    </span>
+                    <input
+                      name="email"
+                      type="text"
+                      id="email"
+                      onChange={handleChange}
+                      placeholder="Your e-mail address"
+                    />
+                    <input
+                      ref={submit}
+                      type="submit"
+                      name="btnSubscribe"
+                      value="Subscribe"
+                      id="btnSubscribe"
+                    />
+                    <div>
+                      <span className="cbx">
+                        <input
+                          id="cbx"
+                          type="checkbox"
+                          name="cbx"
+                          onChange={handleCheck}
+                          checked={check}
+                        />
+                      </span>
+                      &nbsp; i would like to receive the 7Chain email
+                      Newsletter.
+                    </div>
+                  </Group>
+                </Form>
+              )}
+            </Formik>
           </InputEmail>
           <Social>
             <a href="https://medium.com/@7Chain" target="_blank">

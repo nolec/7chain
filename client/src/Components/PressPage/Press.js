@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPressAll, getPress7chain } from "../../actions/press";
+import LangContext from "../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(80, 120)}
@@ -169,6 +170,7 @@ const SLink = styled(Link)`
   font-size: 22px;
 `;
 export default () => {
+  const { languageSetting, lang, korean } = useContext(LangContext);
   const press = useSelector(state => state.press);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -179,6 +181,10 @@ export default () => {
   useEffect(() => {
     dispatch(getPress7chain(currentPage));
   }, [currentPage]);
+
+  useEffect(() => {
+    languageSetting();
+  }, [korean]);
   return (
     <Section>
       <Container>
@@ -285,7 +291,7 @@ export default () => {
         <SeeMore>
           {press.cnt && press.chainPress.length === press.cnt - 1 ? null : (
             <SLink to="#" onClick={handleClick}>
-              더보기
+              {lang.seeMore}
             </SLink>
           )}
         </SeeMore>

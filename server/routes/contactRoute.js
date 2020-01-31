@@ -1,14 +1,20 @@
 import express from "express";
-import NodeMailer from "../middleware/NodeMailer";
+import { mailSender, joinSender } from "../middleware/NodeMailer";
 
 const contactRoute = express.Router();
 
 contactRoute.post("/", async (req, res) => {
   try {
     const post = req.body;
-    await NodeMailer.sendGmail(post);
+    console.log(post);
+    if (Object.keys(post).length > 1) {
+      await mailSender.sendGmail(post);
+    } else if (Object.keys(post).length === 1) {
+      await joinSender.sendJoin(post);
+    }
     return res.status(200).json({ success: true });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ success: false, error });
   }
 });

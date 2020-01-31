@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMedia, getMediaAll, getMeida7chain } from "../../actions/media";
+import LangContext from "../../Context";
 
 const Section = styled.section`
   padding: 0 0 120px;
@@ -115,6 +116,7 @@ const SLink = styled(Link)`
   font-size: 22px;
 `;
 export default () => {
+  const { languageSetting, lang, korean } = useContext(LangContext);
   const media = useSelector(state => state.media);
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
@@ -124,6 +126,9 @@ export default () => {
   useEffect(() => {
     dispatch(getMeida7chain(currentPage));
   }, [currentPage]);
+  useEffect(() => {
+    languageSetting();
+  }, [korean]);
   return (
     <Section>
       <Container>
@@ -152,7 +157,7 @@ export default () => {
         <SeeMore>
           {media.cnt && media.chainMedia.length === media.cnt - 1 ? null : (
             <SLink to="#" onClick={handleClick}>
-              더보기
+              {lang.seeMore}
             </SLink>
           )}
         </SeeMore>

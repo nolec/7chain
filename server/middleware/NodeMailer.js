@@ -1,40 +1,107 @@
 import nodemailer from "nodemailer";
+import smptPool from "nodemailer-smtp-pool";
+import directTransport from "nodemailer-direct-transport";
 
-let mailSender = {
+export let joinSender = {
+  sendJoin: param => {
+    const transport = nodemailer.createTransport(directTransport());
+    var mailOptions = {
+      from: param.email,
+      to: "ca10205@naver.com", // 수신할 이메일
+      subject: "Receive the 7Chain email Newsletter.", // 메일 제목
+      text: `${param.email} : Subscribe를 원합니다.` // 메일 내용
+    };
+    transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+      transport.close();
+    });
+  }
+};
+// export let joinSender = {
+//   sendJoin: param => {
+//     const transport = nodemailer.createTransport({
+//       port: 587,
+//       // secure: false,
+//       // requireTLS: true,
+//       user: param.email,
+//       logger: true,
+//       debug: false // include SMTP traffic in the logs
+//     });
+//     var mailOptions = {
+//       from: param.email,
+//       to: "jlkrg7@gamil.com", // 수신할 이메일
+//       subject: "Receive the 7Chain email Newsletter.", // 메일 제목
+//       text: `${param.email} : Subscribe를 원합니다.` // 메일 내용
+//     };
+//     transport.sendMail(mailOptions, (error, info) => {
+//       if (error) {
+//         console.log(error);
+//       } else {
+//         console.log("Email sent: " + info.response);
+//       }
+//       transport.close();
+//     });
+//   }
+// };
+export let mailSender = {
   sendGmail: param => {
-    let transporter = nodemailer.createTransport({
-      port: 587,
+    const transport = nodemailer.createTransport(
+      smptPool({
+        service: "gmail",
+        auth: {
+          user: "jlkrg7@gmail.com",
+          pass: "shforl1532!"
+        }
+      })
+    );
+    let transport2 = nodemailer.createTransport({
       host: "smtp.naver.com",
+      post: 465,
       secure: false,
-      requireTLS: true,
+      requireSSL: true,
       auth: {
         user: "ca10205@naver.com",
         pass: "nolec1532!"
       }
     });
+    let reciver = "";
+    if (param.id === 0) {
+      reciver = "jlkrg7@gmail.com";
+    } else if (param.id === 1) {
+      reciver = "ca10205@naver.com";
+    }
+    console.log(reciver, "test");
     // 메일 옵션
     var mailOptions = {
-      from: "ca10205@naver.com",
-      to: param.email, // 수신할 이메일
-      subject: param.name, // 메일 제목
+      from: reciver,
+      to: reciver, // 수신할 이메일
+      subject: param.email + param.name, // 메일 제목
       text: param.message // 메일 내용
     };
-    transporter.verify(function(error, success) {
+    transport2.verify(function(error, success) {
       if (error) {
         console.log(error);
       } else {
         console.log("Server is ready to take our messages");
       }
     });
-    // 메일 발송
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
+    //메일 발송
+    const finalSend = transporterParam =>
+      transporterParam.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+        }
+      });
+    if (param.id === 0) {
+      finalSend(transport);
+    } else if (param.id === 1) {
+      finalSend(transport2);
+    }
   }
 };
-// 메일객체 exports
-export default mailSender;

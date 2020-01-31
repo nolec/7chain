@@ -52,7 +52,7 @@ const Alink = styled(Link)`
   padding: 0.6em 1em;
 `;
 const LanguageBox = styled.div`
-  transition: 0.3s linear;
+  transition: 0.1s linear;
   :hover {
     opacity: 1;
     visibility: visible;
@@ -218,7 +218,7 @@ export default ({ handleToggle, active, location, handleGo }) => {
                 </Ul>
               </NavBar>
               <Util>
-                <UtilBox to="/">
+                <UtilBox to="#">
                   <UtilSeleted />
                 </UtilBox>
                 <LanguageBox>

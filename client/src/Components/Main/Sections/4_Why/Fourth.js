@@ -3,6 +3,10 @@ import styled from "styled-components";
 import { device } from "../../../../device";
 import Scene from "../../ScrollMagic";
 import LangContext from "../../../../Context";
+import { TweenMax, TimelineLite } from "gsap";
+import ScrollMagic from "scrollmagic";
+import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
+ScrollMagicPluginGsap(ScrollMagic, TweenMax);
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -215,9 +219,56 @@ font-size: 20px;
 `;
 export default () => {
   const why = useRef(null);
+  const sevenChain = useRef(null);
   const { lang } = useContext(LangContext);
   useEffect(() => {
     Scene(why.current.children, 0.7, "active");
+  }, []);
+  useEffect(() => {
+    const tween = new TimelineLite();
+    tween
+      .fromTo(
+        sevenChain.current,
+        1,
+        {
+          scale: 0.8,
+          opacity: 0
+        },
+        { scale: 1.2, opacity: 1 }
+      )
+      .fromTo(
+        sevenChain.current,
+        1,
+        {
+          scale: 1.2
+        },
+        { scale: 1 }
+      )
+      .fromTo(
+        sevenChain.current,
+        1,
+        {
+          scale: 1
+        },
+        { scale: 1.2 }
+      )
+      .fromTo(
+        sevenChain.current,
+        1,
+        {
+          scale: 1.2
+        },
+        { scale: 1 }
+      );
+    const controller = new ScrollMagic.Controller();
+    new ScrollMagic.Scene({
+      triggerElement: sevenChain.current,
+      offset: 50,
+      triggerHook: 0.5,
+      reverse: false
+    })
+      .setTween(tween)
+      .addTo(controller);
   }, []);
   return (
     <Section id="why">
@@ -269,7 +320,7 @@ export default () => {
             </BlockChain>
           </div>
           <div>
-            <SevenChain>
+            <SevenChain ref={sevenChain}>
               <p>
                 <b>{lang.sevenChain01}</b>
                 <br />

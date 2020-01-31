@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { TweenMax } from "gsap";
 import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
@@ -21,12 +21,20 @@ const Blink = styled.a`
   background-repeat: no-repeat;
 `;
 
-export default () => {
+export default withRouter(({ location }) => {
   const handleClick = e => {
     console.log(e.target);
     const body = document.querySelector("body");
     TweenMax.to(window, 1, { scrollTo: body.offsetTop });
   };
+  useEffect(() => {
+    setTimeout(() => {
+      if (location.pathname !== "/") {
+        const body = document.querySelector("body");
+        TweenMax.to(window, 1, { scrollTo: body.offsetTop });
+      }
+    }, 1000);
+  }, [location.pathname]);
   return (
     <Btn>
       <Blink
@@ -36,4 +44,4 @@ export default () => {
       ></Blink>
     </Btn>
   );
-};
+});

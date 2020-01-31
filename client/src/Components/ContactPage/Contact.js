@@ -84,9 +84,10 @@ const Inquiry = styled.div`
 const Slink = styled(Link)`
   div {
     padding: 20px 20px;
-    border: ${props => (props.active ? "1px solid #a4dada" : "1px solid #fff")};
+    border: ${props =>
+      props.active === "true" ? "1px solid #a4dada" : "1px solid #fff"};
     font-size: 20px;
-    color: ${props => (props.active ? "#a4dada" : "#fff")};
+    color: ${props => (props.active === "true" ? "#a4dada" : "#fff")};
     transition: 0.3s linear;
     ${device.PC`padding : 10px 10px; font-size : 18px`}
     ${device.PC580`font-size: 16px;`}
@@ -133,6 +134,7 @@ const theme = createMuiTheme({
   }
 });
 let ContactSchema = yup.object().shape({
+  id: yup.number(),
   name: yup.string().required("이름을 입력해 주세요"),
   email: yup
     .string()
@@ -152,15 +154,19 @@ export default () => {
   //--------------------------------------------
   const [active, setActive] = useState({
     contact: true,
-    biz: "",
-    developers: ""
+    biz: false,
+    developers: false
   });
+  const [mailId, setMailId] = useState(0);
   const activeChange = e => {
     e.preventDefault();
     console.log(e.currentTarget.hash.substring(1));
     let current = e.currentTarget.hash.substring(1);
     setActive({ contact: false, biz: false, developers: false });
     setActive({ [current]: true });
+    if (current === "contact") setMailId(0);
+    if (current === "biz") setMailId(1);
+    if (current === "developers") setMailId(2);
     // console.log(
     //   Array.prototype.slice
     //     .call(inquiry.current.children)
@@ -172,7 +178,12 @@ export default () => {
     //   .call(inquiry.current.children)
     //   .map(item => (item.children[0] === e.currentTarget ? "" : ""));
   };
-  console.log(active);
+  console.log(active, mailId);
+  const mailConfirm = values => {
+    if (mailId === 0) values.id = 0;
+    if (mailId === 1) values.id = 1;
+    if (mailId === 2) values.id = 2;
+  };
   //--------------------------------------------
   const { languageSetting, lang, korean } = useContext(LangContext);
   useEffect(() => {
@@ -187,14 +198,18 @@ export default () => {
 
         <Formik
           initialValues={{
+            id: mailId,
             name: "",
             email: "",
             message: ""
           }}
           validationSchema={ContactSchema}
           onSubmit={values => {
-            console.log(values);
-            dispatch(mailPost(values));
+            mailConfirm(values);
+            setTimeout(() => {
+              console.log(values);
+              dispatch(mailPost(values));
+            }, 1000);
           }}
         >
           {({ errors, handleChange, touched }) => (
@@ -263,7 +278,7 @@ export default () => {
                       <Slink
                         onClick={activeChange}
                         to="#contact"
-                        active={active.contact}
+                        active={active.contact ? "true" : "false"}
                       >
                         <div>
                           {lang.contact05}
@@ -276,7 +291,7 @@ export default () => {
                       <Slink
                         onClick={activeChange}
                         to="#biz"
-                        active={active.biz}
+                        active={active.biz ? "true" : "false"}
                       >
                         <div>
                           {lang.contact06}
@@ -289,7 +304,7 @@ export default () => {
                       <Slink
                         onClick={activeChange}
                         to="#developers"
-                        active={active.developers}
+                        active={active.developers ? "true" : "false"}
                       >
                         <div>
                           {lang.contact07}
