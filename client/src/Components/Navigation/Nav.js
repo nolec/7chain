@@ -98,6 +98,7 @@ export default withRouter(({ history, location }) => {
           location={location}
           handleToggle={handleToggle}
           active={active}
+          close={close}
         />
       </TopContainer>
       {(location && location.pathname === "/admin/press") ||

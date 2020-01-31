@@ -149,7 +149,7 @@ const SubUl = styled.ul`
   border-top: 1px solid #e0e0e0;
   padding: 2px 0;
 `;
-export default ({ handleToggle, active, location, handleGo }) => {
+export default ({ handleToggle, active, location, handleGo, close }) => {
   // const ref = useRef(null);
 
   // useEffect(() => {
@@ -272,7 +272,7 @@ export default ({ handleToggle, active, location, handleGo }) => {
                   </Alink>
                 </Li>
                 <Li>
-                  <Alink to="/contact">
+                  <Alink onClick={close} to="/contact">
                     <span>Contact</span>
                   </Alink>
                 </Li>
