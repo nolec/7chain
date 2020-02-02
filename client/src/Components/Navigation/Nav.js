@@ -5,6 +5,7 @@ import BottomBox from "./BottomBox";
 import { withRouter } from "react-router-dom";
 import { TweenMax } from "gsap";
 import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
+import ModalPage from "./Modal";
 
 const Header = styled.header`
   position: fixed;
@@ -89,26 +90,29 @@ export default withRouter(({ history, location }) => {
     };
   }, []);
   return (
-    <Header>
-      <TopContainer>
-        <TopBox
-          handleClick={handleClick}
-          handleGo={handleGo}
-          history={history}
-          location={location}
-          handleToggle={handleToggle}
-          active={active}
-          close={close}
-        />
-      </TopContainer>
-      {(location && location.pathname === "/admin/press") ||
-      location.pathname === "/admin/media" ? (
-        "null"
-      ) : (
-        <BottomContainer border={border}>
-          <BottomBox border={border} handleGo={handleGo} />
-        </BottomContainer>
-      )}
-    </Header>
+    <>
+      <Header>
+        <TopContainer>
+          <TopBox
+            handleClick={handleClick}
+            handleGo={handleGo}
+            history={history}
+            location={location}
+            handleToggle={handleToggle}
+            active={active}
+            close={close}
+          />
+        </TopContainer>
+        {(location && location.pathname === "/admin/press") ||
+        location.pathname === "/admin/media" ? (
+          "null"
+        ) : (
+          <BottomContainer border={border}>
+            <BottomBox border={border} handleGo={handleGo} />
+          </BottomContainer>
+        )}
+      </Header>
+      <ModalPage />
+    </>
   );
 });
