@@ -51,12 +51,12 @@ export let joinSender = {
 // };
 export let mailSender = {
   sendGmail: param => {
-    const transport = nodemailer.createTransport(
+    let transport = nodemailer.createTransport(
       smptPool({
         service: "gmail",
         auth: {
           user: process.env.GMAIL_USER,
-          pass: process.env.GAMIL_PASSWORD
+          pass: process.env.GMAIL_PASSWORD
         }
       })
     );
@@ -70,10 +70,22 @@ export let mailSender = {
         pass: process.env.NAVER_PASSWORD
       }
     });
+    let transport3 = nodemailer.createTransport({
+      host: "smtp.naver.com",
+      post: 465,
+      secure: false,
+      requireSSL: true,
+      auth: {
+        user: process.env.NAVER_USER,
+        pass: process.env.NAVER_PASSWORD
+      }
+    });
     let reciver = "";
     if (param.id === 0) {
       reciver = process.env.GMAIL_USER;
     } else if (param.id === 1) {
+      reciver = process.env.NAVER_USER;
+    } else if (param.id === 2) {
       reciver = process.env.NAVER_USER;
     }
     console.log(reciver, "test");
@@ -104,6 +116,8 @@ export let mailSender = {
       finalSend(transport);
     } else if (param.id === 1) {
       finalSend(transport2);
+    } else if (param.id === 2) {
+      finalSend(transport3);
     }
   }
 };

@@ -24,6 +24,8 @@ var _mediaRoute = _interopRequireDefault(require("./routes/mediaRoute"));
 
 var _contactRoute = _interopRequireDefault(require("./routes/contactRoute"));
 
+var _httpProxyMiddleware = _interopRequireDefault(require("http-proxy-middleware"));
+
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
 _dotenv["default"].config();
@@ -42,16 +44,12 @@ app.use("/api/mail", _contactRoute["default"]); //------------------------------
 
 app.use("/server", _express["default"]["static"]("uploads"));
 console.log(__dirname); //------------------------------------
+// Serve static assets if in production
 
-console.log(process.env.NODE_ENV);
-
-if (process.env.NODE_ENV === "production") {
-  app.use("/", _express["default"]["static"](_path["default"].resolve(__dirname, "../../")));
-  app.get("*", function (req, res) {
-    res.sendFile(_path["default"].resolve(__dirname, "../../index.html"));
-  });
-} //------------------------------------
-
+app.use("/", _express["default"]["static"](_path["default"].resolve(__dirname, "../../")));
+app.get("*", function (req, res) {
+  res.sendFile(_path["default"].resolve(__dirname, "../../index.html"));
+}); //------------------------------------
 
 var port = process.env.PORT || 5000;
 
