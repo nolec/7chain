@@ -9,7 +9,9 @@ import path from "path";
 import pressRoute from "./routes/pressRoute";
 import mediaRoute from "./routes/mediaRoute";
 import contactRoute from "./routes/contactRoute";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 app.use(helmet());
 app.use(morgan("dev"));
@@ -29,7 +31,7 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
 });
 //------------------------------------
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 5000;
 const handleListen = () => {
   console.log(`Listened on Server - PORT : ${port} `);
 };

@@ -1,13 +1,15 @@
 import nodemailer from "nodemailer";
 import smptPool from "nodemailer-smtp-pool";
 import directTransport from "nodemailer-direct-transport";
+import dotenv from "dotenv";
+dotenv.config();
 
 export let joinSender = {
   sendJoin: param => {
     const transport = nodemailer.createTransport(directTransport());
     var mailOptions = {
       from: param.email,
-      to: "ca10205@naver.com", // 수신할 이메일
+      to: process.env.TO, // 수신할 이메일
       subject: "Receive the 7Chain email Newsletter.", // 메일 제목
       text: `${param.email} : Subscribe를 원합니다.` // 메일 내용
     };
@@ -53,8 +55,8 @@ export let mailSender = {
       smptPool({
         service: "gmail",
         auth: {
-          user: "jlkrg7@gmail.com",
-          pass: "shforl1532!"
+          user: process.env.GMAIL_USER,
+          pass: process.env.GAMIL_PASSWORD
         }
       })
     );
@@ -64,15 +66,15 @@ export let mailSender = {
       secure: false,
       requireSSL: true,
       auth: {
-        user: "ca10205@naver.com",
-        pass: "nolec1532!"
+        user: process.env.NAVER_USER,
+        pass: process.env.NAVER_PASSWORD
       }
     });
     let reciver = "";
     if (param.id === 0) {
-      reciver = "jlkrg7@gmail.com";
+      reciver = process.env.GMAIL_USER;
     } else if (param.id === 1) {
-      reciver = "ca10205@naver.com";
+      reciver = process.env.NAVER_USER;
     }
     console.log(reciver, "test");
     // 메일 옵션
