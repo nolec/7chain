@@ -34,7 +34,6 @@ const Copy = styled.div`
   }
 `;
 export default withRouter(({ location }) => {
-  console.log(location.pathname);
   return (
     <Footer pathname={location.pathname}>
       <Container>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPressAll, getPress7chain } from "../../actions/press";
-import LangContext from "../../Context";
+import { LangContext } from "../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(80, 120)}
@@ -204,7 +204,7 @@ export default () => {
               <img
                 src={
                   press.chainPress.length > 0
-                    ? `http://localhost:5000/${encodeURIComponent(
+                    ? `http://localhost/${encodeURIComponent(
                         press.chainPress[0].poster_img_filename
                       )}`
                     : null
@@ -215,7 +215,7 @@ export default () => {
                   style={{ width: "120px", height: "52px" }}
                   src={
                     press.chainPress.length > 0
-                      ? `http://localhost:5000/${encodeURIComponent(
+                      ? `http://localhost/${encodeURIComponent(
                           press.chainPress[0].poster_img_filename
                         )}`
                       : null

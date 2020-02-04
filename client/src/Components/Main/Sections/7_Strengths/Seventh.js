@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(40, 120)}
@@ -10,6 +11,7 @@ ${device.PC768`padding-bottom: 15%;`}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)}
@@ -76,9 +78,13 @@ const SubContent = styled.div`
 `;
 export default () => {
   const { lang } = useContext(LangContext);
+  const strength = useRef(null);
+  useEffect(() => {
+    Scene(strength.current.children, 0.7, "active");
+  }, [Scene]);
   return (
     <Section>
-      <Container>
+      <Container ref={strength}>
         <Hbox>
           <h3>{lang.strength01}</h3>
         </Hbox>

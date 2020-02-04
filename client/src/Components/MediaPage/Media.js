@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMedia, getMediaAll, getMeida7chain } from "../../actions/media";
-import LangContext from "../../Context";
+import { LangContext } from "../../Context";
 
 const Section = styled.section`
   padding: 0 0 120px;

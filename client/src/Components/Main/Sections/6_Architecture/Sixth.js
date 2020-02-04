@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
 import Scene from "../../ScrollMagic";
 
 const Section = styled.section`

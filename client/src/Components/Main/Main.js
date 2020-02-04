@@ -16,7 +16,8 @@ import Join from "./Sections/13_Join";
 import Partner from "./Sections/14_Partner";
 import { withRouter } from "react-router-dom";
 import { device } from "../../device";
-import LangContext from "../../Context";
+import { LangContext } from "../../Context";
+// import ReactCssTransitionGroup from "";
 
 const Main = styled.main`
   h1,

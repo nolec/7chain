@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { mailPost } from "../../../../actions/mail";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -13,6 +14,7 @@ ${props => props.theme.style.SectionStyle(0, 120)}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
@@ -111,6 +113,7 @@ let ContactSchema = yup.object().shape({
 export default () => {
   const [check, setCheck] = useState(true);
   const submit = useRef(null);
+  const join = useRef(null);
   const dispatch = useDispatch();
   //checkBox
   const handleCheck = () => {
@@ -123,9 +126,12 @@ export default () => {
       submit.current.disabled = true;
     }
   }, [check]);
+  useEffect(() => {
+    Scene(join.current.children, 0.7, "active");
+  }, [Scene]);
   return (
     <Section>
-      <Container>
+      <Container ref={join}>
         <HBox>
           <h2>Join our Community</h2>
         </HBox>

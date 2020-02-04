@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { device } from "../../device";
+import { SubContext } from "../../Context";
 
 const BottomBox = styled.div`
   max-width: 1162px;
@@ -57,6 +58,7 @@ const Alink = styled(Link)`
   opacity: 0.8;
 `;
 export default ({ handleGo, border }) => {
+  const { handleClose } = useContext(SubContext);
   return (
     <BottomBox border={border}>
       <div>
@@ -88,7 +90,7 @@ export default ({ handleGo, border }) => {
               </Alink>
             </Li>
             <Li>
-              <Alink to="#">
+              <Alink to="#" onClick={handleClose}>
                 <span>White Paper</span>
               </Alink>
             </Li>

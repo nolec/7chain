@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(40, 120)};
@@ -9,6 +10,7 @@ const Section = styled.section`
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const Hbox = styled.div`
   ${props => props.theme.style.Hbox2Style(0, props.theme.file.arr)};
@@ -145,11 +147,15 @@ export default () => {
   const check = require("../../../../assets/images/bullet-check-s2.png");
   const bulletX = require("../../../../assets/images/bullet-x-s.png");
   const triangle = require("../../../../assets/images/bullet-triangle2.png");
-
   const { lang } = useContext(LangContext);
+
+  const compare = useRef(null);
+  useEffect(() => {
+    Scene(compare.current.children, 0.7, "active");
+  }, []);
   return (
     <Section>
-      <Container>
+      <Container ref={compare}>
         <Hbox>
           <h3>{lang.compare01}</h3>
           <p>{lang.compare02}</p>

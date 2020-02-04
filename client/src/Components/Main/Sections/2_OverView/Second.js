@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
 import Scene from "../../ScrollMagic";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
 // import { SectionStyle } from "../../Main";
 
 const Section = styled.section`
@@ -73,7 +73,6 @@ const TextBox = styled.div`
 export default () => {
   const overview = useRef(null);
   const { lang } = useContext(LangContext);
-  console.log(lang);
   useEffect(() => {
     Scene(overview.current.children, 0.7, "active");
   }, []);

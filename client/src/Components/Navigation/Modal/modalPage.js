@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
+import { SubContext } from "../../../Context";
 
 const ModalBox = styled.section`
   position: fixed;
@@ -7,7 +8,6 @@ const ModalBox = styled.section`
   top: 0;
   z-index: 1050;
   width: 100%;
-  display: ${props => (props.toggle ? "block" : "none")};
   height: ${props => (props.toggle ? "100%" : "0")};
   background-color: #0000008f;
 `;
@@ -139,41 +139,51 @@ const Body = styled.div`
 const Korean = styled.div``;
 const English = styled.div``;
 export default () => {
-  const [toggle, setToggle] = useState(true);
   const close = useRef(null);
-  const handleClose = () => {
-    setToggle(!toggle);
-  };
+  const { handleClose, toggle } = useContext(SubContext);
+  const body = document.querySelector("body");
+
+  useEffect(() => {
+    if (toggle) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "auto";
+    }
+  }, [toggle]);
   return (
-    <ModalBox toggle={toggle}>
-      <Container>
-        <Modal>
-          <Content>
-            <Title>
-              <h2>White Paper</h2>
-            </Title>
-            <Close ref={close} onClick={handleClose}>
-              <div></div>
-            </Close>
-            <BodyContainer>
-              <Body>
-                <Korean>
-                  <a href="#">
-                    <i className="flag-icon flag-icon-kr"></i>
-                    <span>Korean</span>
-                  </a>
-                </Korean>
-                <English>
-                  <a href="#">
-                    <i className="flag-icon flag-icon-us"></i>
-                    <span>English</span>
-                  </a>
-                </English>
-              </Body>
-            </BodyContainer>
-          </Content>
-        </Modal>
-      </Container>
-    </ModalBox>
+    <>
+      {toggle && toggle ? (
+        <ModalBox toggle={toggle}>
+          <Container>
+            <Modal>
+              <Content>
+                <Title>
+                  <h2>White Paper</h2>
+                </Title>
+                <Close ref={close} onClick={handleClose}>
+                  <div></div>
+                </Close>
+                <BodyContainer>
+                  <Body>
+                    <Korean>
+                      <a href="#">
+                        <i className="flag-icon flag-icon-kr"></i>
+                        <span>Korean</span>
+                      </a>
+                    </Korean>
+                    <English>
+                      <a href="#">
+                        <i className="flag-icon flag-icon-us"></i>
+                        <span>English</span>
+                      </a>
+                    </English>
+                  </Body>
+                </BodyContainer>
+              </Content>
+            </Modal>
+          </Container>
+        </ModalBox>
+      ) : null}
+    </>
   );
 };

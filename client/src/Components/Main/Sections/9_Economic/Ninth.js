@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -9,16 +10,10 @@ ${props => props.theme.style.SectionStyle(0, 120)}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const HBox = styled.div`
-  ${props =>
-    props.theme.style.HboxStyle(
-      45,
-      15
-    )} /* h2 {
-    font-size: 40px;
-    color: #fff;
-  } */
+  ${props => props.theme.style.HboxStyle(45, 15)}
 `;
 const ContentBox = styled.div`
   position: relative;
@@ -73,9 +68,14 @@ const Content = styled.div`
 `;
 export default () => {
   const { lang } = useContext(LangContext);
+
+  const economic = useRef(null);
+  useEffect(() => {
+    Scene(economic.current.children, 0.7, "active");
+  }, []);
   return (
     <Section id="economic">
-      <Container>
+      <Container ref={economic}>
         <HBox>
           <h2>{lang.economic01}</h2>
         </HBox>

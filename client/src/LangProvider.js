@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ko } from "./GlobalLang/korean";
 import { en } from "./GlobalLang/english";
-import LangContext from "./Context";
+import { LangContext } from "./Context";
 
 const LangProvider = ({ children }) => {
   const [korean, setKorean] = useState(true);
@@ -12,7 +12,6 @@ const LangProvider = ({ children }) => {
     } else {
       setLang(en);
     }
-    console.log("실행");
   };
 
   const handleKor = e => {

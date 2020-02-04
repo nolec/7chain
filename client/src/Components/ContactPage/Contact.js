@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { mailPost } from "../../actions/mail";
 import { Link } from "react-router-dom";
 import { device, minDevice } from "../../device";
-import LangContext from "../../Context";
+import { LangContext } from "../../Context";
 
 const Section = styled.section`
   ${props => props.theme.style.SectionStyle(80, 120)}
@@ -160,7 +160,6 @@ export default () => {
   const [mailId, setMailId] = useState(0);
   const activeChange = e => {
     e.preventDefault();
-    console.log(e.currentTarget.hash.substring(1));
     let current = e.currentTarget.hash.substring(1);
     setActive({ contact: false, biz: false, developers: false });
     setActive({ [current]: true });

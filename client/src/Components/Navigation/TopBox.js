@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { device, minDevice } from "../../device";
 import UtilSeleted from "./Util";
-import LangContext from "../../Context";
+import { LangContext } from "../../Context";
 
 const TopBox = styled.div`
   max-width: 1162px;

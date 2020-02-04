@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { device } from "../../../../device";
+import Scene from "../../ScrollMagic";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}
@@ -13,6 +14,7 @@ ${props => props.theme.style.SectionStyle(0, 120)}
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
+  ${props => props.theme.style.GsapStyle()}
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
@@ -33,9 +35,13 @@ const Item = styled.div`
   }
 `;
 export default () => {
+  const partner = useRef(null);
+  useEffect(() => {
+    Scene(partner.current.children, 0.7, "active");
+  }, [Scene]);
   return (
     <Section>
-      <Container>
+      <Container ref={partner}>
         <HBox>
           <h2>Partners</h2>
         </HBox>

@@ -23,7 +23,6 @@ const Blink = styled.a`
 
 export default withRouter(({ location }) => {
   const handleClick = e => {
-    console.log(e.target);
     const body = document.querySelector("body");
     TweenMax.to(window, 1, { scrollTo: body.offsetTop });
   };

@@ -5,7 +5,7 @@ import GraphAreaOne from "./Graph/AreaOne";
 import GraphAreaTwo from "./Graph/AreaTwo";
 import Scene from "../../ScrollMagic";
 import { device } from "../../../../device";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
 
 const Section = styled.section`
 ${props => props.theme.style.SectionStyle(0, 120)}

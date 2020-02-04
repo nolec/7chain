@@ -31,7 +31,7 @@ const BottomContainer = styled.div`
     props.border ? "border : none" : "border-bottom: 1px solid #282828;"}
 `;
 
-export default withRouter(({ history, location }) => {
+export default withRouter(({ history, location, toggle, handleClose }) => {
   const plugins = [ScrollToPlugin];
 
   const [active, setActive] = useState(false);
@@ -41,7 +41,6 @@ export default withRouter(({ history, location }) => {
     setActive(false);
 
     e.preventDefault();
-    console.log(e.currentTarget, id, "Go", location.pathname);
     if (location.pathname !== "/") {
       const time = () =>
         setTimeout(() => {
@@ -55,16 +54,13 @@ export default withRouter(({ history, location }) => {
   };
   const handleClick = e => {
     const body = document.querySelector("body");
-    console.log(e.target.hash);
     TweenMax.to(body, 1, { scrollTo: body.offsetTop });
   };
   //-----------------------------------------------------
   const handleToggle = () => {
     if (active) {
-      console.log(active, "close");
       close();
     } else {
-      console.log(active, "open");
       open();
     }
   };
@@ -108,7 +104,12 @@ export default withRouter(({ history, location }) => {
           "null"
         ) : (
           <BottomContainer border={border}>
-            <BottomBox border={border} handleGo={handleGo} />
+            <BottomBox
+              border={border}
+              handleGo={handleGo}
+              handleClose={handleClose}
+              toggle={toggle}
+            />
           </BottomContainer>
         )}
       </Header>

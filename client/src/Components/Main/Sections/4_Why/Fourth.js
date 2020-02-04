@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { device } from "../../../../device";
 import Scene from "../../ScrollMagic";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
 import { TweenMax, TimelineLite } from "gsap";
 import ScrollMagic from "scrollmagic";
 import { ScrollMagicPluginGsap } from "scrollmagic-plugin-gsap";
@@ -229,7 +229,7 @@ export default () => {
     tween
       .fromTo(
         sevenChain.current,
-        1,
+        0.7,
         {
           scale: 0.8,
           opacity: 0
@@ -238,7 +238,7 @@ export default () => {
       )
       .fromTo(
         sevenChain.current,
-        1,
+        0.7,
         {
           scale: 1.2
         },
@@ -246,7 +246,7 @@ export default () => {
       )
       .fromTo(
         sevenChain.current,
-        1,
+        0.7,
         {
           scale: 1
         },
@@ -254,7 +254,7 @@ export default () => {
       )
       .fromTo(
         sevenChain.current,
-        1,
+        0.7,
         {
           scale: 1.2
         },

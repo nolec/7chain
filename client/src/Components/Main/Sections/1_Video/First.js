@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import LangContext from "../../../../Context";
+import { LangContext } from "../../../../Context";
 
 const Section = styled.section`
   position: relative;
