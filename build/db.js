@@ -12,6 +12,8 @@ exports["default"] = void 0;
 
 var _mysql = _interopRequireDefault(require("mysql"));
 
+var _key = _interopRequireDefault(require("./config/key"));
+
 // import mongoose from "mongoose";
 // import config from "./config/dev";
 // mongoose.connect(config.mongoURL, {
@@ -25,22 +27,7 @@ var _mysql = _interopRequireDefault(require("mysql"));
 // const handleError = error => console.log(`❌ Error on DB Connection:${error}`);
 // db.once("open", handleOpen);
 // db.on("error", handleError);
-var db = _mysql["default"].createPool({
-  host: "211.251.239.224",
-  user: "num_local",
-  password: "num_local",
-  post: 3306,
-  database: "7chain_official",
-  multipleStatements: true
-}); // const db = mysql.createPool({
-//   host: "127.0.0.1",
-//   user: "root",
-//   password: "15324613",
-//   post: 3306,
-//   database: "nolec",
-//   multipleStatements: true
-// });
-
+var db = _mysql["default"].createPool(_key["default"].db);
 
 var _default = db;
 exports["default"] = _default;

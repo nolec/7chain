@@ -7,12 +7,14 @@
     "server": "pm2.cmd start ecosystem.config.js",
     "kill": "pm2.cmd kill",
     "start": "babel-node server/app.js",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "frontend": "setnpm start --prefix client",
-    "backend": "nodemon --exec babel-node server/app.js",
+    "dev:dev": "concurrently \"npm run frontend\" \"npm run backend:dev\"",
+    "dev:prod": "concurrently \"npm run frontend\" \"npm run backend:prod\"",
+    "frontend": "npm start --prefix client",
+    "backend:prod": "cross-env NODE_ENV=production nodemon --exec babel-node server/app.js",
+    "backend:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:server": "cross-env babel server --out-dir build",
+    "build:server": "cross-env NODE_ENV=production babel server --out-dir build",
     "build": "npm run build:server && cp -R server/uploads build",
     "prebuild": "rm -rf build"
   },
@@ -51,9 +53,7 @@
     "react-google-recaptcha": "^2.0.1",
     "regenerator-runtime": "^0.13.3",
     "sendmail": "^1.6.1",
-    "sequelize": "^5.21.3",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "sequelize": "^5.21.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

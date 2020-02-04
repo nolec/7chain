@@ -16,7 +16,7 @@
 // db.once("open", handleOpen);
 // db.on("error", handleError);
 import mysql from "mysql";
-import config from "./config/dev";
+import config from "./config/key";
 
-const db = mysql.createPool(config.development);
+const db = mysql.createPool(config.db);
 export default db;

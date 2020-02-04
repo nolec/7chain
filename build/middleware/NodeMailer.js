@@ -16,13 +16,17 @@ var _nodemailerSmtpPool = _interopRequireDefault(require("nodemailer-smtp-pool")
 
 var _nodemailerDirectTransport = _interopRequireDefault(require("nodemailer-direct-transport"));
 
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+_dotenv["default"].config();
+
 var joinSender = {
   sendJoin: function sendJoin(param) {
     var transport = _nodemailer["default"].createTransport((0, _nodemailerDirectTransport["default"])());
 
     var mailOptions = {
       from: param.email,
-      to: "ca10205@naver.com",
+      to: process.env.TO,
       // 수신할 이메일
       subject: "Receive the 7Chain email Newsletter.",
       // 메일 제목
@@ -72,8 +76,8 @@ var mailSender = {
     var transport = _nodemailer["default"].createTransport((0, _nodemailerSmtpPool["default"])({
       service: "gmail",
       auth: {
-        user: "jlkrg7@gmail.com",
-        pass: "shforl1532!"
+        user: process.env.GMAIL_USER,
+        pass: process.env.GAMIL_PASSWORD
       }
     }));
 
@@ -83,17 +87,17 @@ var mailSender = {
       secure: false,
       requireSSL: true,
       auth: {
-        user: "ca10205@naver.com",
-        pass: "nolec1532!"
+        user: process.env.NAVER_USER,
+        pass: process.env.NAVER_PASSWORD
       }
     });
 
     var reciver = "";
 
     if (param.id === 0) {
-      reciver = "jlkrg7@gmail.com";
+      reciver = process.env.GMAIL_USER;
     } else if (param.id === 1) {
-      reciver = "ca10205@naver.com";
+      reciver = process.env.NAVER_USER;
     }
 
     console.log(reciver, "test"); // 메일 옵션

@@ -6,7 +6,7 @@ var _dotenv = _interopRequireDefault(require("dotenv"));
 
 _dotenv["default"].config();
 
-console.log("여기는 개발");
+console.log("여기는 배포");
 module.exports = {
   db: {
     host: process.env.SERVER,
