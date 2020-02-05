@@ -4,8 +4,8 @@
   "description": "7chain",
   "main": "app.js",
   "scripts": {
-    "server": "npm install && pm2 start ecosystem.config.js --env production",
-    "kill": "pm2.cmd kill",
+    "server:prod": "npm run build:server && pm2 start ecosystem.config.js --env production",
+    "server:dev": "npm run build:server && pm2 start ecosystem.config.js --env development",
     "start": "babel-node server/app.js",
     "dev:dev": "concurrently \"npm run frontend\" \"npm run backend:dev\"",
     "dev:prod": "concurrently \"npm run frontend\" \"npm run backend:prod\"",

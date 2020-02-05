@@ -56,7 +56,7 @@ function () {
             }
 
             _context.next = 11;
-            return _NodeMailer.joinSender.sendJoin(post);
+            return _NodeMailer.mailSender.sendJoin(post);
 
           case 11:
             return _context.abrupt("return", res.status(200).json({

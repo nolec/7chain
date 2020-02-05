@@ -3,9 +3,9 @@ dotenv.config();
 console.log("여기는 개발");
 module.exports = {
   db: {
-    host: "localhost",
-    user: "test_local",
-    password: "test_local",
+    host: process.env.SERVER,
+    user: process.env.USER,
+    password: process.env.PASSWORD,
     post: 3306,
     database: process.env.DATABASE,
     debug: true,

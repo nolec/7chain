@@ -27,12 +27,12 @@ app.use("/api/mail", contactRoute);
 app.use("/server", express.static("uploads"));
 console.log(__dirname);
 //------------------------------------
-// Serve static assets if in production
-app.use("/", express.static(path.resolve(__dirname, "../../")));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../index.html"));
-});
-
+if (process.env.NODE_ENV === "production") {
+  app.use("/", express.static(path.resolve(__dirname, "../../")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../../index.html"));
+  });
+}
 //------------------------------------
 const port = process.env.PORT || 5000;
 const handleListen = () => {

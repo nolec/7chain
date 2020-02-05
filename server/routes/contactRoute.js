@@ -10,7 +10,7 @@ contactRoute.post("/", async (req, res) => {
     if (Object.keys(post).length > 1) {
       await mailSender.sendGmail(post);
     } else if (Object.keys(post).length === 1) {
-      await joinSender.sendJoin(post);
+      await mailSender.sendJoin(post);
     }
     return res.status(200).json({ success: true });
   } catch (error) {

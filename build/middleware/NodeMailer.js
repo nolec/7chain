@@ -8,7 +8,7 @@ _Object$defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.mailSender = exports.joinSender = void 0;
+exports.mailSender = void 0;
 
 var _nodemailer = _interopRequireDefault(require("nodemailer"));
 
@@ -18,32 +18,7 @@ var _nodemailerDirectTransport = _interopRequireDefault(require("nodemailer-dire
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
-_dotenv["default"].config();
-
-var joinSender = {
-  sendJoin: function sendJoin(param) {
-    var transport = _nodemailer["default"].createTransport((0, _nodemailerDirectTransport["default"])());
-
-    var mailOptions = {
-      from: param.email,
-      to: process.env.TO,
-      // 수신할 이메일
-      subject: "Receive the 7Chain email Newsletter.",
-      // 메일 제목
-      text: "".concat(param.email, " : Subscribe\uB97C \uC6D0\uD569\uB2C8\uB2E4.") // 메일 내용
-
-    };
-    transport.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-
-      transport.close();
-    });
-  }
-}; // export let joinSender = {
+_dotenv["default"].config(); // export let joinSender = {
 //   sendJoin: param => {
 //     const transport = nodemailer.createTransport({
 //       port: 587,
@@ -70,18 +45,52 @@ var joinSender = {
 //   }
 // };
 
-exports.joinSender = joinSender;
+
 var mailSender = {
+  sendJoin: function sendJoin(param) {
+    var transport = _nodemailer["default"].createTransport((0, _nodemailerDirectTransport["default"])());
+
+    var mailOptions = {
+      from: param.email,
+      to: process.env.TO,
+      // 수신할 이메일
+      subject: "Receive the 7Chain email Newsletter.",
+      // 메일 제목
+      text: "".concat(param.email, " : Subscribe\uB97C \uC6D0\uD569\uB2C8\uB2E4.") // 메일 내용
+
+    };
+    transport.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+
+      transport.close();
+    });
+  },
+  //----------------------------------------------------
   sendGmail: function sendGmail(param) {
     var transport = _nodemailer["default"].createTransport((0, _nodemailerSmtpPool["default"])({
       service: "gmail",
       auth: {
         user: process.env.GMAIL_USER,
-        pass: process.env.GAMIL_PASSWORD
+        pass: process.env.GMAIL_PASSWORD
       }
     }));
 
     var transport2 = _nodemailer["default"].createTransport({
+      host: "smtp.naver.com",
+      post: 465,
+      secure: false,
+      requireSSL: true,
+      auth: {
+        user: process.env.NAVER_USER,
+        pass: process.env.NAVER_PASSWORD
+      }
+    });
+
+    var transport3 = _nodemailer["default"].createTransport({
       host: "smtp.naver.com",
       post: 465,
       secure: false,
@@ -97,6 +106,8 @@ var mailSender = {
     if (param.id === 0) {
       reciver = process.env.GMAIL_USER;
     } else if (param.id === 1) {
+      reciver = process.env.NAVER_USER;
+    } else if (param.id === 2) {
       reciver = process.env.NAVER_USER;
     }
 
@@ -133,6 +144,8 @@ var mailSender = {
       finalSend(transport);
     } else if (param.id === 1) {
       finalSend(transport2);
+    } else if (param.id === 2) {
+      finalSend(transport3);
     }
   }
 };

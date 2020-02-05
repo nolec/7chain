@@ -38,12 +38,16 @@ const Item = styled.div`
     figure {
       width: 100%;
       height: auto;
+      max-height: 160px;
       margin: 0;
       padding: 0;
       background: #fff;
       overflow: hidden;
       border: 1px solid #fff;
       img {
+        height: 12vw;
+        width: 100%;
+        max-height: 160px;
         ${device.PC1199`height: 16vw; max-height : none;`}
         ${device.PC991`height: 25vw;`}
       }
@@ -71,8 +75,8 @@ const Logo = styled.div`
   height: 34px;
   opacity: 0.7;
   img {
-    width: 75px;
-    height: 30px;
+    width: 75px !important;
+    height: 30px !important;
   }
 `;
 const Sub = styled.div`
@@ -146,9 +150,18 @@ export default () => {
               <Item key={i}>
                 <a href={pr.media_link} target="_blank">
                   <figure src="#" alt="poster">
-                    <img src="#" alt="poster" />
+                    <img
+                      src={`/images/press/${pr.poster_img_filename}`}
+                      alt="poster"
+                    />
                     <Logo>
-                      <img src="#" alt="logo" />
+                      <img
+                        src={`/images/press/${encodeURIComponent(
+                          pr.logo_img_filename,
+                          "euc-kr"
+                        )}`}
+                        alt="logo"
+                      />
                     </Logo>
                   </figure>
                   <Sub>
@@ -175,7 +188,22 @@ export default () => {
               <Item key={i}>
                 <a href={me.media_link} target="_blank">
                   <figure src="#" alt="poster">
-                    <img src="#" alt="logo" />
+                    <img
+                      src={`/images/media/${encodeURIComponent(
+                        me.poster_img_filename,
+                        "euc-kr"
+                      )}`}
+                      alt="poster"
+                    />
+                    {/* <Logo>
+                      <img
+                        src={`/images/media/${encodeURIComponent(
+                          me.logo_img_filename,
+                          "euc-kr"
+                        )}`}
+                        alt="logo"
+                      />
+                    </Logo> */}
                   </figure>
                   <Sub>
                     <span>{me.media_name}</span>

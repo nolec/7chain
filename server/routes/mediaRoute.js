@@ -1,5 +1,6 @@
 import express from "express";
 import db from "../db";
+
 const mediaRoute = express.Router();
 
 mediaRoute.get("/", async (req, res) => {
@@ -32,7 +33,7 @@ mediaRoute.get("/all/:page", async (req, res) => {
         throw err;
       }
       con.query(
-        `CALL spt_GetMedias(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
+        `CALL spt_GetMediasAdmin(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
         [1, page],
         (err, rows, fields) => {
           if (err) {
@@ -49,11 +50,90 @@ mediaRoute.get("/all/:page", async (req, res) => {
           const result = rows.filter(
             (row, i) => row.constructor.name !== "OkPacket"
           );
-          console.log(result);
+          console.log(encodeURIComponent(uploadData));
+          const send = encodeURIComponent(uploadData);
           con.release();
           return res.send(result);
         }
       );
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
+});
+mediaRoute.post("/upload", async (req, res) => {
+  let {
+    mediaLink: _media_link,
+    mediaName: _media_name,
+    title: _title,
+    description: _content,
+    checkedA: _is_7chain,
+    checkedB: _is_numbers,
+    regDate: _reg_date,
+    poster: _poster_img_filename,
+    logo: _logo_img_filename
+  } = req.body;
+  try {
+    console.log(req.body, _is_7chain, _is_numbers);
+    await db.getConnection((err, con) => {
+      if (err) {
+        con.release();
+        throw err;
+      }
+      con.query(
+        `CALL spt_RegistMedia(?,?,?,?,?,?,?,?,?,@_return); select @_return`,
+        [
+          _media_link,
+          _media_name,
+          _title,
+          _content,
+          _is_7chain,
+          _is_numbers,
+          _reg_date,
+          _poster_img_filename,
+          _logo_img_filename
+        ],
+        (err, rows, fields) => {
+          if (err) {
+            con.release();
+            throw err;
+          }
+          console.log(rows, fields);
+          con.release();
+          return res.send(rows);
+        }
+      );
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
+});
+mediaRoute.post("/image", (req, res) => {
+  upload(req, res, error => {
+    console.log(res.req.files, "어디죠");
+    if (error) {
+      return res.status(400).json({ success: false, error: error.message });
+    }
+    return res.json({ success: true, files: res.req.files });
+  });
+});
+mediaRoute.get("/delete/:no", async (req, res) => {
+  const no = req.params.no;
+  try {
+    await db.getConnection((err, con) => {
+      if (err) {
+        con.release();
+        throw err;
+      }
+      con.query(`CALL spt_RemoveMedia(?)`, [no], (err, rows, fields) => {
+        if (err) {
+          con.release();
+          throw err;
+        }
+        console.log(rows);
+        con.release();
+        return res.json({ success: true });
+      });
     });
   } catch (error) {
     return res.status(400).json({ error: error });

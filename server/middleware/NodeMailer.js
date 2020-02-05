@@ -3,26 +3,6 @@ import smptPool from "nodemailer-smtp-pool";
 import directTransport from "nodemailer-direct-transport";
 import dotenv from "dotenv";
 dotenv.config();
-
-export let joinSender = {
-  sendJoin: param => {
-    const transport = nodemailer.createTransport(directTransport());
-    var mailOptions = {
-      from: param.email,
-      to: process.env.TO, // 수신할 이메일
-      subject: "Receive the 7Chain email Newsletter.", // 메일 제목
-      text: `${param.email} : Subscribe를 원합니다.` // 메일 내용
-    };
-    transport.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-      transport.close();
-    });
-  }
-};
 // export let joinSender = {
 //   sendJoin: param => {
 //     const transport = nodemailer.createTransport({
@@ -50,6 +30,24 @@ export let joinSender = {
 //   }
 // };
 export let mailSender = {
+  sendJoin: param => {
+    const transport = nodemailer.createTransport(directTransport());
+    var mailOptions = {
+      from: param.email,
+      to: process.env.TO, // 수신할 이메일
+      subject: "Receive the 7Chain email Newsletter.", // 메일 제목
+      text: `${param.email} : Subscribe를 원합니다.` // 메일 내용
+    };
+    transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+      transport.close();
+    });
+  },
+  //----------------------------------------------------
   sendGmail: param => {
     let transport = nodemailer.createTransport(
       smptPool({

@@ -45,6 +45,7 @@ const Item = styled.div`
     color: #fff;
     overflow: hidden;
     figure {
+      position: relative;
       width: 100%;
       height: auto;
       margin: 0;
@@ -193,14 +194,14 @@ export default () => {
                 <a href={pr.media_link} target="_blank">
                   <figure>
                     <img
-                      src={`http://localhost:5000/${encodeURIComponent(
+                      src={`/images/press/${encodeURIComponent(
                         pr.poster_img_filename
                       )}`}
                       alt="poster"
                     />
                     <Logo>
                       <img
-                        src={`http://localhost:5000/${encodeURIComponent(
+                        src={`/images/press/${encodeURIComponent(
                           pr.logo_img_filename,
                           "euc-kr"
                         )}`}

@@ -151,7 +151,7 @@ export default () => {
         alert("체크해주세요");
         return false;
       } else {
-        if (formData.logo === null || formData.poster === null) {
+        if (formData.poster === null) {
           alert("이미지를 채워 넣어주세요.");
           return false;
         } else {

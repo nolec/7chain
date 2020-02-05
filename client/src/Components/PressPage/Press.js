@@ -130,8 +130,8 @@ const Logo = styled.div`
   height: 34px;
   opacity: 0.7;
   img {
-    width: 75px;
-    height: 30px;
+    width: 75px !important;
+    height: 30px !important;
   }
 `;
 const Sub = styled.div`
@@ -204,7 +204,7 @@ export default () => {
               <img
                 src={
                   press.chainPress.length > 0
-                    ? `http://localhost/${encodeURIComponent(
+                    ? `/images/press/${encodeURIComponent(
                         press.chainPress[0].poster_img_filename
                       )}`
                     : null
@@ -215,7 +215,7 @@ export default () => {
                   style={{ width: "120px", height: "52px" }}
                   src={
                     press.chainPress.length > 0
-                      ? `http://localhost/${encodeURIComponent(
+                      ? `/images/press/${encodeURIComponent(
                           press.chainPress[0].poster_img_filename
                         )}`
                       : null
@@ -270,13 +270,18 @@ export default () => {
               <a href={pr.media_link} target="_blank">
                 <figure src="#" alt="poster">
                   <img
-                    src={`http://localhost:5000/${encodeURIComponent(
+                    src={`/images/press/${encodeURIComponent(
                       pr.poster_img_filename
                     )}`}
                     alt="poster"
                   />
                   <Logo>
-                    <img src="#" alt="logo" />
+                    <img
+                      src={`/images/press/${encodeURIComponent(
+                        pr.logo_img_filename
+                      )}`}
+                      alt="logo"
+                    />
                   </Logo>
                 </figure>
                 <Sub>

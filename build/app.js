@@ -44,12 +44,14 @@ app.use("/api/mail", _contactRoute["default"]); //------------------------------
 
 app.use("/server", _express["default"]["static"]("uploads"));
 console.log(__dirname); //------------------------------------
-// Serve static assets if in production
 
-app.use("/", _express["default"]["static"](_path["default"].resolve(__dirname, "../../")));
-app.get("*", function (req, res) {
-  res.sendFile(_path["default"].resolve(__dirname, "../../index.html"));
-}); //------------------------------------
+if (process.env.NODE_ENV === "production") {
+  app.use("/", _express["default"]["static"](_path["default"].resolve(__dirname, "../../")));
+  app.get("*", function (req, res) {
+    res.sendFile(_path["default"].resolve(__dirname, "../../index.html"));
+  });
+} //------------------------------------
+
 
 var port = process.env.PORT || 5000;
 
