@@ -3,8 +3,7 @@ import styled from "styled-components";
 import TopBox from "./TopBox";
 import BottomBox from "./BottomBox";
 import { withRouter } from "react-router-dom";
-import { TweenMax } from "gsap";
-import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
+import { TweenMax, Power3 } from "gsap";
 import ModalPage from "./Modal";
 
 const Header = styled.header`
@@ -32,25 +31,28 @@ const BottomContainer = styled.div`
 `;
 
 export default withRouter(({ history, location, toggle, handleClose }) => {
-  const plugins = [ScrollToPlugin];
-
   const [active, setActive] = useState(false);
 
   const handleGo = e => {
     const id = e.currentTarget.hash;
-    setActive(false);
-
     e.preventDefault();
     if (location.pathname !== "/") {
       const time = () =>
         setTimeout(() => {
           history.push("/");
-          TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+          TweenMax.to(window, 0.5, {
+            scrollTo: { y: id, offsetY: 70 },
+            ease: Power3.easeOut
+          });
         }, 750);
       time();
     } else {
-      TweenMax.to(window, 1, { scrollTo: { y: id, offsetY: 70 } });
+      TweenMax.to(window, 0.5, {
+        scrollTo: { y: id, offsetY: 70 },
+        ease: Power3.easeOut
+      });
     }
+    setActive(false);
   };
   const handleClick = e => {
     const body = document.querySelector("body");
