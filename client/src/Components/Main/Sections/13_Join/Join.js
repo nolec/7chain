@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
 import styled from "styled-components";
 import { device, minDevice } from "../../../../device";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { mailPost } from "../../../../actions/mail";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
@@ -115,6 +115,8 @@ export default () => {
   const submit = useRef(null);
   const join = useRef(null);
   const dispatch = useDispatch();
+
+  const success = useSelector(state => state.mail.success);
   //checkBox
   const handleCheck = () => {
     setCheck(!check);
@@ -129,6 +131,7 @@ export default () => {
   useEffect(() => {
     Scene(join.current.children, 0.7, "active");
   }, [Scene]);
+
   return (
     <Section>
       <Container ref={join}>

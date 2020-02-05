@@ -197,7 +197,7 @@ export default () => {
                         "euc-kr"
                       )}`}
                     />
-                    <Logo>
+                    {/* <Logo>
                       <img
                         src={`/images/media/${encodeURIComponent(
                           me.logo_img_filename,
@@ -205,7 +205,7 @@ export default () => {
                         )}`}
                         alt="logo"
                       />
-                    </Logo>
+                    </Logo> */}
                   </figure>
                   <Sub>
                     <span>{me.media_name}</span>
@@ -217,7 +217,7 @@ export default () => {
             ))}
         </Articles>
         <SeeMore>
-          {cnt && media.length === cnt - 1 ? null : (
+          {cnt && media.length === cnt ? null : (
             <SLink to="#" onClick={handleClick}>
               더보기
             </SLink>

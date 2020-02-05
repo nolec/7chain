@@ -86,8 +86,10 @@ export const uploadImage = (
     };
 
     uploadFile.set("media_name", formData.mediaName);
-    uploadFile.append("file", posterFile);
-    uploadFile.append("file", logoFile);
+    console.log(logoFile, posterFile, formData);
+    await uploadFile.append("file", posterFile);
+    await uploadFile.append("file", logoFile);
+    console.log(uploadFile);
     const res = await axios.post(`/api/press/image`, uploadFile, config);
     console.log(res.data);
     const sendData = {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getPress } from "../../../../actions/press";
 import { Link } from "react-router-dom";
 import { getMedia } from "../../../../actions/media";
-import { device } from "../../../../device";
+import { device, minDevice } from "../../../../device";
 import { LangContext } from "../../../../Context";
 import Scene from "../../ScrollMagic";
 
@@ -32,13 +32,17 @@ const Item = styled.div`
   max-width: 25%;
   padding-right: 15px;
   padding-left: 15px;
+  ${minDevice.minPC576`flex: 0 0 50%;    max-width: 50%;`} 
+  ${minDevice.minPC768`flex: 0 0 50%;    max-width: 50%;`}
+  ${minDevice.minPC992`flex: 0 0 33.333333%;    max-width: 33.333333%;`}
+  ${minDevice.minPC`flex: 0 0 25%;    max-width: 25%;`}
+  ${device.PC575`max-width : none;flex: 0 0 100%;`}
   a {
     color: #fff;
     overflow: hidden;
     figure {
       width: 100%;
       height: auto;
-      max-height: 160px;
       margin: 0;
       padding: 0;
       background: #fff;
@@ -50,6 +54,7 @@ const Item = styled.div`
         max-height: 160px;
         ${device.PC1199`height: 16vw; max-height : none;`}
         ${device.PC991`height: 25vw;`}
+        ${device.PC575`max-width : none;height : 50vw;`}
       }
     }
     p {

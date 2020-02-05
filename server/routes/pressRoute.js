@@ -40,7 +40,8 @@ pressRoute.get("/all/:page", async (req, res) => {
     }
   );
   try {
-    const page = parseInt(req.params.page) * 8;
+    const page =
+      parseInt(req.params.page) * 7 + (parseInt(req.params.page) - 1);
     db.getConnection((err, con) => {
       if (err) {
         con.release();
@@ -48,7 +49,7 @@ pressRoute.get("/all/:page", async (req, res) => {
       }
       con.query(
         `CALL spt_GetArticlesAdmin(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
-        [1, page],
+        [0, page + 1],
         (err, rows, fields) => {
           if (err) {
             con.release();
@@ -122,14 +123,19 @@ pressRoute.post("/upload", async (req, res) => {
     return res.status(400).json({ error: error });
   }
 });
-pressRoute.post("/image", (req, res) => {
-  upload(req, res, error => {
-    console.log(res.req.files, "어디죠");
-    if (error) {
-      return res.status(400).json({ success: false, error: error.message });
-    }
-    return res.json({ success: true, files: res.req.files });
-  });
+pressRoute.post("/image", async (req, res) => {
+  try {
+    await upload(req, res, error => {
+      // console.log(res.req.files, "어디죠");
+      if (error) {
+        console.log(error);
+        return res.status(400).json({ success: false, error: error.message });
+      }
+      return res.json({ success: true, files: res.req.files });
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
 });
 pressRoute.get("/delete/:no", async (req, res) => {
   const no = req.params.no;
@@ -155,7 +161,7 @@ pressRoute.get("/delete/:no", async (req, res) => {
 });
 pressRoute.get("/all/7chain/:page", async (req, res) => {
   try {
-    let page = parseInt(req.params.page) * 8;
+    let page = parseInt(req.params.page) * 7 + (parseInt(req.params.page) - 1);
     console.log(page);
     await db.getConnection((err, con) => {
       if (err) {
@@ -164,7 +170,7 @@ pressRoute.get("/all/7chain/:page", async (req, res) => {
       }
       con.query(
         `CALL spt_GetArticles(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
-        [1, page],
+        [0, page],
         (err, rows, fields) => {
           if (err) {
             con.release();

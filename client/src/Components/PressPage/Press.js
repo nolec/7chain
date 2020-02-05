@@ -4,15 +4,19 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getPressAll, getPress7chain } from "../../actions/press";
 import { LangContext } from "../../Context";
+import { minDevice, device } from "../../device";
 
 const Section = styled.section`
-  ${props => props.theme.style.SectionStyle(80, 120)}
+  padding: 0 0 120px;
+  margin-top: 80px;
+  overflow: hidden;
 `;
 const Container = styled.div`
   ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
   ${props => props.theme.style.HboxStyle(45, 15)}
+  margin-bottom: 55px;
 `;
 const MainArticle = styled.div`
   width: 100%;
@@ -20,6 +24,7 @@ const MainArticle = styled.div`
   padding: 0 20px;
   display: flex;
   color: #fff;
+  ${device.PC991`display : none;`}
 `;
 
 const Poster = styled.div`
@@ -89,6 +94,11 @@ const Item = styled.div`
   max-width: 25%;
   padding-right: 15px;
   padding-left: 15px;
+  ${minDevice.minPC576`flex: 0 0 50%;    max-width: 50%;`} 
+  ${minDevice.minPC768`flex: 0 0 50%;    max-width: 50%;`}
+  ${minDevice.minPC992`flex: 0 0 33.333333%;    max-width: 33.333333%;`}
+  ${minDevice.minPC`flex: 0 0 25%;    max-width: 25%;`}
+  ${device.PC575`max-width : none;flex: 0 0 100%;`}
   a {
     color: #fff;
     overflow: hidden;
@@ -105,6 +115,9 @@ const Item = styled.div`
         height: 12vw;
         max-height: 160px;
         transition: 0.3s ease-in-out;
+        ${device.PC1199`height: 16vw; max-height : none;`}
+        ${device.PC991`height: 25vw;`}
+        ${device.PC575`max-width : none;height : 50vw;`}
       }
     }
     p {
@@ -294,7 +307,7 @@ export default () => {
           ))}
         </Articles>
         <SeeMore>
-          {press.cnt && press.chainPress.length === press.cnt - 1 ? null : (
+          {press.cnt && press.chainPress.length === press.cnt ? null : (
             <SLink to="#" onClick={handleClick}>
               {lang.seeMore}
             </SLink>

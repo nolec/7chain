@@ -219,7 +219,7 @@ export default () => {
             ))}
         </Articles>
         <SeeMore>
-          {cnt && press.length === cnt - 1 ? null : (
+          {cnt && press.length === cnt ? null : (
             <SLink to="#" onClick={handleClick}>
               더보기
             </SLink>

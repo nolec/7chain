@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { mailPost } from "../../actions/mail";
 import { Link } from "react-router-dom";
 import { device, minDevice } from "../../device";
@@ -151,6 +151,8 @@ export default () => {
   const recaptchaRef = useRef(null);
   const inquiry = useRef(null);
   const dispatch = useDispatch();
+
+  const success = useSelector(state => state.mail.success);
   //--------------------------------------------
   const [active, setActive] = useState({
     contact: true,

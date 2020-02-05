@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMedia, getMediaAll, getMeida7chain } from "../../actions/media";
 import { LangContext } from "../../Context";
+import { minDevice, device } from "../../device";
 
 const Section = styled.section`
   padding: 0 0 120px;
@@ -11,23 +12,11 @@ const Section = styled.section`
   overflow: hidden;
 `;
 const Container = styled.div`
-  max-width: 1162px;
-  width: 1162px;
-  margin: auto;
+  ${props => props.theme.style.ContainerStyle(1260, 1162)}
 `;
 const HBox = styled.div`
-  position: relative;
-  width: 1162px;
-  margin: 0 auto;
-  padding-top: 45px;
-  transition: all 0.1s, color 0.1s 0.1s;
-  border-bottom: 1px #282828 solid;
-  padding-bottom: 15px;
+  ${props => props.theme.style.HboxStyle(45, 15)}
   margin-bottom: 55px;
-  h2 {
-    font-size: 40px;
-    color: #fff;
-  }
 `;
 const Articles = styled.div`
   display: flex;
@@ -41,6 +30,11 @@ const Item = styled.div`
   max-width: 25%;
   padding-right: 15px;
   padding-left: 15px;
+  ${minDevice.minPC576`flex: 0 0 50%;    max-width: 50%;`} 
+  ${minDevice.minPC768`flex: 0 0 50%;    max-width: 50%;`}
+  ${minDevice.minPC992`flex: 0 0 33.333333%;    max-width: 33.333333%;`}
+  ${minDevice.minPC`flex: 0 0 25%;    max-width: 25%;`}
+  ${device.PC575`max-width : none;flex: 0 0 100%;`}
   a {
     color: #fff;
     overflow: hidden;
@@ -56,6 +50,9 @@ const Item = styled.div`
         width: 100%;
         height: 12vw;
         max-height: 160px;
+        ${device.PC1199`height: 16vw; max-height : none;`}
+        ${device.PC991`height: 25vw;`}
+        ${device.PC575`max-width : none;height : 50vw;`}
       }
     }
     p {
@@ -170,7 +167,7 @@ export default () => {
           ))}
         </Articles>
         <SeeMore>
-          {media.cnt && media.chainMedia.length === media.cnt - 1 ? null : (
+          {media.cnt && media.chainMedia.length === media.cnt ? null : (
             <SLink to="#" onClick={handleClick}>
               {lang.seeMore}
             </SLink>

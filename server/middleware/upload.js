@@ -5,7 +5,7 @@ import dateFormat from "dateformat";
 let storage = multer.diskStorage({
   destination: (req, file, callback) => {
     console.log(req.body.media_name, file, "destination");
-    callback(null, "uploads/");
+    callback(null, "server/uploads/");
   },
   filename: (req, file, callback) => {
     console.log(file, "upload file");
