@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
 import { LangContext } from "../../../../Context";
 
 const Section = styled.section`
@@ -46,7 +45,6 @@ export default () => {
     if (win_height > min_height) setHeight(win_height - top_margin);
     else setHeight(min_height - top_margin);
   }
-  const press = useSelector(state => state.press);
   const { korean } = useContext(LangContext);
   useEffect(() => {
     reSizeIntro();

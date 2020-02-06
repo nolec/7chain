@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getPressAll, getPress7chain } from "../../actions/press";
+import { getPress7chain } from "../../actions/press";
 import { LangContext } from "../../Context";
 import { minDevice, device } from "../../device";
 
@@ -94,11 +94,21 @@ const Item = styled.div`
   max-width: 25%;
   padding-right: 15px;
   padding-left: 15px;
+  *{
+    transition: .3s ease-in-out
+  }
   ${minDevice.minPC576`flex: 0 0 50%;    max-width: 50%;`} 
   ${minDevice.minPC768`flex: 0 0 50%;    max-width: 50%;`}
   ${minDevice.minPC992`flex: 0 0 33.333333%;    max-width: 33.333333%;`}
   ${minDevice.minPC`flex: 0 0 25%;    max-width: 25%;`}
   ${device.PC575`max-width : none;flex: 0 0 100%;`}
+  :hover figure > img{
+    transform : scale(1.1);
+    opacity : 0.8;
+  }
+  :hover p{
+    text-decoration : underline;
+  }
   a {
     color: #fff;
     overflow: hidden;
@@ -107,7 +117,7 @@ const Item = styled.div`
       height: auto;
       margin: 0;
       padding: 0;
-      background: #fff;
+      background: #000;
       overflow: hidden;
       border: 1px solid #fff;
       img {
@@ -193,11 +203,11 @@ export default () => {
   };
   useEffect(() => {
     dispatch(getPress7chain(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
 
   useEffect(() => {
     languageSetting();
-  }, [korean]);
+  }, [korean, languageSetting]);
   return (
     <Section>
       <Container>
@@ -207,12 +217,13 @@ export default () => {
         <MainArticle>
           <Poster>
             <a
-              href={
+              hreflink={
                 press.chainPress.length > 0
                   ? press.chainPress[0].media_link
-                  : undefined
+                  : "#"
               }
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src={
@@ -222,6 +233,7 @@ export default () => {
                       )}`
                     : null
                 }
+                alt="poster"
               />
               <Logo>
                 <img
@@ -252,9 +264,10 @@ export default () => {
                 href={
                   press.chainPress.length > 0
                     ? press.chainPress[0].media_link
-                    : undefined
+                    : "#"
                 }
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <p>
                   {press.chainPress.length > 0 && press.chainPress[0].title}
@@ -266,9 +279,10 @@ export default () => {
                 href={
                   press.chainPress.length > 0
                     ? press.chainPress[0].media_link
-                    : undefined
+                    : "#"
                 }
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <p>
                   {press.chainPress.length > 0 && press.chainPress[0].content}
@@ -280,8 +294,13 @@ export default () => {
         <Articles>
           {press.chainPress.map(pr => (
             <Item key={pr.no}>
-              <a href={pr.media_link} target="_blank">
-                <figure src="#" alt="poster">
+              <a
+                href={pr.media_link}
+                target="_blank"
+                rel="noopener noreferrer"
+                rel="noopener noreferrer"
+              >
+                <figure alt="poster">
                   <img
                     src={`/images/press/${encodeURIComponent(
                       pr.poster_img_filename
@@ -308,7 +327,7 @@ export default () => {
         </Articles>
         <SeeMore>
           {press.cnt && press.chainPress.length === press.cnt ? null : (
-            <SLink to="#" onClick={handleClick}>
+            <SLink to="#none" onClick={handleClick}>
               {lang.seeMore}
             </SLink>
           )}

@@ -1,10 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Scene from "../../../ScrollMagic";
-import { device } from "../../../../../device";
-const transform = keyframes`
 
-`;
 const GraphArea = styled.div`
   ${props => props.theme.style.GraphArea()};
 `;

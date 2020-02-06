@@ -32,11 +32,21 @@ const Item = styled.div`
   max-width: 25%;
   padding-right: 15px;
   padding-left: 15px;
+  *{
+    transition: .3s ease-in-out
+  }
   ${minDevice.minPC576`flex: 0 0 50%;    max-width: 50%;`} 
   ${minDevice.minPC768`flex: 0 0 50%;    max-width: 50%;`}
   ${minDevice.minPC992`flex: 0 0 33.333333%;    max-width: 33.333333%;`}
   ${minDevice.minPC`flex: 0 0 25%;    max-width: 25%;`}
   ${device.PC575`max-width : none;flex: 0 0 100%;`}
+  :hover figure > img{
+    transform : scale(1.1);
+    opacity : 0.8;
+  }
+  :hover p{
+    text-decoration : underline;
+  }
   a {
     color: #fff;
     overflow: hidden;
@@ -45,7 +55,7 @@ const Item = styled.div`
       height: auto;
       margin: 0;
       padding: 0;
-      background: #fff;
+      background: #000;
       overflow: hidden;
       border: 1px solid #fff;
       img {
@@ -129,20 +139,20 @@ export default () => {
   const pressRef = useRef(null);
   useEffect(() => {
     Scene(mediaRef.current.children, 0.7, "active");
-  }, [Scene]);
+  }, []);
   useEffect(() => {
     Scene(pressRef.current.children, 0.7, "active");
-  }, [Scene]);
+  }, []);
   // const tags = useMemo(() => {
   //   return [dispatch(getPress()), dispatch(getMedia())];
   // }, [press.loading]);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPress());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     dispatch(getMedia());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Section id="press">
@@ -153,7 +163,11 @@ export default () => {
           <Articles>
             {press.press.map((pr, i) => (
               <Item key={i}>
-                <a href={pr.media_link} target="_blank">
+                <a
+                  href={pr.media_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <figure src="#" alt="poster">
                     <img
                       src={`/images/press/${pr.poster_img_filename}`}
@@ -162,8 +176,7 @@ export default () => {
                     <Logo>
                       <img
                         src={`/images/press/${encodeURIComponent(
-                          pr.logo_img_filename,
-                          "euc-kr"
+                          pr.logo_img_filename
                         )}`}
                         alt="logo"
                       />
@@ -191,7 +204,11 @@ export default () => {
           <Articles>
             {media.media.map((me, i) => (
               <Item key={i}>
-                <a href={me.media_link} target="_blank">
+                <a
+                  href={me.media_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <figure src="#" alt="poster">
                     <img
                       src={`/images/media/${encodeURIComponent(

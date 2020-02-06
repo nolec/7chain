@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,10 +14,8 @@ import Press from "./PressPage";
 import AdminPress from "./Admin/AdminPress";
 import AdminMedia from "./Admin/AdminMedia";
 import Contact from "./ContactPage";
-import ip from "ip";
 
 export default () => {
-  console.log(ip.isV4Format(ip.address()));
   return (
     <Router>
       <Nav />
@@ -26,12 +24,10 @@ export default () => {
         <Route path="/press" component={Press} />
         <Route path="/media" component={Media} />
         <Route path="/contact" component={Contact} />
-        {ip.isV4Format(ip.address()) ? (
-          <>
-            <Route path="/admin/press" component={AdminPress} />
-            <Route path="/admin/media" component={AdminMedia} />
-          </>
-        ) : null}
+
+        <Route path="/admin/press" component={AdminPress} />
+        <Route path="/admin/media" component={AdminMedia} />
+
         <Redirect from="/*" to="/" />
       </Switch>
       <BtnTop />

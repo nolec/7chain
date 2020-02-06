@@ -40,8 +40,7 @@ pressRoute.get("/all/:page", async (req, res) => {
     }
   );
   try {
-    const page =
-      parseInt(req.params.page) * 7 + (parseInt(req.params.page) - 1);
+    const page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
     db.getConnection((err, con) => {
       if (err) {
         con.release();
@@ -49,7 +48,7 @@ pressRoute.get("/all/:page", async (req, res) => {
       }
       con.query(
         `CALL spt_GetArticlesAdmin(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;`,
-        [0, page + 1],
+        [0, page],
         (err, rows, fields) => {
           if (err) {
             con.release();
@@ -161,7 +160,7 @@ pressRoute.get("/delete/:no", async (req, res) => {
 });
 pressRoute.get("/all/7chain/:page", async (req, res) => {
   try {
-    let page = parseInt(req.params.page) * 7 + (parseInt(req.params.page) - 1);
+    let page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
     console.log(page);
     await db.getConnection((err, con) => {
       if (err) {

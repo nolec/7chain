@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { SubContext } from "../../../Context";
 
@@ -149,7 +149,7 @@ export default () => {
     } else {
       body.style.overflow = "auto";
     }
-  }, [toggle]);
+  }, [toggle, body.style.overflow]);
   return (
     <>
       {toggle && toggle ? (
@@ -166,13 +166,21 @@ export default () => {
                 <BodyContainer>
                   <Body>
                     <Korean>
-                      <a href="#">
+                      <a
+                        href={`/7chain/index.html?file=white-paper&lang=kr`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <i className="flag-icon flag-icon-kr"></i>
                         <span>Korean</span>
                       </a>
                     </Korean>
                     <English>
-                      <a href="#">
+                      <a
+                        href={`/7chain/index.html?file=white-paper&lang=kr`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <i className="flag-icon flag-icon-us"></i>
                         <span>English</span>
                       </a>

@@ -21,17 +21,14 @@ const ImgBox = styled.div`
   text-align: center;
   width: 100%;
 `;
-const Img = styled.img.attrs({
-  src: props => props.theme.file.architecture
-})`
+const Img = styled.img.attrs(props => ({ src: props.theme.file.architecture }))`
   position: relative;
   width: 95%;
-  display: inline;
   ${device.PC768`display : none`};
 `;
-const ImgV = styled.img.attrs({
-  src: props => props.theme.file.architecture_v
-})`
+const ImgV = styled.img.attrs(props => ({
+  src: props.theme.file.architecture_v
+}))`
   width: 100%;
   max-width: 450px;
   position: relative;

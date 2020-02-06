@@ -81,7 +81,7 @@ export default () => {
   const strength = useRef(null);
   useEffect(() => {
     Scene(strength.current.children, 0.7, "active");
-  }, [Scene]);
+  }, []);
   return (
     <Section>
       <Container ref={strength}>

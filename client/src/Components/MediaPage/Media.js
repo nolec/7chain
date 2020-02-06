@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getMedia, getMediaAll, getMeida7chain } from "../../actions/media";
+import { getMeida7chain } from "../../actions/media";
 import { LangContext } from "../../Context";
 import { minDevice, device } from "../../device";
 
@@ -30,11 +30,21 @@ const Item = styled.div`
   max-width: 25%;
   padding-right: 15px;
   padding-left: 15px;
+  *{
+    transition: .3s ease-in-out
+  }
   ${minDevice.minPC576`flex: 0 0 50%;    max-width: 50%;`} 
   ${minDevice.minPC768`flex: 0 0 50%;    max-width: 50%;`}
   ${minDevice.minPC992`flex: 0 0 33.333333%;    max-width: 33.333333%;`}
   ${minDevice.minPC`flex: 0 0 25%;    max-width: 25%;`}
   ${device.PC575`max-width : none;flex: 0 0 100%;`}
+  :hover figure > img{
+    transform : scale(1.1);
+    opacity : 0.8;
+  }
+  :hover p{
+    text-decoration : underline;
+  }
   a {
     color: #fff;
     overflow: hidden;
@@ -43,7 +53,7 @@ const Item = styled.div`
       height: auto;
       margin: 0;
       padding: 0;
-      background: #fff;
+      background: #000;
       overflow: hidden;
       border: 1px solid #fff;
       img {
@@ -67,21 +77,21 @@ const Item = styled.div`
     }
   }
 `;
-const Logo = styled.div`
-  position: absolute;
-  left: 16px;
-  top: 1px;
-  margin: 0;
-  padding: 2px 5px;
-  background: #353434;
-  width: 85px;
-  height: 34px;
-  opacity: 0.7;
-  img {
-    width: 75px !important;
-    height: 30px !important;
-  }
-`;
+// const Logo = styled.div`
+//   position: absolute;
+//   left: 16px;
+//   top: 1px;
+//   margin: 0;
+//   padding: 2px 5px;
+//   background: #353434;
+//   width: 85px;
+//   height: 34px;
+//   opacity: 0.7;
+//   img {
+//     width: 75px !important;
+//     height: 30px !important;
+//   }
+// `;
 const Sub = styled.div`
   text-align: left;
   margin: 0;
@@ -127,10 +137,10 @@ export default () => {
   };
   useEffect(() => {
     dispatch(getMeida7chain(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
   useEffect(() => {
     languageSetting();
-  }, [korean]);
+  }, [korean, languageSetting]);
   return (
     <Section>
       <Container>
@@ -140,7 +150,7 @@ export default () => {
         <Articles>
           {media.chainMedia.map(me => (
             <Item key={me.no}>
-              <a href={me.media_link} target="_blank">
+              <a href={me.media_link} target="_blank" rel="noopener noreferrer">
                 <figure src="#" alt="poster">
                   <img
                     src={`/images/media/${encodeURIComponent(

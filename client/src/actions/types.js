@@ -12,3 +12,5 @@ export const UPLOAD_FAIL = "UPLOAD_FAIL";
 export const DELETE_PRESS = "DELETE_PRESS";
 export const MAIL_SUCCESS = "MAIL_SUCCESS";
 export const MAIL_FAIL = "MAIL_FAIL";
+export const IP_CONFIRM = "IP_CONFIRM";
+export const IP_SERVER_ERROR = "IP_SERVER_ERROR";

@@ -18,17 +18,17 @@ const LangProvider = ({ children }) => {
     if (korean) {
       e.preventDefault();
     } else {
+      window.scrollTo(0, 0);
       setKorean(true);
     }
-    console.log("handleKor");
   };
   const handleEng = e => {
     if (!korean) {
       e.preventDefault();
     } else {
+      window.scrollTo(0, 0);
       setKorean(false);
     }
-    console.log("handleEng");
   };
   const provider = {
     languageSetting,

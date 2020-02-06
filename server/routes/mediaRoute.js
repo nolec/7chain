@@ -1,5 +1,7 @@
 import express from "express";
 import db from "../db";
+import upload from "../middleware/upload";
+import { ipConfirm } from "../middleware/ipConfirm";
 
 const mediaRoute = express.Router();
 
@@ -26,8 +28,7 @@ mediaRoute.get("/", async (req, res) => {
 });
 mediaRoute.get("/all/:page", async (req, res) => {
   try {
-    const page =
-      parseInt(req.params.page) * 7 + (parseInt(req.params.page) - 1);
+    const page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
     db.getConnection((err, con) => {
       if (err) {
         con.release();
@@ -107,14 +108,19 @@ mediaRoute.post("/upload", async (req, res) => {
     return res.status(400).json({ error: error });
   }
 });
-mediaRoute.post("/image", (req, res) => {
-  upload(req, res, error => {
-    console.log(res.req.files, "어디죠");
-    if (error) {
-      return res.status(400).json({ success: false, error: error.message });
-    }
-    return res.json({ success: true, files: res.req.files });
-  });
+mediaRoute.post("/image", async (req, res) => {
+  try {
+    await upload(req, res, error => {
+      // console.log(res.req.files, "어디죠");
+      if (error) {
+        console.log(error);
+        return res.status(400).json({ success: false, error: error.message });
+      }
+      return res.json({ success: true, files: res.req.files });
+    });
+  } catch (error) {
+    return res.status(400).json({ error: error });
+  }
 });
 mediaRoute.get("/delete/:no", async (req, res) => {
   const no = req.params.no;
@@ -140,7 +146,7 @@ mediaRoute.get("/delete/:no", async (req, res) => {
 });
 mediaRoute.get("/all/7chain/:page", async (req, res) => {
   try {
-    let page = parseInt(req.params.page) * 7 + (parseInt(req.params.page) - 1);
+    let page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
     console.log(page);
     await db.getConnection((err, con) => {
       if (err) {

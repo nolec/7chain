@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef, useImperativeHandle } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import { device, minDevice } from "../../../../device";
-import { useDispatch, useSelector } from "react-redux";
+import { device } from "../../../../device";
+import { useDispatch } from "react-redux";
 import { mailPost } from "../../../../actions/mail";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
@@ -116,7 +116,6 @@ export default () => {
   const join = useRef(null);
   const dispatch = useDispatch();
 
-  const success = useSelector(state => state.mail.success);
   //checkBox
   const handleCheck = () => {
     setCheck(!check);
@@ -130,7 +129,7 @@ export default () => {
   }, [check]);
   useEffect(() => {
     Scene(join.current.children, 0.7, "active");
-  }, [Scene]);
+  }, []);
 
   return (
     <Section>
@@ -195,7 +194,11 @@ export default () => {
             </Formik>
           </InputEmail>
           <Social>
-            <a href="https://medium.com/@7Chain" target="_blank">
+            <a
+              href="https://medium.com/@7Chain"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/sns/sns_medium.png")}
                 alt="medium"
@@ -205,6 +208,7 @@ export default () => {
               href="https://twitter.com/7Chain_Official"
               id="twitter_kr"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src={require("../../../../assets/images/sns/sns_twitter.png")}
@@ -212,13 +216,21 @@ export default () => {
               />
             </a>
 
-            <a href="https://t.me/sevenchainproject" target="_blank">
+            <a
+              href="https://t.me/sevenchainproject"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/sns/sns_telegram.png")}
                 alt="telegram"
               />
             </a>
-            <a href="https://www.facebook.com/7chain" target="_blank">
+            <a
+              href="https://www.facebook.com/7chain"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/sns/sns_facebook.png")}
                 alt="facebook"
@@ -227,6 +239,7 @@ export default () => {
             <a
               href="https://www.youtube.com/channel/UCHuEqrnlAuQoMqeJTB8d86A"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <img
                 src={require("../../../../assets/images/sns/sns_youtube.png")}

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useContext } from "react";
-import styled, { ThemeProvider } from "styled-components";
-import { theme } from "../../Main";
+import styled from "styled-components";
 import GraphAreaOne from "./Graph/AreaOne";
 import GraphAreaTwo from "./Graph/AreaTwo";
 import Scene from "../../ScrollMagic";

@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { TweenMax } from "gsap";
 import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 
@@ -10,7 +10,7 @@ const Btn = styled.div`
   right: 30px;
   bottom: 30px;
 `;
-const Blink = styled.a`
+const Blink = styled(Link)`
   display: block;
   border-radius: 100%;
   width: 50px;
@@ -20,25 +20,22 @@ const Blink = styled.a`
   background-image: url(${props => props.back});
   background-repeat: no-repeat;
 `;
-
+const plugins = [ScrollToPlugin];
 export default withRouter(({ location }) => {
   const handleClick = e => {
     const body = document.querySelector("body");
     TweenMax.to(window, 1, { scrollTo: body.offsetTop });
   };
   useEffect(() => {
-    setTimeout(() => {
-      if (location.pathname !== "/") {
-        const body = document.querySelector("body");
-        TweenMax.to(window, 1, { scrollTo: body.offsetTop });
-      }
-    }, 1000);
+    if (location.pathname !== "/") {
+      window.scrollTo(0, 0);
+    }
   }, [location.pathname]);
   return (
     <Btn>
       <Blink
         onClick={handleClick}
-        href="#window"
+        to="#"
         back={require("../assets/images/bullet-arrow-top.png")}
       ></Blink>
     </Btn>

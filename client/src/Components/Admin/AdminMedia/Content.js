@@ -98,21 +98,21 @@ const Close = styled.div`
     z-index: 999;
   }
 `;
-const Logo = styled.div`
-  position: absolute;
-  left: 16px;
-  top: 1px;
-  margin: 0;
-  padding: 2px 5px;
-  background: #353434;
-  width: 85px;
-  height: 34px;
-  opacity: 0.7;
-  img {
-    width: 75px;
-    height: 30px;
-  }
-`;
+// const Logo = styled.div`
+//   position: absolute;
+//   left: 16px;
+//   top: 1px;
+//   margin: 0;
+//   padding: 2px 5px;
+//   background: #353434;
+//   width: 85px;
+//   height: 34px;
+//   opacity: 0.7;
+//   img {
+//     width: 75px;
+//     height: 30px;
+//   }
+// `;
 const Sub = styled.div`
   text-align: left;
   margin: 0;
@@ -150,7 +150,6 @@ const SLink = styled(Link)`
 `;
 export default () => {
   const dispatch = useDispatch();
-
   const [currentPage, setCurrentPage] = useState(1);
   const { media, cnt } = useSelector(state => ({
     media: state.media.adminMedia,
@@ -169,7 +168,7 @@ export default () => {
   };
   useEffect(() => {
     dispatch(getMediaAll(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
   return (
     <Section>
       <Container>
@@ -187,15 +186,20 @@ export default () => {
                 <Close onClick={() => handleDelete(me.no)}>
                   <img
                     src={require("../../../assets/images/MVPGame_Close.png")}
+                    alt="close"
                   />
                 </Close>
-                <a href={me.media_link} target="_blank">
+                <a
+                  href={me.media_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <figure>
                     <img
                       src={`/images/media/${encodeURIComponent(
-                        me.poster_img_filename,
-                        "euc-kr"
+                        me.poster_img_filename
                       )}`}
+                      alt="poster"
                     />
                     {/* <Logo>
                       <img

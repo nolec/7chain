@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { device } from "../../../../device";
 import Scene from "../../ScrollMagic";
 
@@ -38,7 +37,7 @@ export default () => {
   const partner = useRef(null);
   useEffect(() => {
     Scene(partner.current.children, 0.7, "active");
-  }, [Scene]);
+  }, []);
   return (
     <Section>
       <Container ref={partner}>
@@ -47,7 +46,11 @@ export default () => {
         </HBox>
         <Partners>
           <Item>
-            <a href="https://eosys.io/" target="_blank">
+            <a
+              href="https://eosys.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Eosys.png")}
                 alt="partner"
@@ -55,7 +58,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="http://koreos.io/" target="_blank">
+            <a
+              href="http://koreos.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Koreos.png")}
                 alt="partner"
@@ -63,7 +70,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="https://www.stealien.com/" target="_blank">
+            <a
+              href="https://www.stealien.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Stealien.png")}
                 alt="partner"
@@ -71,7 +82,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="https://japanonlinegame.org/" target="_blank">
+            <a
+              href="https://japanonlinegame.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Joga.png")}
                 alt="partner"
@@ -79,7 +94,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="http://h2interactive.co.jp/" target="_blank">
+            <a
+              href="http://h2interactive.co.jp/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_H2.png")}
                 alt="partner"
@@ -87,7 +106,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="https://www.nodebrick.com/" target="_blank">
+            <a
+              href="https://www.nodebrick.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Nodebrick.png")}
                 alt="partner"
@@ -95,7 +118,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="http://www.ziopops.com/" target="_blank">
+            <a
+              href="http://www.ziopops.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Ziopops.png")}
                 alt="partner"
@@ -103,7 +130,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="https://www.subete-games.com/" target="_blank">
+            <a
+              href="https://www.subete-games.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Subete.png")}
                 alt="partner"
@@ -111,7 +142,11 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a href="http://www.fzhmsy.com.cn/" target="_blank">
+            <a
+              href="http://www.fzhmsy.com.cn/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 src={require("../../../../assets/images/partner/Logo_Fzhmsy.png")}
                 alt="partner"
@@ -119,7 +154,7 @@ export default () => {
             </a>
           </Item>
           <Item>
-            <a>
+            <a href="#none">
               <img
                 src={require("../../../../assets/images/partner/Logo_Devpot.png")}
                 alt="partner"

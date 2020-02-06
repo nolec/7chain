@@ -4,6 +4,7 @@ import TopBox from "./TopBox";
 import BottomBox from "./BottomBox";
 import { withRouter } from "react-router-dom";
 import { TweenMax, Power3 } from "gsap";
+import ScrollToPlugin from "gsap/umd/ScrollToPlugin";
 import ModalPage from "./Modal";
 
 const Header = styled.header`
@@ -30,6 +31,7 @@ const BottomContainer = styled.div`
     props.border ? "border : none" : "border-bottom: 1px solid #282828;"}
 `;
 
+const plugins = [ScrollToPlugin];
 export default withRouter(({ history, location, toggle, handleClose }) => {
   const [active, setActive] = useState(false);
 

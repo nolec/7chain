@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { device } from "../../device";
@@ -65,6 +65,7 @@ export default ({ handleGo, border }) => {
         <FontLogo>
           <img
             src={require("../../assets/images/logo/7chain-logofont-white.svg")}
+            alt="logo"
           />
         </FontLogo>
         <NavBar>

@@ -27,9 +27,7 @@ const Right = styled.div`
   max-height: 412px;
   text-align: right;
 `;
-const Img = styled.img.attrs({
-  src: props => props.theme.file.contact
-})`
+const Img = styled.img.attrs(props => ({ src: props.theme.file.contact }))`
   width: auto;
   height: auto;
   padding: 115px 0 0 20px;

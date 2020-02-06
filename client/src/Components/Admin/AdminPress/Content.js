@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { getPressAll, deletePress } from "../../../actions/press";
@@ -171,7 +171,7 @@ export default () => {
   };
   useEffect(() => {
     dispatch(getPressAll(currentPage));
-  }, [currentPage]);
+  }, [currentPage, dispatch]);
   return (
     <Section>
       <Container>
@@ -189,9 +189,14 @@ export default () => {
                 <Close onClick={() => handleDelete(pr.no)}>
                   <img
                     src={require("../../../assets/images/MVPGame_Close.png")}
+                    alt="close"
                   />
                 </Close>
-                <a href={pr.media_link} target="_blank">
+                <a
+                  href={pr.media_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <figure>
                     <img
                       src={`/images/press/${encodeURIComponent(

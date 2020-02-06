@@ -300,7 +300,6 @@ export const theme = {
     graph_2_4: require("../../assets/images/graph/graph_2_4.jpg"),
     graph_2_3: require("../../assets/images/graph/graph_2_3.jpg"),
     graph_3_3: require("../../assets/images/graph/graph_3_3.jpg"),
-    graph_2_4: require("../../assets/images/graph/graph_2_4.jpg"),
     graph_3_4: require("../../assets/images/graph/graph_3_4.jpg"),
     contact: require("../../assets/images/Icon_Contact.png")
   }
@@ -318,7 +317,7 @@ export default withRouter(({ location: { pathname } }) => {
   const { languageSetting, korean } = useContext(LangContext);
   useEffect(() => {
     languageSetting();
-  }, [korean]);
+  }, [korean, languageSetting]);
   return (
     <Main id="home">
       <ThemeProvider theme={theme}>

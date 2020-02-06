@@ -14,7 +14,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { blue } from "@material-ui/core/colors";
 import { uploadImage } from "../../../actions/media";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Poster from "../Dropzone/Poster";
 import Logo from "../Dropzone/Logo";
 import DropzoneContext from "../context";
@@ -175,6 +175,22 @@ export default () => {
             </DropzoneContext.Provider>
             <FormUpload className={classes.root}>
               <ThemeProvider theme={theme}>
+                <Group
+                  error={errors.mediaLink && touched.mediaLink}
+                  onChange={handleChange}
+                  autoComplete="mediaLink"
+                  name="mediaLink"
+                  variant="outlined"
+                  id="mediaLink"
+                  label="Link 주소"
+                  fullWidth
+                  autoFocus
+                  helperText={
+                    errors.mediaLink && touched.mediaLink
+                      ? errors.mediaLink
+                      : null
+                  }
+                />
                 <Group
                   error={errors.mediaName && touched.mediaName}
                   helperText={

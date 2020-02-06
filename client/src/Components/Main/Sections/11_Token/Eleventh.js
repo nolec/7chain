@@ -70,7 +70,6 @@ const TextBox = styled.div`
     text-align: center;
   }
 `;
-const SubBox = styled.div``;
 const Bottom = styled.div`
   position: relative;
   max-width: 350px;
@@ -133,7 +132,10 @@ export default () => {
           <Chart>
             <Top>
               <ImgBox>
-                <img src={require("../../../../assets/images/Pie_1.png")} />
+                <img
+                  src={require("../../../../assets/images/Pie_1.png")}
+                  alt="pie"
+                />
               </ImgBox>
               <TextBox>
                 <p>{lang.token03}</p>
@@ -171,7 +173,10 @@ export default () => {
           <Chart>
             <Top>
               <ImgBox>
-                <img src={require("../../../../assets/images/Pie_2.png")} />
+                <img
+                  src={require("../../../../assets/images/Pie_2.png")}
+                  alt="pie"
+                />
               </ImgBox>
               <TextBox>
                 <p>{lang.token11}</p>

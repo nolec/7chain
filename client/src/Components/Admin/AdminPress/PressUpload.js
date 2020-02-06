@@ -14,7 +14,7 @@ import { Formik, Form } from "formik";
 import * as yup from "yup";
 import { blue } from "@material-ui/core/colors";
 import { uploadImage } from "../../../actions/press";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Poster from "../Dropzone/Poster";
 import Logo from "../Dropzone/Logo";
 import DropzoneContext from "../context";
@@ -124,7 +124,7 @@ let ContactFormSchema = yup.object().shape({
   checkedA: yup.boolean(),
   checkedB: yup.boolean()
 });
-export default props => {
+export default () => {
   const dispatch = useDispatch();
   const [logoFile, setLogoFile] = useState();
   const [posterFile, setPosterFile] = useState();

@@ -81,7 +81,7 @@ export default () => {
         </HBox>
         <ContentBox>
           <ImgBox>
-            <img src={lang.economic02} />
+            <img src={lang.economic02} alt="economic" />
           </ImgBox>
           <Content>
             <p>{lang.economic03}</p>

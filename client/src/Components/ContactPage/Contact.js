@@ -1,7 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import styled from "styled-components";
 // import { isEmail, isValidation } from "./Auth";
-import PropTypes from "prop-types";
 import { Formik, Form } from "formik";
 import * as yup from "yup";
 import {
@@ -13,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
 import ReCAPTCHA from "react-google-recaptcha";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { mailPost } from "../../actions/mail";
 import { Link } from "react-router-dom";
 import { device, minDevice } from "../../device";
@@ -46,9 +45,7 @@ const Right = styled.div`
   text-align: right;
   ${device.PC900`display : none;`}
 `;
-const Img = styled.img.attrs({
-  src: props => props.theme.file.contact
-})`
+const Img = styled.img.attrs(props => ({ src: props.theme.file.contact }))`
   width: auto;
   height: auto;
   padding: 115px 0 0 20px;
@@ -120,7 +117,6 @@ const useStyles = makeStyles(theme => ({
     padding: "10px 30px",
     background: "#393939",
     color: "#fff",
-    fontSize: "22px",
     border: "none",
     fontSize: "20px",
     marginTop: "30px",
@@ -152,7 +148,6 @@ export default () => {
   const inquiry = useRef(null);
   const dispatch = useDispatch();
 
-  const success = useSelector(state => state.mail.success);
   //--------------------------------------------
   const [active, setActive] = useState({
     contact: true,
@@ -189,7 +184,7 @@ export default () => {
   const { languageSetting, lang, korean } = useContext(LangContext);
   useEffect(() => {
     languageSetting();
-  }, [korean]);
+  }, [korean, languageSetting]);
   return (
     <Section>
       <Container>

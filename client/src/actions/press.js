@@ -74,9 +74,7 @@ export const uploadImage = (
       title,
       description,
       checkedA,
-      checkedB,
-      logo,
-      poster
+      checkedB
     } = formData;
 
     const config = {

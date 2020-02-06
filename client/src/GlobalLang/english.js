@@ -1,4 +1,3 @@
-import React from "react";
 import { textFunc } from "./TextChange";
 let overview02 = `Roger Caillois - sociologist, critic\n(March 3, 1913 ~ December 21, 1978)`;
 let overview03 = `Roger Caillois, French sociologist and critic states in his book published in 1958(Man, Play and Games) that a person would immerse him/herself into a game through three elements - role, competition and luck'.\n\nDigital games of today appears not to be much different as it consists of these three elements, with the luck being the core element as it can impact an entire game.\n\nHowever, the very element is still regarded as a territory of distrust and remains a subject to conflict mainly due to today's decentralized structure.\n\n7Chain aims to extinguish this problem soon.`;

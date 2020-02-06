@@ -1,4 +1,3 @@
-import React from "react";
 import { textFunc, bFunc } from "./TextChange";
 let overview02 = `로제 카이와 - 사회학자, 문학평론가\n(1913년 3월 3일 ~ 1978년 12월 21일)`;
 let overview03 =
