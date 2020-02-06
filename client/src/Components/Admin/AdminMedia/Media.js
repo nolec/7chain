@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import MediaUpload from "./MediaUpload";
 import Content from "./Content";
-import { useSelector, useDispatch } from "react-redux";
-import { ipConfirm } from "../../../actions/ip";
 
 const Section = styled.section`
   margin-top: 80px;
@@ -31,11 +29,7 @@ const HBox = styled.div`
   }
 `;
 
-export default ({ history }) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(ipConfirm());
-  }, []);
+export default () => {
   return (
     <>
       <Section>
@@ -46,7 +40,7 @@ export default ({ history }) => {
           <MediaUpload />
         </Container>
       </Section>
-      <Content history={history} />
+      <Content />
     </>
   );
 };

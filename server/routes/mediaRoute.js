@@ -26,7 +26,7 @@ mediaRoute.get("/", async (req, res) => {
     return res.status(400).json({ error: error });
   }
 });
-mediaRoute.get("/all/:page", async (req, res) => {
+mediaRoute.get("/all/:page", ipConfirm, async (req, res) => {
   try {
     const page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
     db.getConnection((err, con) => {
