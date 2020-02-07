@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import MediaUpload from "./MediaUpload";
 import Content from "./Content";
+import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 const Section = styled.section`
   margin-top: 80px;
@@ -30,6 +32,10 @@ const HBox = styled.div`
 `;
 
 export default () => {
+  const { ip } = useSelector(state => ({ ip: state.ip.ip }));
+  if (ip !== null && !ip) {
+    return <Redirect to="/" />;
+  }
   return (
     <>
       <Section>

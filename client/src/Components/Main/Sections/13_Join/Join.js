@@ -148,7 +148,6 @@ export default () => {
               }}
               validationSchema={ContactSchema}
               onSubmit={values => {
-                console.log(values);
                 setTimeout(() => {
                   dispatch(mailPost(values));
                 }, 1000);

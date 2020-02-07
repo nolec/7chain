@@ -11,16 +11,14 @@ import SubProvider from "../SubProvider";
 import publicIp from "public-ip";
 import setIpAddress from "../utils/setIpAddress";
 import { ipConfirm } from "../actions/ip";
-const getIp = async () => {
-  let ip = await publicIp.v4();
-  console.log(ip);
-  setIpAddress(ip);
-};
-getIp();
 function App() {
-  useEffect(() => {
-    store.dispatch(ipConfirm());
-  }, []);
+  // useEffect(() => {
+  //   const getIp = async () => {
+  //     let ip = await publicIp.v4();
+  //     store.dispatch(ipConfirm(ip));
+  //   };
+  //   getIp();
+  // }, []);
   return (
     <Provider store={store}>
       <LangProvider>

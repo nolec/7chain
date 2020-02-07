@@ -10,6 +10,7 @@ import {
   DELETE_PRESS
 } from "./types";
 import axios from "axios";
+import { ipConfirm } from "./ip";
 
 export const getPress = () => async dispatch => {
   try {
@@ -20,6 +21,7 @@ export const getPress = () => async dispatch => {
   }
 };
 export const getPressAll = page => async dispatch => {
+  dispatch(ipConfirm());
   try {
     const res = await axios.get(`/api/press/all/${page}`);
     // let test = [];

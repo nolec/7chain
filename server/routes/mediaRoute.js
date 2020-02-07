@@ -6,6 +6,8 @@ import { ipConfirm } from "../middleware/ipConfirm";
 const mediaRoute = express.Router();
 
 mediaRoute.get("/", async (req, res) => {
+  let ip = req.attributeIp;
+  console.log(ip, "test");
   const sql =
     "select * from media group by media_link order by reg_date DESC limit 4";
   // const sql = `SELECT * from media ORDER BY reg_date DESC limit 4`;
@@ -27,6 +29,7 @@ mediaRoute.get("/", async (req, res) => {
   }
 });
 mediaRoute.get("/all/:page", ipConfirm, async (req, res) => {
+  console.log(req.header("x-auth-ip"), "드루와");
   try {
     const page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
     db.getConnection((err, con) => {
@@ -147,7 +150,6 @@ mediaRoute.get("/delete/:no", async (req, res) => {
 mediaRoute.get("/all/7chain/:page", async (req, res) => {
   try {
     let page = parseInt(req.params.page) * 7 + parseInt(req.params.page);
-    console.log(page);
     await db.getConnection((err, con) => {
       if (err) {
         con.release();

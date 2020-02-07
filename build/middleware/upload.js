@@ -19,7 +19,7 @@ var _dateformat = _interopRequireDefault(require("dateformat"));
 var storage = _multer["default"].diskStorage({
   destination: function destination(req, file, callback) {
     console.log(req.body.media_name, file, "destination");
-    callback(null, "uploads/");
+    callback(null, "server/uploads/");
   },
   filename: function filename(req, file, callback) {
     console.log(file, "upload file");

@@ -1,18 +1,22 @@
-import publicIp from "public-ip";
-export const ipConfirm = async (req, res, next) => {
+export const ipConfirm = (req, res, next) => {
   const clientIp = req.header("x-auth-ip");
-  const ServerIp = await publicIp.v4();
+  let ip = req.attributeIp;
+  console.log("clientIp : ", clientIp, "attributeIp : ", ip);
   try {
-    console.log(req.header(), clientIp, ServerIp, "please");
-    if (clientIp !== ServerIp) {
-      console.log("아이피 틀림");
-      return res.status(200).json({
-        ip: false
-      });
-    } else {
+    if (
+      ip === process.env.SERVER ||
+      ip === process.env.LOCAL_SERVER_1 ||
+      ip === process.env.LOCAL_SERVER_2 ||
+      ip === process.env.LOCAL_SERVER_3
+    ) {
       console.log("아이피 맞음");
       req.body = { ip: true };
       next();
+    } else {
+      console.log("아이피 틀림");
+      return res.json({
+        ip: false
+      });
     }
   } catch (error) {
     res.status(401).json({ message: "이상한 문제" });

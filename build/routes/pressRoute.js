@@ -107,7 +107,7 @@ function () {
             });
 
             _context2.prev = 2;
-            page = (0, _parseInt2["default"])(req.params.page) * 8;
+            page = (0, _parseInt2["default"])(req.params.page) * 7 + (0, _parseInt2["default"])(req.params.page);
 
             _db["default"].getConnection(function (err, con) {
               if (err) {
@@ -115,7 +115,7 @@ function () {
                 throw err;
               }
 
-              con.query("CALL spt_GetArticlesAdmin(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;", [1, page], function (err, rows, fields) {
+              con.query("CALL spt_GetArticlesAdmin(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;", [0, page], function (err, rows, fields) {
                 if (err) {
                   con.release();
                   throw err;
@@ -219,37 +219,71 @@ function () {
     return _ref3.apply(this, arguments);
   };
 }());
-pressRoute.post("/image", function (req, res) {
-  (0, _upload["default"])(req, res, function (error) {
-    console.log(res.req.files, "어디죠");
-
-    if (error) {
-      return res.status(400).json({
-        success: false,
-        error: error.message
-      });
-    }
-
-    return res.json({
-      success: true,
-      files: res.req.files
-    });
-  });
-});
-pressRoute.get("/delete/:no",
+pressRoute.post("/image",
 /*#__PURE__*/
 function () {
   var _ref4 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
   _regenerator["default"].mark(function _callee4(req, res) {
-    var no;
     return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
+            _context4.prev = 0;
+            _context4.next = 3;
+            return (0, _upload["default"])(req, res, function (error) {
+              // console.log(res.req.files, "어디죠");
+              if (error) {
+                console.log(error);
+                return res.status(400).json({
+                  success: false,
+                  error: error.message
+                });
+              }
+
+              return res.json({
+                success: true,
+                files: res.req.files
+              });
+            });
+
+          case 3:
+            _context4.next = 8;
+            break;
+
+          case 5:
+            _context4.prev = 5;
+            _context4.t0 = _context4["catch"](0);
+            return _context4.abrupt("return", res.status(400).json({
+              error: _context4.t0
+            }));
+
+          case 8:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4, null, [[0, 5]]);
+  }));
+
+  return function (_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}());
+pressRoute.get("/delete/:no",
+/*#__PURE__*/
+function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])(
+  /*#__PURE__*/
+  _regenerator["default"].mark(function _callee5(req, res) {
+    var no;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
             no = req.params.no;
-            _context4.prev = 1;
-            _context4.next = 4;
+            _context5.prev = 1;
+            _context5.next = 4;
             return _db["default"].getConnection(function (err, con) {
               if (err) {
                 con.release();
@@ -271,50 +305,50 @@ function () {
             });
 
           case 4:
-            _context4.next = 9;
+            _context5.next = 9;
             break;
 
           case 6:
-            _context4.prev = 6;
-            _context4.t0 = _context4["catch"](1);
-            return _context4.abrupt("return", res.status(400).json({
-              error: _context4.t0
+            _context5.prev = 6;
+            _context5.t0 = _context5["catch"](1);
+            return _context5.abrupt("return", res.status(400).json({
+              error: _context5.t0
             }));
 
           case 9:
           case "end":
-            return _context4.stop();
+            return _context5.stop();
         }
       }
-    }, _callee4, null, [[1, 6]]);
+    }, _callee5, null, [[1, 6]]);
   }));
 
-  return function (_x7, _x8) {
-    return _ref4.apply(this, arguments);
+  return function (_x9, _x10) {
+    return _ref5.apply(this, arguments);
   };
 }());
 pressRoute.get("/all/7chain/:page",
 /*#__PURE__*/
 function () {
-  var _ref5 = (0, _asyncToGenerator2["default"])(
+  var _ref6 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  _regenerator["default"].mark(function _callee5(req, res) {
+  _regenerator["default"].mark(function _callee6(req, res) {
     var page;
-    return _regenerator["default"].wrap(function _callee5$(_context5) {
+    return _regenerator["default"].wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
-            _context5.prev = 0;
-            page = (0, _parseInt2["default"])(req.params.page) * 8;
+            _context6.prev = 0;
+            page = (0, _parseInt2["default"])(req.params.page) * 7 + (0, _parseInt2["default"])(req.params.page);
             console.log(page);
-            _context5.next = 5;
+            _context6.next = 5;
             return _db["default"].getConnection(function (err, con) {
               if (err) {
                 con.release();
                 throw err;
               }
 
-              con.query("CALL spt_GetArticles(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;", [1, page], function (err, rows, fields) {
+              con.query("CALL spt_GetArticles(?,?,@total_row_count); SELECT @total_row_count AS total_row_count;", [0, page], function (err, rows, fields) {
                 if (err) {
                   con.release();
                   throw err;
@@ -338,26 +372,26 @@ function () {
             });
 
           case 5:
-            _context5.next = 10;
+            _context6.next = 10;
             break;
 
           case 7:
-            _context5.prev = 7;
-            _context5.t0 = _context5["catch"](0);
-            return _context5.abrupt("return", res.status(400).json({
-              error: _context5.t0
+            _context6.prev = 7;
+            _context6.t0 = _context6["catch"](0);
+            return _context6.abrupt("return", res.status(400).json({
+              error: _context6.t0
             }));
 
           case 10:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5, null, [[0, 7]]);
+    }, _callee6, null, [[0, 7]]);
   }));
 
-  return function (_x9, _x10) {
-    return _ref5.apply(this, arguments);
+  return function (_x11, _x12) {
+    return _ref6.apply(this, arguments);
   };
 }());
 var _default = pressRoute;

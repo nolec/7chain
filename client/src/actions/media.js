@@ -10,6 +10,7 @@ import {
   DELETE_PRESS
 } from "./types";
 import axios from "axios";
+import { ipConfirm } from "./ip";
 
 export const getMedia = () => async dispatch => {
   try {
@@ -20,6 +21,7 @@ export const getMedia = () => async dispatch => {
   }
 };
 export const getMediaAll = page => async dispatch => {
+  dispatch(ipConfirm());
   try {
     const res = await axios.get(`/api/media/all/${page}`);
     dispatch({ type: LOAD_ADMINMEDIA, payload: res.data });

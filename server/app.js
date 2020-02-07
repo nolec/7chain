@@ -10,9 +10,10 @@ import pressRoute from "./routes/pressRoute";
 import mediaRoute from "./routes/mediaRoute";
 import contactRoute from "./routes/contactRoute";
 import dotenv from "dotenv";
+import ipRoute from "./routes/ipRoute";
 import ip from "ip";
 import publicIp from "public-ip";
-import ipRoute from "./routes/ipRoute";
+import requestIp from "request-ip";
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(requestIp.mw({ attributeName: "attributeIp" }));
 
 app.use("/api/ip", ipRoute);
 app.use("/api/press", pressRoute);
