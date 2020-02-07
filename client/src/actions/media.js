@@ -32,17 +32,14 @@ export const getMediaAll = page => async dispatch => {
 export const getMeida7chain = page => async dispatch => {
   try {
     const res = await axios.get(`/api/media/all/7chain/${page}`);
-    console.log(res);
     dispatch({ type: LOAD_7CHAINMEDIA, payload: res.data.result });
   } catch (error) {
-    console.log(error);
     dispatch({ type: FAIL_LOAD, payload: error });
   }
 };
 export const uploadMedia = sendData => async dispatch => {
   try {
     const res = await axios.post(`/api/media/upload`, sendData);
-    console.log(res.data, sendData);
     dispatch({ type: SUCCESS_UPLOAD, payload: res.data });
   } catch (error) {
     dispatch({ type: UPLOAD_FAIL, payload: error });
@@ -75,7 +72,6 @@ export const uploadImage = (
     uploadFile.append("file", posterFile);
     uploadFile.append("file", logoFile);
     const res = await axios.post(`/api/media/image`, uploadFile, config);
-    console.log(res.data);
     const sendData = {
       mediaLink,
       mediaName,
@@ -100,7 +96,6 @@ export const uploadImage = (
 export const deleteMedia = no => async dispatch => {
   try {
     const res = await axios.get(`/api/media/delete/${no}`);
-    console.log(res.data);
     await dispatch({ type: DELETE_PRESS, payload: res.data });
     dispatch(getMediaAll(1));
   } catch (error) {

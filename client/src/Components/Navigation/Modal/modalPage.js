@@ -177,7 +177,7 @@ export default () => {
                     </Korean>
                     <English>
                       <a
-                        href={`/7chain/index.html?file=white-paper&lang=kr`}
+                        href={`/7chain/index.html?file=white-paper&lang=en`}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

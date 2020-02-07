@@ -1,6 +1,5 @@
 import { IP_CONFIRM, IP_SERVER_ERROR } from "./types";
 import axios from "axios";
-import setIpAddress from "../utils/setIpAddress";
 
 export const ipConfirm = () => async dispatch => {
   try {

@@ -174,7 +174,6 @@ export default () => {
     //   .call(inquiry.current.children)
     //   .map(item => (item.children[0] === e.currentTarget ? "" : ""));
   };
-  console.log(active, mailId);
   const mailConfirm = values => {
     if (mailId === 0) values.id = 0;
     if (mailId === 1) values.id = 1;
@@ -203,7 +202,6 @@ export default () => {
           onSubmit={values => {
             mailConfirm(values);
             setTimeout(() => {
-              console.log(values);
               dispatch(mailPost(values));
             }, 1000);
           }}

@@ -1,6 +1,5 @@
 export const isEmail = email => {
   const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  console.log("정규식 검사", emailRegex.test(email));
   return emailRegex.test(email);
 };
 
