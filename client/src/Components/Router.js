@@ -14,8 +14,11 @@ import Press from "./PressPage";
 import AdminPress from "./Admin/AdminPress";
 import AdminMedia from "./Admin/AdminMedia";
 import Contact from "./ContactPage";
+import { useSelector } from "react-redux";
 
 export default () => {
+  const { ip } = useSelector(state => ({ ip: state.ip.ip }));
+  console.log(ip);
   return (
     <Router>
       <Nav />
@@ -24,9 +27,12 @@ export default () => {
         <Route path="/press" component={Press} />
         <Route path="/media" component={Media} />
         <Route path="/contact" component={Contact} />
-
-        <Route path="/admin/press" component={AdminPress} />
-        <Route path="/admin/media" component={AdminMedia} />
+        {ip === undefined || ip ? (
+          <>
+            <Route path="/admin/press" component={AdminPress} />
+            <Route path="/admin/media" component={AdminMedia} />
+          </>
+        ) : null}
 
         <Redirect from="/*" to="/" />
       </Switch>

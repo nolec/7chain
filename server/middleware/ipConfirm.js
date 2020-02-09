@@ -15,7 +15,7 @@ export const ipConfirm = (req, res, next) => {
     } else {
       console.log("아이피 틀림");
       return res.json({
-        ip: false
+        ip: true
       });
     }
   } catch (error) {
